@@ -1,0 +1,50 @@
+.navbar {
+  display: flex;
+  padding: 0rem 2rem;
+  background-color: var(--darkgreen);
+}
+.navbar_company_logo_pages {
+  align-items: center;
+  width: 1000px;
+  display: flex;
+  gap: 0rem 2rem;
+}
+.navbar_company_logo img {
+  height: 4rem;
+}
+.navbar_pages {
+  display: flex;
+  flex: 1;
+  gap: 0 1rem;
+}
+.navbar_page {
+  color: var(--mainGrey);
+  padding: 0.5rem;
+}
+.navbar_searchBox_login_signUp {
+  display: flex;
+  align-items: center;
+  gap: 0 2rem;
+}
+.navbar_searchBox {
+  display: flex;
+  gap: 1rem;
+}
+.navbar_searchBox input {
+  height: 2rem;
+  border-radius: 2rem;
+  width: 14rem;
+  border: none;
+  outline: none;
+  padding: 12px;
+  font-size: 16px;
+}
+.navbar_login_Signup_Btn {
+  display: flex;
+  gap: 1rem;
+}
+.navbar_page:hover {
+  background-color: var(--midgreen);
+  color: var( --mainGrey);
+  border-radius: 2rem;
+}
