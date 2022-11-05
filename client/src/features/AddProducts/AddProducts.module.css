@@ -1,0 +1,46 @@
+.addProduct_form {
+  height: calc(100vh - 70.4px);
+  width: 25rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+  padding: 1rem;
+}
+.product_form {
+  width: 100%;
+}
+.form_control {
+  margin: 1rem 0;
+}
+.form_control label,
+.form_control input,
+.form_control textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+.form_control input,
+.form_control textarea {
+  padding: 0rem 0.1rem;
+  border: 1px solid #a1a1a1;
+  font: inherit;
+  border-radius: 2px;
+}
+.form_control input:focus,
+.form_control textarea:focus {
+  outline-color: var(--darkgreen);
+}
+.addProduct_form_submit_btn {
+  font-size: 16px;
+  color: var(--darkgreen);
+  background-color: var(--mainWhite);
+  padding: 0.43rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid var(--darkgreen);
+  outline: none;
+  cursor: pointer;
+}
+.addProduct_form_submit_btn:hover {
+  background-color: var(--darkgreen);
+  color: var(--mainGrey);
+}
