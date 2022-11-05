@@ -1,12 +1,12 @@
+.navbar_sideBar_container {
+  width: 100%;
+  position: sticky;
+}
 .navbar {
   display: flex;
   padding: 0rem 2rem;
   background-color: var(--darkgreen);
-}
-.navbar_company_logo_pages {
   align-items: center;
-  width: 1000px;
-  display: flex;
   gap: 0rem 2rem;
 }
 .navbar_company_logo img {
@@ -21,11 +21,6 @@
   color: var(--mainGrey);
   padding: 0.5rem;
 }
-.navbar_searchBox_login_signUp {
-  display: flex;
-  align-items: center;
-  gap: 0 2rem;
-}
 .navbar_searchBox {
   display: flex;
   gap: 1rem;
@@ -39,12 +34,128 @@
   padding: 12px;
   font-size: 16px;
 }
-.navbar_login_Signup_Btn {
+.navbar_login_signUp_Btn {
   display: flex;
   gap: 1rem;
 }
+.navbar_sideBar {
+  display: none;
+}
+.navbar_sideBar_logo {
+  font-size: 2rem;
+  color: var(--mainGrey);
+}
+.login_btn {
+  font-size: 16px;
+  color: var(--mainGrey);
+  background-color: var(--darkgreen);
+  padding: 0.43rem 1rem;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  width: 7rem;
+}
+.signUp_btn {
+  font-size: 16px;
+  color: var(--mainGrey);
+  background-color: var(--darkgreen);
+  padding: 0.43rem 1rem;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  width: 7rem;
+}
 .navbar_page:hover {
   background-color: var(--midgreen);
-  color: var( --mainGrey);
+  color: var(--mainGrey);
   border-radius: 2rem;
+}
+.sideBar_content {
+  background-color: var(--midgreen);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.sideBar_halfContent {
+  display: flex;
+  gap: 2rem;
+  display: none;
+}
+.sideBar_fullContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  display: none;
+  color: var(--mainGrey);
+}
+@media screen and (max-width: 1262px) {
+  .navbar_sideBar {
+    display: block;
+  }
+  .navbar_login_signUp_Btn {
+    display: none;
+  }
+  .sideBar_content {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .sideBar_halfContent {
+    display: block;
+    display: flex;
+    gap: 2rem;
+  }
+}
+@media screen and (max-width: 1090px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  .navbar_pages {
+    display: none;
+  }
+  .sideBar_halfContent {
+    display: none;
+  }
+  .sideBar_fullContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .sidebar_page {
+    padding: 0.2rem;
+  }
+  .sidebar_page:hover {
+    background-color: var(--mainGrey);
+    color: var(--midgreen);
+    border-radius: 2rem;
+  }
+}
+@media screen and (max-width: 430px) {
+  .navbar {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-bottom: 1rem;
+  }
+  .navbar_searchBox {
+    width: 100%;
+    justify-content: center;
+  }
+  .navbar_company_logo,
+  .navbar_sideBar {
+    justify-content: space-evenly;
+    order: -1;
+    flex: 0 0 0%;
+  }
+  .navbar_company_logo img {
+    text-align: center;
+  }
 }
