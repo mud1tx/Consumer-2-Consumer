@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
 import classes from "./AddProducts.module.css";
-import Button from "../../layouts/Button";
 
 const AddProducts = () => {
   return (
@@ -47,13 +46,13 @@ const AddProducts = () => {
               // onChange={handleInputs}
             ></textarea>
           </div>
-          <Button
+          <button
             className={classes.addProduct_form_submit_btn}
             type="submit"
             onClick={() => {}}
           >
             Add-Product
-          </Button>
+          </button>
         </form>
       </main>
     </div>

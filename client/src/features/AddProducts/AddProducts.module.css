@@ -28,19 +28,19 @@
 }
 .form_control input:focus,
 .form_control textarea:focus {
-  outline-color: var(--darkgreen);
+  outline-color: var(--main-bg-color);
 }
 .addProduct_form_submit_btn {
   font-size: 16px;
-  color: var(--darkgreen);
-  background-color: var(--mainWhite);
+  color: var(--main-bg-color);
+  background-color: var(--main-white-color);
   padding: 0.43rem 1rem;
   border-radius: 2rem;
-  border: 1px solid var(--darkgreen);
+  border: 1px solid var(--main-bg-color);
   outline: none;
   cursor: pointer;
 }
 .addProduct_form_submit_btn:hover {
-  background-color: var(--darkgreen);
-  color: var(--mainGrey);
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
 }

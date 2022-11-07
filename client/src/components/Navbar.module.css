@@ -5,7 +5,7 @@
 .navbar {
   display: flex;
   padding: 0rem 2rem;
-  background-color: var(--darkgreen);
+  background-color: var(--main-bg-color);
   align-items: center;
   gap: 0rem 2rem;
 }
@@ -18,7 +18,7 @@
   gap: 0 1rem;
 }
 .navbar_page {
-  color: var(--mainGrey);
+  color: var(--main-text-color);
   padding: 0.5rem;
 }
 .navbar_searchBox {
@@ -43,35 +43,28 @@
 }
 .navbar_sideBar_logo {
   font-size: 2rem;
-  color: var(--mainGrey);
+  color: var(--main-text-color);
 }
+.signUp_btn,
 .login_btn {
   font-size: 16px;
-  color: var(--mainGrey);
-  background-color: var(--darkgreen);
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color-light);
   padding: 0.43rem 1rem;
   border-radius: 2rem;
   border: none;
   outline: none;
-  width: 7rem;
+  cursor: pointer;
 }
-.signUp_btn {
-  font-size: 16px;
-  color: var(--mainGrey);
-  background-color: var(--darkgreen);
-  padding: 0.43rem 1rem;
-  border-radius: 2rem;
-  border: none;
-  outline: none;
-  width: 7rem;
-}
-.navbar_page:hover {
-  background-color: var(--midgreen);
-  color: var(--mainGrey);
+.navbar_page:hover,
+.login_btn:hover,
+.signUp_btn:hover {
+  background-color: var(--hover-color);
+  color: var(--main-bg-color);
   border-radius: 2rem;
 }
 .sideBar_content {
-  background-color: var(--midgreen);
+  background-color: var(--main-bg-color-light);
   padding-top: 3rem;
   padding-bottom: 3rem;
   width: 100%;
@@ -91,7 +84,7 @@
   flex-direction: column;
   gap: 1rem;
   display: none;
-  color: var(--mainGrey);
+  color: var(--main-text-color);
 }
 @media screen and (max-width: 1262px) {
   .navbar_sideBar {
@@ -113,7 +106,7 @@
     gap: 2rem;
   }
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 1150px) {
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -125,16 +118,18 @@
     display: none;
   }
   .sideBar_fullContent {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
   .sidebar_page {
-    padding: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    /* width: 100%; */
   }
   .sidebar_page:hover {
-    background-color: var(--mainGrey);
-    color: var(--midgreen);
+    background-color: var(--main-text-color);
+    color: var(--main-bg-color-light);
     border-radius: 2rem;
   }
 }

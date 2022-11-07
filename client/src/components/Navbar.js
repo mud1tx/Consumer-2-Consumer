@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classes from "./Navbar.module.css";
-import Button from "../layouts/Button";
 import { HiMenu } from "react-icons/hi";
 
 const Navbar = () => {
@@ -38,12 +37,12 @@ const Navbar = () => {
           <input type="search" placeholder="Search Product..." />
         </div>
         <div className={classes.navbar_login_signUp_Btn}>
-          <Button className="" type="button">
+          <button className={`${classes.login_btn}`} type="button">
             Login
-          </Button>
-          <Button className="" type="button">
+          </button>
+          <button className={`${classes.signUp_btn}`} type="button">
             SignUp
-          </Button>
+          </button>
         </div>
         <div className={classes.navbar_sideBar}>
           <HiMenu
@@ -61,12 +60,12 @@ const Navbar = () => {
         <div className={classes.sideBar_content}>
           <div>
             <div className={classes.sideBar_halfContent}>
-              <Button className={`${classes.login_btn}`} type="button">
+              <button className={`${classes.login_btn}`} type="button">
                 Login
-              </Button>
-              <Button className={`${classes.signUp_btn}`} type="button">
+              </button>
+              <button className={`${classes.signUp_btn}`} type="button">
                 SignUp
-              </Button>
+              </button>
             </div>
           </div>
           <div className={classes.sideBar_fullContent}>
@@ -88,12 +87,12 @@ const Navbar = () => {
             <div className={classes.sidebar_page}>
               <p>Admin Products</p>
             </div>
-            <Button className={`${classes.login_btn}`} type="button">
+            <button className={`${classes.login_btn}`} type="button">
               Login
-            </Button>
-            <Button className={`${classes.signUp_btn}`} type="button">
+            </button>
+            <button className={`${classes.signUp_btn}`} type="button">
               SignUp
-            </Button>
+            </button>
           </div>
         </div>
       )}
