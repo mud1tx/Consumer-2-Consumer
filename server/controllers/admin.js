@@ -13,7 +13,7 @@ exports.postAddProduct = async (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-  // conver images into base64 encoding
+  // convert images into base64 encoding
   let imgArray = images.map((file) => {
     let img = fs.readFileSync(file.path);
     return (en = img.toString("base64"));
@@ -47,23 +47,3 @@ exports.postAddProduct = async (req, res, next) => {
     });
   // res.json(product);
 };
-
-
-// function saveImage(product, imgEncoded) {
-//   if (imgEncoded === null) {
-//     return;
-//   }
-//   if (!Array.isArray(imgEncoded)) {
-//     const singleImg = JSON.parse(imgEncoded);
-//     product.image.push = new Buffer.from(singleImg.data, "base64");
-//     product.imageType.push(singleImg.type);
-//   } else {
-//     for (let i = 0; i < imgEncoded.length; i++) {
-//       const img = JSON.parse(imgEncoded[i]);
-//       if (img != null && imageMimeTypes.includes(img.type)) {
-//         product.image.push = new Buffer.from(img.data, "base64");
-//         product.imageType.push(img.type);
-//       }
-//     }
-//   }
-// }

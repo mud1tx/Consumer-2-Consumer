@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const store = require("./util/multer");
 const Product = require("./models/products");
 const User = require("./models/user");
 const app = express();
@@ -11,7 +10,6 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
-// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const adminRoutes = require("./routes/admin");

@@ -38,24 +38,4 @@ const productSchema = new Schema({
   }
 });
 
-// productSchema.virtual('imgSrc').get(function(){
-//   if(this.image!=null && this.imageType!=null){
-//     return `data:${this.imageType}:charSet=utf-8;base64,${this.image.toString('base64')}`
-//   }
-// })
-
-// productSchema.virtual("imgSrc").get(function () {
-//   const imageSrcData = [];
-//   for (let i = 0; i < this.image.length; i++) {
-//     if (this.image[i] != null && this.imageType[i] != null) {
-//       imageSrcData.push(
-//         `data:${this.imageType[i]}:charSet=utf-8;base64,${this.image[
-//           i
-//         ].toString("base64")}`
-//       );
-//     }
-//   }
-//   return imageSrcData;
-// });
-
 module.exports = mongoose.model("Product", productSchema);
