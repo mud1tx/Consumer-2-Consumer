@@ -8,6 +8,8 @@ import AddProductsPage from "./pages/AddProductsPage";
 import CartPage from "./pages/CartPage";
 import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
+import Login from "./features/Authentication/Login";
+import Signup from "./features/Authentication/Signup";
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
       <Route path="/orders" element={<OrdersPage />} />
       <Route path="/admin/add-product" element={<AddProductsPage />} />
       <Route path="/admin/admin-products" element={<AdminProductsPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       {/* <Navbar /> */}
     </Routes>
   );
