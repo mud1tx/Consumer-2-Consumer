@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import classes from "./AddProducts.module.css";
-import ImagePond from "../../components/ImagePond";
 
 const AddProducts = () => {
-  const [user, setUser] = useState({ title: "",category:"", price: "", description: "" });
+  const [user, setUser] = useState({
+    title: "",
+    category: "",
+    price: "",
+    description: "",
+  });
   const handleInputs = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -19,6 +23,7 @@ const AddProducts = () => {
         <form
           className={classes.product_form}
           action="/admin/add-product"
+          encType="multipart/form-data"
           method="POST"
         >
           <div className={classes.form_control}>
@@ -42,8 +47,14 @@ const AddProducts = () => {
             />
           </div>
           <div className={classes.form_control}>
-            <label htmlFor="image">Choose File</label>
-            <ImagePond name="image" />
+            {/* <label htmlFor="images">Choose File</label> */}
+            <input
+              type="file"
+              className={classes.image_input}
+              name="images"
+              id="formFile"
+              multiple
+            />
           </div>
           <div className={classes.form_control}>
             <label htmlFor="price">Price</label>
@@ -65,10 +76,7 @@ const AddProducts = () => {
               onChange={handleInputs}
             ></textarea>
           </div>
-          <button
-            className={classes.addProduct_form_submit_btn}
-            type="submit"
-          >
+          <button className={classes.addProduct_form_submit_btn} type="submit">
             Add-Product
           </button>
         </form>
