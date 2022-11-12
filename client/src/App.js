@@ -1,6 +1,4 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
-// import Navbar from "./components/Navbar";
 import ShopPage from "./pages/ShopPage";
 import React from "react";
 import AdminProductsPage from "./pages/AdminProductsPage";
