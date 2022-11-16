@@ -1,61 +1,51 @@
-import React from "react";
-// import {NavLink} from 'react-router-dom'
-
-const Login = () => {
+import React, { useState } from "react";
+// import img from "../Authentication/login_background.png";
+export default function Login () {
+  const [showpass, setShowPass] = useState(false);
   return (
-    <div class="bg-[#dad7cd] min-h-screen flex flex-col">
-      <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-        <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-          <h1 class="mb-8 text-3xl text-center text-[#588157]">Log in here</h1>
-          <input
-            type="text"
-            class="block border border-[#588157] w-full p-3 rounded mb-4"
-            name="fullname"
-            placeholder="Full Name"
-          />
-
-          <input
-            type="text"
-            class="block border border-[#588157] w-full p-3 rounded mb-4"
-            name="email"
-            placeholder="Email"
-          />
-
-          <input
-            type="password"
-            class="block border border-[#588157]  w-full p-3 rounded mb-4"
-            name="password"
-            placeholder="Password"
-          />
-
-          <button
-            type="submit"
-            class="w-full text-center py-3 hover:bg-[#3a5a40] rounded bg-[#588157] text-white hover:bg-green-dark focus:outline-none my-1"
-          >
-            Create Account
-          </button>
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2  h-screen w-full">
+        <div className="hidden sm:block  ">
+          {/* <img
+            className="w-full h-full object-cover"
+            src={img}
+            alt="Login Image"
+          /> */}
         </div>
 
-        <div class="text-grey-dark mt-6">
-          Already have an account?
-          <a
-            class="no-underline border-b border-blue  text-blue"
-            href="../login/"
-          >
-            Log in
-          </a>
-          .
+        <div className=" flex  bg-gray-800 felx-col items-center justify-center">
+          <form className="max-w-[400px] bg-gray-900 w-full mx-auto bg-gary-900 p-8 px-8 rounded-lg">
+            <h2 className="text-4xl dark:text-white font-bold text-center">
+              Sign In
+            </h2>
+            <div className="flex  flex-col text-gray-400 py-2">
+              <label>User Name</label>
+              <input
+                className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                type="text"
+              />
+            </div>
+            <div className="flex flex-col text-gray-400 py-2">
+              <label>Password</label>
+              <input
+                className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                type="Password"
+              />
+            </div>
+            <div className="flex justify-between items-center text-gray-400 py-2">
+              <p className="flex items-center">
+                <input className="mr-2" type="checkbox" />
+                Remember Me
+              </p>
+              <p className="">Forgot Password</p>
+            </div>
+            <button className="w-full my-5 py-2 text-mygreen shadow-lg shadow-mygreen-800 hover:shadow-green-500/20  text-gray-100 font-semibold rounded-lg">
+              Sign In
+            </button>
+            <p className="text-white">Didn't Have Acount <span><a  className="cursor-pointer text-teal-500">Sign Up </a></span></p>
+          </form>
         </div>
       </div>
-    </div>
+    </>
   );
-};
-
-export default Login;
-
-// function Login(){
-//     return <>
-
-//     </>
-// }
-// export default Login;
+}
