@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Skeleton from 'react-loading-skeleton'
+// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import Navbar from "../../components/Navbar";
 
 const Shop = () => {
@@ -27,10 +31,13 @@ const Shop = () => {
               <h1>title:{product.title}</h1>
               <p>category:{product.category}</p>
               {product.image.map((img, index) => (
+                <div key={index} className={index}>
+
                 <img
-                  key={index}
+                  // key={index}
                   src={`data:${product.imageType[index]};base64,${img}`} alt={`${product.category}`}
-                />
+                  />
+                  </div>
               ))}
               <p>price:${product.price}</p>
               <p>description:{product.description}</p>
@@ -39,7 +46,7 @@ const Shop = () => {
         </div>
       ) : (
         <div>
-          <p>!Oops we have nothing</p>
+          <p><Skeleton count={10} /></p>
         </div>
       )}
     </div>
