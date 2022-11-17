@@ -34,7 +34,8 @@ const User = require("../models/user");
 // };
 
 exports.postSignup = (req, res, next) => {
-  const name = req.body.name;
+  const firstname = req.body.first_name;
+  const lastname = req.body.last_name;
   const email = req.body.email;
   const password = req.body.password;
   const confirmPassword = req.body.confirmPassword;
@@ -51,7 +52,8 @@ exports.postSignup = (req, res, next) => {
         .hash(password, 12)
         .then((hashedPassword) => {
           const user = new User({
-            name: name,
+            first_name: firstname,
+            last_name: lastname,
             email: email,
             password: hashedPassword,
             cart: { items: [] },
