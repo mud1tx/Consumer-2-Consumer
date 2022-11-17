@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Skeleton from 'react-loading-skeleton'
+// import Skeleton from 'react-loading-skeleton'
 // import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+// import 'react-loading-skeleton/dist/skeleton.css'
 
 import Navbar from "../../components/Navbar";
 
@@ -32,12 +32,12 @@ const Shop = () => {
               <p>category:{product.category}</p>
               {product.image.map((img, index) => (
                 <div key={index} className={index}>
-
-                <img
-                  // key={index}
-                  src={`data:${product.imageType[index]};base64,${img}`} alt={`${product.category}`}
+                  <img
+                    // key={index}
+                    src={`data:${product.imageType[index]};base64,${img}`}
+                    alt={`${product.category}`}
                   />
-                  </div>
+                </div>
               ))}
               <p>price:${product.price}</p>
               <p>description:{product.description}</p>

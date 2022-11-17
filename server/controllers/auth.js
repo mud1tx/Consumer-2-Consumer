@@ -66,3 +66,8 @@ exports.postSignup = (req, res, next) => {
       console.log(err);
     });
 };
+
+exports.postLogin = (req, res, next) => {
+  req.session.isLoggedIn = true;
+  res.rredirect("/");
+};
