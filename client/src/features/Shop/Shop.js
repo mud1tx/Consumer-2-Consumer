@@ -46,9 +46,6 @@ const Shop = () => {
         </div>
       ) : (
         <div>
-          <p>
-            oops
-          </p>
           {/* <p><Skeleton count={10} /></p> */}
         </div>
       )}

@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-// import img from "../Authentication/login_background.png";
+import img from "../Authentication/LoginImg.png";
 export default function Login () {
   const [showpass, setShowPass] = useState(false);
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2  h-screen w-full">
+
         <div className="hidden sm:block  ">
-          {/* <img
+          <img
             className="w-full h-full object-cover"
             src={img}
             alt="Login Image"
-          /> */}
+          />
         </div>
 
-        <div className=" flex  bg-gray-800 felx-col items-center justify-center">
-          <form className="max-w-[400px] bg-gray-900 w-full mx-auto bg-gary-900 p-8 px-8 rounded-lg">
+        <div className=" flex w-full  bg-gray-800 felx-col items-center justify-center">
+          <form className="max-w-[800px]   mx-auto bg-gray-900 p-8 px-8 rounded-lg">
             <h2 className="text-4xl dark:text-white font-bold text-center">
               Sign In
             </h2>
