@@ -13,7 +13,6 @@ const AddProducts = () => {
     const name = e.target.name;
     const value = e.target.value;
     setUser({ ...user, [name]: value });
-    // console.log(user);
   };
 
   return (
