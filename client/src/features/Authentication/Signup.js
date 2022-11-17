@@ -3,7 +3,7 @@ import img from "../Authentication/LoginImg.png";
 import { NavLink } from "react-router-dom";
 
 const SignUp = () => {
-  const [productData, setProductData] = useState({
+  const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
     email: "",
@@ -13,9 +13,9 @@ const SignUp = () => {
 
   const handleInputs = (e) => {
     const name = e.target.name;
-    console.log(name);
+    // console.log(name);
     const value = e.target.value;
-    setProductData({ ...productData, [name]: value });
+    setUserData({ ...userData, [name]: value });
   };
 
   return (
@@ -44,7 +44,7 @@ const SignUp = () => {
                 className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="text"
                 name="first_name"
-                value={productData.first_name}
+                value={userData.first_name}
                 onChange={handleInputs}
               />
             </div>
@@ -55,7 +55,7 @@ const SignUp = () => {
                 className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="text"
                 name="last_name"
-                value={productData.last_name}
+                value={userData.last_name}
                 onChange={handleInputs}
               />
             </div>
@@ -66,7 +66,7 @@ const SignUp = () => {
                 className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="email"
                 name="email"
-                value={productData.email}
+                value={userData.email}
                 onChange={handleInputs}
               />
             </div>
@@ -77,7 +77,7 @@ const SignUp = () => {
                 className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="Password"
                 name="password"
-                value={productData.password}
+                value={userData.password}
                 onChange={handleInputs}
               />
             </div>
@@ -88,7 +88,7 @@ const SignUp = () => {
                 className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="Password"
                 name="confirmPassword"
-                value={productData.confirmPassword}
+                value={userData.confirmPassword}
                 onChange={handleInputs}
               />
             </div>
@@ -99,9 +99,9 @@ const SignUp = () => {
               Sign In
             </button>
           </form>
-            <p className="text-white">
-              <NavLink to="/login">Already have Account</NavLink>{" "}
-            </p>
+          <p className="text-white">
+            <NavLink to="/login">Already have Account</NavLink>
+          </p>
         </div>
       </div>
     </>
