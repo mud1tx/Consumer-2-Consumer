@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { AiOutlineLogin } from "react-icons/ai";
+import {
+  AiOutlineLogin,
+  AiOutlineClose,
+  AiOutlineUserAdd,
+} from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose } from "react-icons/ai";
-import { AiOutlineUserAdd } from "react-icons/ai";
 import { BiLogOutCircle } from "react-icons/bi";
 
-export default function Navbar() {
+const Navbar = () => {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
-  // const [product, setProduct] = useState(false);
-  // const [deliverables, setDeliverables] = useState(false);
   return (
     <>
       <div className="bg-main_color-1000 h-full w-full">
@@ -52,7 +52,7 @@ export default function Navbar() {
                 </div>
                 <div className="hidden xl:flex items-center">
                   <div className="relative md:mr-6 my-2">
-                    <a className=""></a>
+                    {/* <a className=""></a> */}
                     <input
                       className="bg-main_color-200 focus:outline-none rounded w-full text-sm text-main_color-1000  pl-8 py-2"
                       type="text"
@@ -67,18 +67,17 @@ export default function Navbar() {
                       {profile && (
                         <ul className="p-2 w-40 border-r bg-main_color-1000 absolute rounded right-0 shadow top-0 mt-16 ">
                           <li className="cursor-pointer text-main_color-200 text-sm leading-3 tracking-normal py-2 hover:text-white focus:text-main_color-200 focus:outline-none">
-                        
                             <div className="flex items-center">
                               <AiOutlineLogin className="text-xl" />
                               <span className="ml-2">
-                              <NavLink to="/login">Login</NavLink>
+                                <NavLink to="/login">Login</NavLink>
                               </span>
                             </div>
                           </li>
                           <li className="cursor-pointer text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-white focus:text-main_color-200 focus:outline-none flex items-center">
                             <AiOutlineUserAdd className="text-2xl " />
                             <span className="ml-2">
-                            <NavLink to="/signup">SignUp</NavLink>
+                              <NavLink to="/signup">SignUp</NavLink>
                             </span>
                           </li>
                           <li className="cursor-pointer text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-white focus:text-main_color-200 focus:outline-none flex items-center">
@@ -224,7 +223,8 @@ export default function Navbar() {
 
                         <button
                           className="bg-main_color-200 pl-4 pr-4 pt-1 rounded hover:bg-white pb-1"
-                          type="button">
+                          type="button"
+                        >
                           <NavLink to="/signup">SignUp</NavLink>
                         </button>
                       </div>
@@ -239,241 +239,7 @@ export default function Navbar() {
       </div>
     </>
   );
-}
+};
 
-// import React, { useState } from "react";
-// import { NavLink } from "react-router-dom";
-// import classes from "./Navbar.module.css";
-// import { HiMenu } from "react-icons/hi";
 
-// const Navbar = () => {
-//   const [sideBarClick, setSideBarClick] = useState(false);
-
-//   return (
-//     <div className={classes.navbar_sideBar_container}>
-//       {/*NAV-BAR CODE  */}
-
-//       <div className={classes.navbar}>
-//         <div className={classes.navbar_company_logo}>
-//           <img alt="Company Logo" src="../Images/company-logo.png" />
-//         </div>
-//         <div className={classes.navbar_pages}>
-//           <div className={classes.navbar_page}>
-//             <NavLink
-//               to="/"
-//               className={({ isActive }) =>
-//                 isActive ? "nav_link_active" : "nav_link"
-//               }
-//             >
-//               Shop
-//             </NavLink>
-//           </div>
-//           <div className={classes.navbar_page}>
-//             <NavLink
-//               to="/products"
-//               className={({ isActive }) =>
-//                 isActive ? "nav_link_active" : "nav_link"
-//               }
-//             >
-//               Products
-//             </NavLink>
-//           </div>
-//           <div className={classes.navbar_page}>
-//             <NavLink
-//               to="/cart"
-//               className={({ isActive }) =>
-//                 isActive ? "nav_link_active" : "nav_link"
-//               }
-//             >
-//               Cart
-//             </NavLink>
-//           </div>
-//           <div className={classes.navbar_page}>
-//             <NavLink
-//               to="/orders"
-//               className={({ isActive }) =>
-//                 isActive ? "nav_link_active" : "nav_link"
-//               }
-//             >
-//               Orders
-//             </NavLink>
-//           </div>
-//           <div className={classes.navbar_page}>
-//             <NavLink
-//               to="/admin/add-product"
-//               className={({ isActive }) =>
-//                 isActive ? "nav_link_active" : "nav_link"
-//               }
-//             >
-//               Add Products
-//             </NavLink>
-//           </div>
-//           <div className={classes.navbar_page}>
-//             <NavLink
-//               to="/user"
-//               className={({ isActive }) =>
-//                 isActive ? "nav_link_active" : "nav_link"
-//               }
-//             >
-//               Admin Products
-//             </NavLink>
-//           </div>
-//         </div>
-//         <div className={classes.navbar_searchBox}>
-//           <input type="search" placeholder="Search Product..." />
-//         </div>
-//         <div className={classes.navbar_login_signUp_Btn}>
-//           <button className={`${classes.login_btn}`} type="button">
-//             <NavLink
-//               to="/login"
-//               style={() => ({
-//                 color: "inherit",
-//                 textDecoration: "none",
-//               })}
-//             >
-//               Login
-//             </NavLink>
-//           </button>
-//           <button className={`${classes.signUp_btn}`} type="button">
-//             <NavLink
-//               to="/signup"
-//               style={() => ({
-//                 color: "inherit",
-//                 textDecoration: "none",
-//               })}
-//             >
-//               SignUp
-//             </NavLink>
-//           </button>
-//         </div>
-//         <div className={classes.navbar_sideBar}>
-//           <HiMenu
-//             className={classes.navbar_sideBar_logo}
-//             onClick={() => {
-//               setSideBarClick(!sideBarClick);
-//             }}
-//           />
-//         </div>
-//       </div>
-
-//       {/* SIDE-BAR CODE */}
-
-//       {sideBarClick && (
-//         <div className={classes.sideBar_content}>
-//           <div>
-//             <div className={classes.sideBar_halfContent}>
-//               <button className={`${classes.login_btn}`} type="button">
-//                 <NavLink
-//                   to="/login"
-//                   style={() => ({
-//                     color: "inherit",
-//                     textDecoration: "none",
-//                   })}
-//                 >
-//                   Login
-//                 </NavLink>
-//               </button>
-//               <button className={`${classes.signUp_btn}`} type="button">
-//                 <NavLink
-//                   to="/signup"
-//                   style={() => ({
-//                     color: "inherit",
-//                     textDecoration: "none",
-//                   })}
-//                 >
-//                   SignUp
-//                 </NavLink>
-//               </button>
-//             </div>
-//           </div>
-//           <div className={classes.sideBar_fullContent}>
-//             <div className={classes.sidebar_page}>
-//               <NavLink
-//                 to="/"
-//                 className={({ isActive }) =>
-//                   isActive ? "nav_link_active" : "sideBar_link"
-//                 }
-//               >
-//                 Shop
-//               </NavLink>
-//             </div>
-//             <div className={classes.sidebar_page}>
-//               <NavLink
-//                 to="/products"
-//                 className={({ isActive }) =>
-//                   isActive ? "nav_link_active" : "sideBar_link"
-//                 }
-//               >
-//                 Products
-//               </NavLink>
-//             </div>
-//             <div className={classes.sidebar_page}>
-//               <NavLink
-//                 to="/cart"
-//                 className={({ isActive }) =>
-//                   isActive ? "nav_link_active" : "sideBar_link"
-//                 }
-//               >
-//                 Cart
-//               </NavLink>
-//             </div>
-//             <div className={classes.sidebar_page}>
-//               <NavLink
-//                 to="/orders"
-//                 className={({ isActive }) =>
-//                   isActive ? "nav_link_active" : "sideBar_link"
-//                 }
-//               >
-//                 Orders
-//               </NavLink>
-//             </div>
-//             <div className={classes.sidebar_page}>
-//               <NavLink
-//                 to="/admin/add-product"
-//                 className={({ isActive }) =>
-//                   isActive ? "nav_link_active" : "sideBar_link"
-//                 }
-//               >
-//                 Add Products
-//               </NavLink>
-//             </div>
-//             <div className={classes.sidebar_page}>
-//               <NavLink
-//                 to="/user"
-//                 className={({ isActive }) =>
-//                   isActive ? "nav_link_active" : "sideBar_link"
-//                 }
-//               >
-//                 Admin Products
-//               </NavLink>
-//             </div>
-//             <button className={`${classes.login_btn}`} type="button">
-//               <NavLink
-//                 to="/login"
-//                 style={() => ({
-//                   color: "inherit",
-//                   textDecoration: "none",
-//                 })}
-//               >
-//                 Login
-//               </NavLink>
-//             </button>
-//             <button className={`${classes.signUp_btn}`} type="button">
-//               <NavLink
-//                 to="/signup"
-//                 style={() => ({
-//                   color: "inherit",
-//                   textDecoration: "none",
-//                 })}
-//               >
-//                 SignUp
-//               </NavLink>
-//             </button>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Navbar;
+export default Navbar;
