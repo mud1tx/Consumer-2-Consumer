@@ -46,7 +46,7 @@ const Shop = () => {
         </div>
       ) : (
         <div>
-          <p><Skeleton count={10} /></p>
+          {/* <p><Skeleton count={10} /></p> */}
         </div>
       )}
     </div>
