@@ -12,6 +12,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 const Navbar = () => {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
+
   return (
     <>
       <div className="bg-main_color-1000 h-full w-full">
@@ -80,12 +81,15 @@ const Navbar = () => {
                               <NavLink to="/signup">SignUp</NavLink>
                             </span>
                           </li>
-                          <li className="cursor-pointer text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-white focus:text-main_color-200 focus:outline-none flex items-center">
-                            <BiLogOutCircle className="text-2xl" />
-                            <span className="ml-2">LogOut</span>
-                          </li>
                         </ul>
                       )}
+                      <div className="cursor-pointer text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-white focus:text-main_color-200 focus:outline-none flex items-center">
+                        <BiLogOutCircle className="text-2xl" />
+                        <form action="/logout" method="POST">
+                          <input type="hidden" name="logout" value="" />
+                          <button type="submit">LogOut</button>
+                        </form>
+                      </div>
                       <div className="cursor-pointer flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out"></div>
                       <div className="ml-2 text-main_color-200 flex items-center">
                         <FaUserCircle className="text-3xl" />
