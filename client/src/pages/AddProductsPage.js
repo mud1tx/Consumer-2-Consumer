@@ -1,11 +1,12 @@
 import React from "react";
 import AddProducts from "../features/AddProducts/AddProducts";
+import Navbar from "../components/Navbar";
 
 const AddProductsPage = () => {
   return (
     <>
+      <Navbar/>
       <AddProducts />
-      <h1>this is changed na</h1>
     </>
   );
 };
