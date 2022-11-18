@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 // import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 // import 'react-loading-skeleton/dist/skeleton.css'
 
-import Navbar from "../../components/Navbar";
-
 const Shop = () => {
   const [allProductsData, setAllProductsData] = useState([]);
   useEffect(() => {
@@ -23,7 +21,6 @@ const Shop = () => {
   // console.log(allProductsData);
   return (
     <div>
-      <Navbar />
       {allProductsData?.length > 0 ? (
         <div>
           {allProductsData.map((product) => (

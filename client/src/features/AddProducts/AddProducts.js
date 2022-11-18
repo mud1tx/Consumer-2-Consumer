@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar";
 import classes from "./AddProducts.module.css";
 
 const AddProducts = () => {
@@ -17,7 +16,6 @@ const AddProducts = () => {
 
   return (
     <div>
-      <Navbar />
       <main className={classes.addProduct_form}>
         <form
           className={classes.product_form}
