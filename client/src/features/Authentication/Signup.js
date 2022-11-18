@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import img from "../Authentication/LoginImg.png";
 import { NavLink } from "react-router-dom";
 
 const SignUp = () => {
@@ -13,7 +12,6 @@ const SignUp = () => {
 
   const handleInputs = (e) => {
     const name = e.target.name;
-    // console.log(name);
     const value = e.target.value;
     setUserData({ ...userData, [name]: value });
   };
@@ -24,8 +22,8 @@ const SignUp = () => {
         <div className="hidden sm:block  ">
           <img
             className="w-full h-full object-cover"
-            src={img}
-            alt="Login Image"
+            src={require("../../assets/LoginImg.png")}
+            alt="Signup"
           />
         </div>
 

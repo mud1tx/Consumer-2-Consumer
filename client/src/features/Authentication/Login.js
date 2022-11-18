@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import img from "../Authentication/LoginImg.png";
 import { NavLink } from "react-router-dom";
 
 const Login = () => {
@@ -10,10 +9,9 @@ const Login = () => {
 
   const handleInputs = (e) => {
     const name = e.target.name;
-    // console.log(name);
     const value = e.target.value;
     setUserLoginData({ ...userLoginData, [name]: value });
-  }
+  };
 
   return (
     <>
@@ -21,8 +19,8 @@ const Login = () => {
         <div className="hidden sm:block  ">
           <img
             className="w-full h-full object-cover"
-            src={img}
-            alt="Login Image"
+            src={require("../../assets/LoginImg.png")}
+            alt="Login"
           />
         </div>
 
@@ -55,18 +53,11 @@ const Login = () => {
                 onChange={handleInputs}
               />
             </div>
-            {/* <div className="flex justify-between items-center text-gray-400 py-2">
-              <p className="flex items-center">
-                <input className="mr-2" type="checkbox" />
-                Remember Me
-              </p>
-              <p className="">Forgot Password</p>
-            </div> */}
             <button
               className="w-full my-5 py-2 text-mygreen shadow-lg shadow-mygreen-800 hover:shadow-green-500/20  text-gray-100 font-semibold rounded-lg"
               type="submit"
             >
-              Sign In
+              Log In
             </button>
           </form>
           <p className="text-white">
