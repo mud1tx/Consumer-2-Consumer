@@ -24,7 +24,7 @@ const Navbar = () => {
                   <img
                     className="rounded h-10 w-10 object-cover"
                     alt="Logo"
-                    src={require("../components/company-logo.png")}
+                    src={require("../assets/company-logo.png")}
                   />
                 </div>
               </div>
@@ -104,7 +104,7 @@ const Navbar = () => {
                 <img
                   className="rounded h-10 w-10 object-cover"
                   alt="Logo"
-                  src={require("../components/company-logo.png")}
+                  src={require("../assets/company-logo.png")}
                 />
               </div>
             </div>
@@ -152,7 +152,7 @@ const Navbar = () => {
                             <img
                               className="rounded h-10 w-10 object-cover"
                               alt="Logo"
-                              src={require("../components/company-logo.png")}
+                              src={require("../assets/company-logo.png")}
                             />
                           </div>
                         </div>
@@ -162,15 +162,15 @@ const Navbar = () => {
                       </div>
                     </div>
                     <ul className="f-m-m">
-                      <a className="cursor-pointer">
-                        <li className="text-main_color-200 pt-10">
-                          <div className="w-full h-full md:w-full  md:h-full text-main_color-200">
-                            <p className="text-main_color-200 xl:text-base text-base duration-700 p-2 ease-in-out hover:text-main_color-1000 hover:bg-main_color-200 ">
-                              <NavLink to="/">Shop</NavLink>
-                            </p>
-                          </div>
-                        </li>
-                      </a>
+                      {/* <a className="cursor-pointer"> */}
+                      <li className="text-main_color-200 pt-10">
+                        <div className="w-full h-full md:w-full  md:h-full text-main_color-200">
+                          <p className="text-main_color-200 xl:text-base text-base duration-700 p-2 ease-in-out hover:text-main_color-1000 hover:bg-main_color-200 ">
+                            <NavLink to="/">Shop</NavLink>
+                          </p>
+                        </div>
+                      </li>
+                      {/* </a> */}
                       <li className="text-main_color-200 pt-2">
                         <div className="flex items-center justify-between">
                           <div className="w-full h-full md:w-full md:h-full  text-main_color-200">
@@ -180,15 +180,15 @@ const Navbar = () => {
                           </div>
                         </div>
                       </li>
-                      <a className="cursor-pointer">
-                        <li className="pt-2">
-                          <div className="w-full h-full md:w-full md:h-full  text-main_color-200">
-                            <p className="xl:text-base md:text-2xl text-base p-2 duration-700 ease-in-out hover:bg-main_color-200 hover:text-main_color-1000">
-                              <NavLink to="/products">Products</NavLink>
-                            </p>
-                          </div>
-                        </li>
-                      </a>
+                      {/* <a className="cursor-pointer"> */}
+                      <li className="pt-2">
+                        <div className="w-full h-full md:w-full md:h-full  text-main_color-200">
+                          <p className="xl:text-base md:text-2xl text-base p-2 duration-700 ease-in-out hover:bg-main_color-200 hover:text-main_color-1000">
+                            <NavLink to="/products">Products</NavLink>
+                          </p>
+                        </div>
+                      </li>
+                      {/* </a> */}
                       <li className="pt-4 cursor-pointer">
                         <div className="flex items-center justify-between">
                           <div className="w-full h-full md:w-full md:h-full  text-main_color-200">
@@ -240,6 +240,5 @@ const Navbar = () => {
     </>
   );
 };
-
 
 export default Navbar;
