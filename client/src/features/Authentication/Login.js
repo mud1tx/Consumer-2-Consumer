@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+// import axios from "axios";
+// import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [userLoginData, setUserLoginData] = useState({
@@ -12,6 +14,7 @@ const Login = () => {
     const value = e.target.value;
     setUserLoginData({ ...userLoginData, [name]: value });
   };
+
 
   return (
     <>
@@ -30,8 +33,8 @@ const Login = () => {
           </h2>
           <form
             className="max-w-[800px]   mx-auto bg-gray-900 p-8 px-8 rounded-lg"
-            method="POST"
             action="/login"
+            method="POST"
           >
             <div className="flex  flex-col text-gray-400 py-2">
               <label>Email</label>

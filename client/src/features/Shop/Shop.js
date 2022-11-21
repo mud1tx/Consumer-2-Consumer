@@ -42,12 +42,10 @@ const Shop = () => {
           ))}
         </div>
       ) : (
-        <div>
-          {/* <p><Skeleton count={10} /></p> */}
-        </div>
+        <div>{/* <p><Skeleton count={10} /></p> */}</div>
       )}
     </div>
   );
-};;
+};
 
 export default Shop;

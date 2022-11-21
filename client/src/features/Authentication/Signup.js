@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+// import axios from "axios";
+// import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -15,6 +17,7 @@ const SignUp = () => {
     const value = e.target.value;
     setUserData({ ...userData, [name]: value });
   };
+
 
   return (
     <>

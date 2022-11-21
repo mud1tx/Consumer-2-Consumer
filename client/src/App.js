@@ -8,20 +8,24 @@ import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
 import Login from "./features/Authentication/Login";
 import Signup from "./features/Authentication/Signup";
+import { UserContextProvider } from "./context/UserContext";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<ShopPage />} />
-      <Route path="/products" element={<ProductsPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/orders" element={<OrdersPage />} />
-      <Route path="/admin/add-product" element={<AddProductsPage />} />
-      <Route path="/admin/admin-products" element={<AdminProductsPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      {/* <Navbar /> */}
-    </Routes>
+    <UserContextProvider>
+      <Routes>
+        <Route path="/" element={<ShopPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/admin/add-product" element={<AddProductsPage />} />
+        <Route path="/admin/admin-products" element={<AdminProductsPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        {/* <Navbar /> */}
+      </Routes>
+    </UserContextProvider>
   );
 };
 

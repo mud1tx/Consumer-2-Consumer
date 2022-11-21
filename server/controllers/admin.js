@@ -3,6 +3,7 @@ const fs = require("fs");
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 
 exports.postAddProduct = async (req, res, next) => {
+  // console.log("loloolook", req.session);
   const title = req.body.title;
   const category = req.body.category;
   const images = req.files;
