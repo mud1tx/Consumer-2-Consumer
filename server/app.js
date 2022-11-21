@@ -67,21 +67,21 @@ app.use((req, res, next) => {
     });
 });
 
-
-app.use("/admin", adminRoutes);
-app.use(authRoutes);
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   next();
 });
+
+app.use("/admin", adminRoutes);
+app.use(authRoutes);
 app.use(shopRoutes);
 
 mongoose
-.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-.then((result) => {
-  app.listen(5000);
-  console.log("listening at port 5000");
-})
-.catch((err) => {
-  console.log(err);
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => {
+    app.listen(5000);
+    console.log("listening at port 5000");
+  })
+  .catch((err) => {
+    console.log(err);
   });
