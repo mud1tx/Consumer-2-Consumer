@@ -8,7 +8,6 @@ import OrdersPage from "./pages/OrdersPage";
 import ProductsPage from "./pages/ProductsPage";
 import Login from "./features/Authentication/Login";
 import Signup from "./features/Authentication/Signup";
-import { UserContextProvider } from "./context/UserContext";
 import PrivateRoute from "./features/PrivateRoutes/PrivateRoutes";
 import { User } from "./redux/action/authUser";
 import { useDispatch } from "react-redux";
@@ -25,7 +24,6 @@ const App = () => {
   });
 
   return (
-    <UserContextProvider>
       <Routes>
         <Route path="/" element={<ShopPage />} />
         <Route element={<PrivateRoute />}>
@@ -39,7 +37,6 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         {/* <Navbar /> */}
       </Routes>
-    </UserContextProvider>
   );
 };
 
