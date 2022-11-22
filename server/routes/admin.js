@@ -4,7 +4,7 @@ const adminController = require("../controllers/admin");
 
 const store = require("../util/multer");
 
-const isAuth = require("../middleware/is_auth");
+// const isAuth = require("../middleware/is_auth");
 
 const router = express.Router();
 
@@ -13,7 +13,6 @@ const router = express.Router();
 router.post(
   "/add-product",
   store.array("images", 12),
-  isAuth,
   adminController.postAddProduct
 );
 
