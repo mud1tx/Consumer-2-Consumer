@@ -5,11 +5,8 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
-const flash = require("connect-flash");
 const cors = require("cors");
-const Product = require("./models/products");
 const User = require("./models/user");
-const cookieParser = require("cookie-parser");
 
 // const isAuth = require("../middleware/is_auth");
 // mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop?retryWrites=true&w=majority
@@ -38,7 +35,6 @@ const authRoutes = require("./routes/auth");
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(
   session({
@@ -50,7 +46,6 @@ app.use(
 );
 
 // app.use(csrfProtection);
-app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -58,7 +53,6 @@ app.use((req, res, next) => {
   }
   User.findById(req.session.user._id)
     .then((user) => {
-      // console.log("reQ", req.session);
       req.user = user;
       next();
     })
@@ -67,10 +61,6 @@ app.use((req, res, next) => {
     });
 });
 
-app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isLoggedIn;
-  next();
-});
 
 app.use("/admin", adminRoutes);
 app.use(authRoutes);
