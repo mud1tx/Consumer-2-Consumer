@@ -1,13 +1,17 @@
-import React, { useState, useContext, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-// import axios from "axios";
-// import { ToastContainer, toast } from "react-toastify";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { User } from "../../redux/action/authUser";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [userLoginData, setUserLoginData] = useState({
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleInputs = (e) => {
     const name = e.target.name;
@@ -15,6 +19,34 @@ const Login = () => {
     setUserLoginData({ ...userLoginData, [name]: value });
   };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const loginApiResponse = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: userLoginData.email,
+          password: userLoginData.password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const formData = await loginApiResponse.json();
+      const { ok } = formData;
+      if (!ok) {
+        console.log("error aye kya", formData);
+        setError(formData.message);
+      } else {
+        sessionStorage.setItem("userLoggedIn", JSON.stringify(formData));
+        dispatch(User(formData));
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -33,8 +65,9 @@ const Login = () => {
           </h2>
           <form
             className="max-w-[800px]   mx-auto bg-gray-900 p-8 px-8 rounded-lg"
-            action="/login"
-            method="POST"
+            // action="/login"
+            // method="POST"
+            onSubmit={handleFormSubmit}
           >
             <div className="flex  flex-col text-gray-400 py-2">
               <label>Email</label>
@@ -68,6 +101,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      {error && <h1>{error}</h1>}
     </>
   );
 };

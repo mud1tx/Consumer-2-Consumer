@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   AiOutlineLogin,
   AiOutlineClose,
@@ -8,10 +8,35 @@ import {
 } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BiLogOutCircle } from "react-icons/bi";
+import { useSelector, useDispatch } from "react-redux";
+import { User } from "../redux/action/authUser";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userLoggedIn = useSelector((state) => state.authenticateUser);
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
+  // const [logoutRefresh, setLogoutRefresh] = useState(false);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const logoutApiResponse = await fetch("http://localhost:5000/logout", {
+        method: "POST",
+      });
+
+      const logoutData = await logoutApiResponse.json();
+
+      sessionStorage.clear();
+      let data = logoutData;
+      dispatch(User({ data }));
+      // setLogoutRefresh(true);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -34,26 +59,31 @@ const Navbar = () => {
                   <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                     <NavLink to="/">Shop</NavLink>
                   </div>
+                  {userLoggedIn?.isLoggedIn && (
+                    <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                      <NavLink to="/cart">Cart</NavLink>
+                    </div>
+                  )}
+                  {userLoggedIn?.isLoggedIn && (
+                    <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                      <NavLink to="/products">Products</NavLink>
+                    </div>
+                  )}
 
-                  <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                    <NavLink to="/cart">Cart</NavLink>
-                  </div>
+                  {userLoggedIn?.isLoggedIn && (
+                    <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                      <NavLink to="/orders">Orders</NavLink>
+                    </div>
+                  )}
 
-                  <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                    <NavLink to="/products">Products</NavLink>
-                  </div>
-
-                  <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                    <NavLink to="/orders">Orders</NavLink>
-                  </div>
-
-                  <div className=" flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                    <NavLink to="/admin/add-product">Add Products</NavLink>
-                  </div>
+                  {userLoggedIn?.isLoggedIn && (
+                    <div className=" flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                      <NavLink to="/admin/add-product">Add Products</NavLink>
+                    </div>
+                  )}
                 </div>
                 <div className="hidden xl:flex items-center">
                   <div className="relative md:mr-6 my-2">
-                    {/* <a className=""></a> */}
                     <input
                       className="bg-main_color-200 focus:outline-none rounded w-full text-sm text-main_color-1000  pl-8 py-2"
                       type="text"
@@ -83,17 +113,21 @@ const Navbar = () => {
                           </li>
                         </ul>
                       )}
-                      <div className="cursor-pointer text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-white focus:text-main_color-200 focus:outline-none flex items-center">
-                        <BiLogOutCircle className="text-2xl" />
-                        <form action="/logout" method="POST">
-                          <input type="hidden" name="logout" value="" />
-                          <button type="submit">LogOut</button>
-                        </form>
-                      </div>
                       <div className="cursor-pointer flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out"></div>
                       <div className="ml-2 text-main_color-200 flex items-center">
                         <FaUserCircle className="text-3xl" />
                       </div>
+                    </div>
+                    <div className="cursor-pointer text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-white focus:text-main_color-200 focus:outline-none flex items-center">
+                      <BiLogOutCircle className="text-2xl" />
+                      <form
+                        onSubmit={handleFormSubmit}
+                        // action="/logout"
+                        // method="POST"
+                      >
+                        <input type="hidden" name="logout" value="" />
+                        <button type="submit">LogOut</button>
+                      </form>
                     </div>
                   </div>
                 </div>
