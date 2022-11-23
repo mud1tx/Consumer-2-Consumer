@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import { BsCartCheck } from "react-icons/bs";
 // import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import "react-loading-skeleton/dist/skeleton.css";
+import Hero from "./Hero";
 
 const Shop = () => {
   const [allProductsData, setAllProductsData] = useState([]);
@@ -23,12 +24,22 @@ const Shop = () => {
   }, []);
   // console.log(allProductsData);
   return (
-    <div className="w-10/12 m-auto pt-20 sm:pt-0 ">
+    <div className=" pt-20 bg-main_color-200 ">
+      <Hero />
+      <div>
+        <h1 className="text-3xl font-semibold text-main_color-1000 ml-4">
+          Featured Product SoFar
+        </h1>
+      </div>
       {allProductsData?.length > 0 ? (
-        <div className=" flex flex-wrap justify-between  ">
+        <div className=" flex flex-wrap justify-between items-center gap-4  mt-8">
           {allProductsData.map((product) => (
             //  <div  className=" flex ">
-            <div key={product._id} className=" bg-main_color-200 rounded-md  ">
+
+            <div
+              key={product._id}
+              className=" border-2 border-main_color-1000 mb-8 rounded-md p-2 "
+            >
               <div className="w-64 h-auto rounded-md">
                 <Carousel
                   // length={3}
@@ -54,7 +65,7 @@ const Shop = () => {
                   ))}
                 </Carousel>
               </div>
-              <div className="Content p-4">
+              <div className="Content ">
                 <h1>
                   <span className="text-md font-bold text-main_color-1000">
                     Title:{" "}
@@ -77,10 +88,9 @@ const Shop = () => {
                 </p>
                 {/* <p>description:{product.description}</p> */}
                 <div className="flex justify-between items-center mt-4 ">
-                  <button className="bg-main_color-1000 rounded-sm  text-main_color-200 pl-2 pr-2 pt-1 pb-1">
+                  <button className="border-2 hover:bg-main_color-1000 ease-in-out hover:text-main_color-200 duration-700 border-main_color-1000 rounded-sm  text-main_color-1000 pl-2 pr-2 pt-1 pb-1">
                     Buy Now
                   </button>
-
                   <BsCartCheck className="text-main_color-1000 text-2xl" />
                 </div>
               </div>
@@ -90,229 +100,228 @@ const Shop = () => {
         </div>
       ) : (
         <div className="flex flex-wrap justify-between w-10/12 m-auto pt-20 sm:pt-0 ">
-        <div class="w-64 rounded-md ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
+          <div class="w-64 rounded-md ">
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
+
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
           </div>
 
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-          </div>
-        </div>
+          {/* Second Card */}
 
-        {/* Second Card */}
+          <div class="w-64 rounded-md ">
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
 
-        <div class="w-64 rounded-md ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-          </div>
-
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-          </div>
-        </div>
-
-        {/* Third card */}
-
-
-        <div class="w-64 rounded-md ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
           </div>
 
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-          </div>
-        </div>
+          {/* Third card */}
 
-        {/* Fourth Card */}
+          <div class="w-64 rounded-md ">
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
 
-        <div class="w-64 rounded-md ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-          </div>
-
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-          </div>
-        </div>
-
-        {/* Fifth Card */}
-
-        <div class="w-64 rounded-md ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
           </div>
 
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-          </div>
-        </div>
+          {/* Fourth Card */}
 
-        {/* Sixth Card */}
+          <div class="w-64 rounded-md ">
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
 
-        <div class="w-64 rounded-md ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
           </div>
 
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
+          {/* Fifth Card */}
+
+          <div class="w-64 rounded-md ">
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
+
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
           </div>
-        </div>
+
+          {/* Sixth Card */}
+
+          <div class="w-64 rounded-md ">
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
+
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
+          </div>
 
           {/* Seven Card */}
 
           <div class="w-64 rounded-md ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-          </div>
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
 
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
           </div>
-        </div>
 
           {/* Eigth Card */}
 
           <div class="w-64 rounded-md   ">
-          <div className="">
-            <Skeleton className="w-40 h-32" />
-          </div>
-          <div>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-            <p>
-              <Skeleton className="w-10px" />
-            </p>
-          </div>
+            <div className="">
+              <Skeleton className="w-40 h-32" />
+            </div>
+            <div>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+              <p>
+                <Skeleton className="w-10px" />
+              </p>
+            </div>
 
-          <div className="flex justify-between">
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
-            <p className="w-20 text-2xl">
-              <Skeleton />
-            </p>
+            <div className="flex justify-between">
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+              <p className="w-20 text-2xl">
+                <Skeleton />
+              </p>
+            </div>
           </div>
         </div>
-      </div>
       )}
     </div>
   );
