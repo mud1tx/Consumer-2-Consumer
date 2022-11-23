@@ -11,6 +11,8 @@ import Signup from "./features/Authentication/Signup";
 import PrivateRoute from "./features/PrivateRoutes/PrivateRoutes";
 import { User } from "./redux/action/authUser";
 import { useDispatch } from "react-redux";
+import ResetPassword from "./features/Authentication/ResetPassword";
+import NewPassword from "./features/Authentication/NewPassword";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,19 +26,21 @@ const App = () => {
   });
 
   return (
-      <Routes>
-        <Route path="/" element={<ShopPage />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/admin/add-product" element={<AddProductsPage />} />
-          <Route path="/admin/admin-products" element={<AdminProductsPage />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        {/* <Navbar /> */}
-      </Routes>
+    <Routes>
+      <Route path="/" element={<ShopPage />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/admin/add-product" element={<AddProductsPage />} />
+        <Route path="/admin/admin-products" element={<AdminProductsPage />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/reset" element={<ResetPassword />} />
+      <Route path="/new-password/:token" element={<NewPassword />} />
+      <Route path="/signup" element={<Signup />} />
+      {/* <Navbar /> */}
+    </Routes>
   );
 };
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-// import axios from "axios";
-// import { ToastContainer, toast } from "react-toastify";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
@@ -18,6 +18,36 @@ const SignUp = () => {
     setUserData({ ...userData, [name]: value });
   };
 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const loginApiResponse = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          email: userData.email,
+          password: userData.password,
+          confirmPassword: userData.confirmPassword,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const formData = await loginApiResponse.json();
+      console.log("signupdata", formData);
+      const { ok } = formData;
+      if (!ok) {
+        // console.log("error aye kya", formData);
+        // setError(formData.message);
+      } else {
+        navigate("/login");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -36,8 +66,9 @@ const SignUp = () => {
           </h2>
           <form
             className="max-w-[400px] bg-gray-900 w-full mx-auto bg-gary-900 p-8 px-8 rounded-lg"
-            method="POST"
-            action="/signup"
+            // method="POST"
+            // action="/signup"
+            onSubmit={handleFormSubmit}
           >
             <div className="flex  flex-col text-gray-400 py-2">
               <label htmlFor="first_name">First Name</label>

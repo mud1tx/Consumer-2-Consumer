@@ -99,6 +99,9 @@ const Login = () => {
           <p className="text-white">
             <NavLink to="/signup">New User</NavLink>
           </p>
+          <p className="text-white">
+            <NavLink to="/reset">Reset Password</NavLink>
+          </p>
         </div>
       </div>
       {error && <h1>{error}</h1>}

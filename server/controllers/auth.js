@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const User = require("../models/user");
@@ -7,7 +8,8 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        "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",
+        // "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",
+        "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",
     },
   })
 );
@@ -24,15 +26,6 @@ exports.postLogin = (req, res, next) => {
         .compare(password, user.password)
         .then((doMatch) => {
           if (doMatch) {
-            // req.session.isLoggedIn = true;
-            // req.session.user = user;
-            // req.session.save((err) => {
-            //   if (err) {
-            //     console.log(err);
-            //   }
-            // });
-            // console.log("nahi yaar", req.session);
-            // let data = req.session;
             return res.json({ ok: true, user, isLoggedIn: true });
           }
           res.json({
@@ -78,7 +71,7 @@ exports.postSignup = (req, res, next) => {
           res.json({ ok: true, message: "Successfull" });
           return transporter.sendMail(
             {
-              to: email,
+              to: "muditagarwalna@gmail.com",
               from: "c2c16@outlook.com",
               subject: "Signup succeeded",
               html: "<h1>You successfully signed up!</h1>",
@@ -100,11 +93,89 @@ exports.postSignup = (req, res, next) => {
     });
 };
 
+exports.postReset = (req, res, next) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+      return res.json({ ok: false, message: "Some error occured" });
+    }
+    const token = buffer.toString("hex");
+    User.findOne({ email: req.body.email })
+      .then((user) => {
+        if (!user) {
+          return res.json({
+            ok: false,
+            message: "No account with that email found",
+          });
+        }
+        user.resetToken = token;
+        user.resetTokenExpiration = Date.now() + 3600000;
+        return user.save();
+      })
+      .then((result) => {
+        res.json({ ok: true, message: "Successfull" });
+        return transporter.sendMail(
+          {
+            to: req.body.email,
+            from: "c2c16@outlook.com",
+            subject: "Password Reset",
+            html: `<p>You requested a password reset</p>
+            <p>Click this <a href="http://localhost:3000/new-password/${token}">link</a> to set a new password.</p>`,
+          },
+          function (err, res) {
+            if (err) {
+              console.log(err);
+            }
+            console.log(res);
+          }
+        );
+      })
+      .catch((err) => console.log(err));
+  });
+};
+
+exports.getNewPassword = (req, res, next) => {
+  const token = req.params.token;
+  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+    .then((user) => {
+      res.json({ ok: true, userId: user._id.toString(), passwordToken: token });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.postNewPassword = (req, res, next) => {
+  const newPassword = req.body.newPassword;
+  const userId = req.body.userId;
+  const passwordToken = req.body.passwordToken;
+  console.log(newPassword,userId,passwordToken)
+  let resetUser;
+
+  User.findOne({
+    resetToken: passwordToken,
+    resetTokenExpiration: { $gt: Date.now() },
+    _id: userId,
+  })
+    .then((user) => {
+      resetUser = user;
+      return bcrypt.hash(newPassword, 12);
+    })
+    .then((hashedPassword) => {
+      resetUser.password = hashedPassword;
+      resetUser.resetToken = undefined;
+      resetUser.resetTokenExpiration = undefined;
+      return resetUser.save();
+    })
+    .then((result) => {
+      res.json({ok:true,message:"Password change successfully"})
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ok:false,message:`Some error occured`})
+    });
+};
+
 exports.postLogout = (req, res, next) => {
-  // console.log("nahi yaar", req.session);
-  // req.session.destroy((err) => {
-  //   console.log(err);
-  //   res.redirect("/");
-  // });
   res.json({ ok: true, isLoggedIn: false });
 };
