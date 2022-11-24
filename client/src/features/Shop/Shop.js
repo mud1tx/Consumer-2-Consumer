@@ -24,7 +24,7 @@ const Shop = () => {
   }, []);
   // console.log(allProductsData);
   return (
-    <div className=" pt-20 bg-main_color-200 ">
+    <div className=" pt-20 w-10/12 m-auto bg-main_color-200 ">
       <Hero />
       <div>
         <h1 className="text-3xl font-semibold text-main_color-1000 ml-4">
@@ -32,7 +32,7 @@ const Shop = () => {
         </h1>
       </div>
       {allProductsData?.length > 0 ? (
-        <div className=" flex flex-wrap justify-between items-center gap-4  mt-8">
+        <div className=" flex flex-wrap justify-center items-start gap-4  mt-8">
           {allProductsData.map((product) => (
             //  <div  className=" flex ">
 
