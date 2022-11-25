@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const User = require("../models/user");
@@ -9,7 +10,8 @@ const transporter = nodemailer.createTransport(
     auth: {
       api_key:
         // "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",
-        "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",
+        // "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",
+        process.env.SENDGRID_API_KEY,
     },
   })
 );
@@ -71,7 +73,7 @@ exports.postSignup = (req, res, next) => {
           res.json({ ok: true, message: "Successfull" });
           return transporter.sendMail(
             {
-              to: "muditagarwalna@gmail.com",
+              to: email,
               from: "c2c16@outlook.com",
               subject: "Signup succeeded",
               html: "<h1>You successfully signed up!</h1>",
@@ -149,7 +151,7 @@ exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.newPassword;
   const userId = req.body.userId;
   const passwordToken = req.body.passwordToken;
-  console.log(newPassword,userId,passwordToken)
+  console.log(newPassword, userId, passwordToken);
   let resetUser;
 
   User.findOne({
@@ -168,11 +170,11 @@ exports.postNewPassword = (req, res, next) => {
       return resetUser.save();
     })
     .then((result) => {
-      res.json({ok:true,message:"Password change successfully"})
+      res.json({ ok: true, message: "Password change successfully" });
     })
     .catch((err) => {
       console.log(err);
-      res.json({ok:false,message:`Some error occured`})
+      res.json({ ok: false, message: `Some error occured` });
     });
 };
 

@@ -1,4 +1,5 @@
 const path = require("path");
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -14,6 +15,7 @@ const MONGODB_URI =
   "mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop";
 
 // const csrfProtection = csrf({});
+// console.log("process", process.env.SENDGRID_API_KEY);
 
 const app = express();
 
