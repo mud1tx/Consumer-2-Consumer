@@ -3,7 +3,6 @@ const fs = require("fs");
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 
 exports.postAddProduct = async (req, res, next) => {
-  // console.log("loloolook", req.session);
   const title = req.body.title;
   const category = req.body.category;
   const images = req.files;
@@ -13,7 +12,7 @@ exports.postAddProduct = async (req, res, next) => {
     const error = new Error("Please choose files");
     error.httpStatusCode = 400;
     return next(error);
-  }
+  }   
   // convert images into base64 encoding
   let imgArray = images.map((file) => {
     let img = fs.readFileSync(file.path);
