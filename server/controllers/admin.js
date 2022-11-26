@@ -8,11 +8,12 @@ exports.postAddProduct = async (req, res, next) => {
   const images = req.files;
   const price = req.body.price;
   const description = req.body.description;
+  const userId = req.body.userId;
   if (!images) {
     const error = new Error("Please choose files");
     error.httpStatusCode = 400;
     return next(error);
-  }   
+  }
   // convert images into base64 encoding
   let imgArray = images.map((file) => {
     let img = fs.readFileSync(file.path);
@@ -34,7 +35,7 @@ exports.postAddProduct = async (req, res, next) => {
     image: imageArray,
     price: price,
     description: description,
-    userId:req.user._id
+    userId: userId,
   });
   product
     .save()

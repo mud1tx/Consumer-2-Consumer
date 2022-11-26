@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import classes from "./AddProducts.module.css";
+import { useSelector } from "react-redux";
 
 const AddProducts = () => {
+  const userLoggedIn = useSelector((state) => state.authenticateUser);
+  console.log(userLoggedIn.user._id)
+
   const [user, setUser] = useState({
     title: "",
     category: "",
@@ -44,7 +48,6 @@ const AddProducts = () => {
             />
           </div>
           <div className={classes.form_control}>
-            {/* <label htmlFor="images">Choose File</label> */}
             <input
               type="file"
               className={classes.image_input}
@@ -72,6 +75,15 @@ const AddProducts = () => {
               value={user.description}
               onChange={handleInputs}
             ></textarea>
+          </div>
+          <div className={classes.form_control}>
+            <input
+              type="hidden"
+              name="userId"
+              id="userId"
+              value={userLoggedIn.user._id}
+              onChange={handleInputs}
+            />
           </div>
           <button className={classes.addProduct_form_submit_btn} type="submit">
             Add-Product
