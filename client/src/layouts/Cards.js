@@ -23,13 +23,14 @@ const Cards = (props) => {
   };
 
   return (
-    <div className=" flex flex-wrap justify-center items-start gap-4  mt-8">
+    <div className=" bg-main_color-100 flex flex-wrap justify-center items-start   ">
+      {/* <h1>This Is card</h1> */}
       {allProductsData.map((product) => (
         <div
           key={product._id}
-          className=" border-2 border-main_color-1000 mb-8 rounded-md p-2 "
+          className=" border border-main_color-50  p-3  hover:bg-main_color-150 hover:border-main_color-150  duration-700"
         >
-          <div className=" h-auto rounded-md" style={{ maxWidth: "30rem" }}>
+          <div className=" h-auto  max-w-xs" >
             <Carousel
               // length={3}
               // className="w-20"
@@ -54,37 +55,41 @@ const Cards = (props) => {
               ))}
             </Carousel>
           </div>
-          <div className="Content ">
-            <h1>
-              <span className="text-md font-bold text-main_color-1000">
+          <div className="Content mt-10  pt-6 pb-2">
+            <h1 className="text-main_color-25 mt-2 mb-2">
+              <span className="text-md font-bold text-main_color-25">
                 Title:{" "}
               </span>
               {product.title}
             </h1>
-            <p>
-              <span className="text-md font-bold text-main_color-1000">
+            <p className="text-main_color-25">
+              <span className="text-md font-bold ">
                 Category:{" "}
               </span>
               {product.category}
             </p>
 
-            <p>
-              <span className="text-md text-main_color-1000 font-bold">
-                Price:{" "}
-              </span>
-              {product.price}{" "}
-              <span className="text-xs text-main_color-600 ">INR</span>
-            </p>
+          
             <div className="flex justify-between items-center mt-4 ">
-              <button className="border-2 hover:bg-main_color-1000 ease-in-out hover:text-main_color-200 duration-700 border-main_color-1000 rounded-sm  text-main_color-1000 pl-2 pr-2 pt-1 pb-1">
+
+
+            <p className="text-3xl text-main_color-25">
+              {product.price}{" "}
+              <span className="text-xs text-main_color-25 ">INR</span>
+            </p>
+              <div className="flex items-center  justify-center gap-4">
+              <button className="border rounded-md border-main_color-25 text-main_color-25 pl-2 pr-2 pt-1 pb-1">
                 Details
               </button>
+              <button>
               <BsCartCheck
-                className="text-main_color-1000 text-2xl"
+                className="text-main_color-25 text-4xl"
                 onClick={() => {
                   getProductDetailHandler(product._id);
                 }}
               />
+              </button>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
-.image {
+.imgg {
   filter: grayscale(100%);
 }
-.image:hover {
+.imgg:hover {
   filter: grayscale(0);
+  transition: ease-in-out;
+  transition-duration: 1000ms;
 }

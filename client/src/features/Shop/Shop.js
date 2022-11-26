@@ -21,7 +21,7 @@ const Shop = () => {
     fetchAllProducts();
   }, []);
   return (
-    <div className=" pt-20 bg-main_color-200 ">
+    <div className="  bg-main_color-200 ">
       
       {allProductsData?.length > 0 ? (
         <Cards allProductsData={allProductsData} />

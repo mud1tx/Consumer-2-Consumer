@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-main_color-1000 h-full w-full">
+      <div className="bg-main_color-100 border-b border-main_color-50 border-bottom h-full w-full">
         {/* Code block starts */}
         <nav className="shadow xl:block hidden ">
           <div className="mx-auto container px-6 py-2 xl:py-0">
