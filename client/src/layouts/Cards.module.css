@@ -1,0 +1,6 @@
+.productImage {
+  filter: grayscale(100%);
+}
+.productImage:hover {
+  filter: grayscale(0%);
+}

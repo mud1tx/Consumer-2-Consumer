@@ -2,6 +2,7 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { BsCartCheck } from "react-icons/bs";
+import classes from './Cards.module.css';
 
 const Cards = (props) => {
   const allProductsData = props.allProductsData;
@@ -43,13 +44,9 @@ const Cards = (props) => {
               interval={2000}
             >
               {product.image.map((img, index) => (
-                <div
-                  key={index}
-                  // style={{ width: "30rem" }}
-                >
+                <div key={index} className={classes.productImage}>
                   <img
-                    // className="w-full"
-                    style={{ width: "100%" }}
+                    className="w-full"
                     src={`data:${product.imageType[index]};base64,${img}`}
                     alt={`${product.category}`}
                   />
