@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const AddProducts = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
-  console.log(userLoggedIn.user._id)
 
   const [user, setUser] = useState({
     title: "",

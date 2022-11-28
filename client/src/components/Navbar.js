@@ -59,24 +59,24 @@ const Navbar = () => {
                   <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                     <NavLink to="/">Shop</NavLink>
                   </div>
-                  {userLoggedIn?.isLoggedIn && (
+                  {userLoggedIn?.user.isLoggedIn && (
                     <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/cart">Cart</NavLink>
                     </div>
                   )}
-                  {userLoggedIn?.isLoggedIn && (
+                  {userLoggedIn?.user.isLoggedIn && (
                     <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/products">Products</NavLink>
                     </div>
                   )}
 
-                  {userLoggedIn?.isLoggedIn && (
+                  {userLoggedIn?.user.isLoggedIn && (
                     <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/orders">Orders</NavLink>
                     </div>
                   )}
 
-                  {userLoggedIn?.isLoggedIn && (
+                  {userLoggedIn?.user.isLoggedIn && (
                     <div className=" flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/admin/add-product">Add Products</NavLink>
                     </div>

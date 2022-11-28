@@ -2,24 +2,26 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { BsCartCheck } from "react-icons/bs";
-import classes from './Cards.module.css';
+import classes from "./Cards.module.css";
+import { useDispatch } from "react-redux";
+import { SingleProduct } from "../redux/action/productDetail";
+import { useNavigate } from "react-router-dom";
 
 const Cards = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const allProductsData = props.allProductsData;
 
   const getProductDetailHandler = async (productId) => {
-    const res = await fetch("http://localhost:5000/", {
-      method: "POST",
-      body: JSON.stringify({
-        productId: productId,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    // console.log(productId);
+    const res = await fetch(`http://localhost:5000/${productId}`);
     const productData = await res.json();
-    console.log(productData);
+    const { ok } = productData;
+    if (!ok) {
+    } else {
+      dispatch(SingleProduct(productData.product));
+      navigate(`/${productId}`);
+    }
+    // console.log(productData);
   };
 
   return (
@@ -76,15 +78,15 @@ const Cards = (props) => {
               <span className="text-xs text-main_color-600 ">INR</span>
             </p>
             <div className="flex justify-between items-center mt-4 ">
-              <button className="border-2 hover:bg-main_color-1000 ease-in-out hover:text-main_color-200 duration-700 border-main_color-1000 rounded-sm  text-main_color-1000 pl-2 pr-2 pt-1 pb-1">
-                Details
-              </button>
-              <BsCartCheck
-                className="text-main_color-1000 text-2xl"
+              <button
+                className="border-2 hover:bg-main_color-1000 ease-in-out hover:text-main_color-200 duration-700 border-main_color-1000 rounded-sm  text-main_color-1000 pl-2 pr-2 pt-1 pb-1"
                 onClick={() => {
                   getProductDetailHandler(product._id);
                 }}
-              />
+              >
+                Details
+              </button>
+              <BsCartCheck className="text-main_color-1000 text-2xl" />
             </div>
           </div>
         </div>
