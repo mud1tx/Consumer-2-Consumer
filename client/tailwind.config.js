@@ -20,19 +20,38 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-    main_color:{
-  1000:"#344e41",
-  800:"#3a5a40",
-  600:"#588157",
-  400:"#a3b18a",
-  200:"#dad7cd",
-  150:"#aa3246",
-  100:"#0a141e",
-  50:"hsla(0,0%,98%,.1)",
-  25:"hsla(0,0%,98%,.7)",
+    primary:"#5ec576",
+    secondry:"#ff585f",
+    tertiary:"#4bbb7d",
+    primary_darker:"#4bbb7d",
+    secondry_darker:"#ffbb00",
+    tertiary_darker:"#fd424b",
+    primary_opacity:"#5ec5763a",
+    secondry_opacity:"#ffcd0331",
+    tertiary_opacity:"#ff58602d",
+    backgound_white:"#f3f3f3",
+    text_color:"#444",
+    main_white:"#FFFFFF",
     },
-      },
-    },
+    // backgroundImage: {
+    //     'hero-pattern': "url')",
+    //     'footer-texture': "url('/img/footer-texture.png')",
+    //   }
+ },
+//  animation: {
+//   'jump': 'jump 0.5s linear', 
+// },
+// keyframes: {
+//   jump: {
+//     '40%': { 
+//       'transform': 'translateY(-4px)',
+//       'text-shadow': '0 3px 1px rgba(0, 0, 0, .2)'
+//     },
+//     '100%': {
+//       'transform': 'translateY(0px)'
+//     }
+//   },
+// },
   },
   plugins: [],
 }

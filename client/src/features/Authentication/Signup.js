@@ -51,7 +51,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="bg-main_color-100 min-h-screen flex items-center justify-center">
+      <div className="bg-backgound_white min-h-screen flex items-center justify-center">
         {/* <div className="hidden sm:block  ">
           <img
             className="w-full h-full object-cover"
@@ -60,9 +60,9 @@ const SignUp = () => {
           />
         </div> */}
 
-        <div className="  bg-main_color-200 flex rounded shadow-lg max-w-4xl px-2 py-4 items-center">
+        <div className="  bg-main_white flex rounded shadow-lg max-w-4xl px-2 py-4 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
-          <h2 className="font-bold text-3xl text-main_color-150">
+          <h2 className="font-bold text-3xl text-primary">
             Sign Up
           </h2>
           <form
@@ -72,9 +72,9 @@ const SignUp = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="flex  flex-col  py-2">
-              <label htmlFor="first_name" className="text-sm" >First Name</label>
+              <label htmlFor="first_name" className="text-sm text-text_color" >First Name</label>
               <input
-                className="rounded-sm bg-main_color-25  text-sm p-2  focus:outline-none"
+                className="rounded-sm border   bg-main_color-25  focus:border-none text-sm p-2  focus:shadow-md focus:outline-none"
                 type="text"
                 name="first_name"
                 value={userData.first_name}
@@ -83,9 +83,9 @@ const SignUp = () => {
             </div>
 
             <div className="flex  flex-col  py-2">
-              <label htmlFor="last_name" className="text-sm">Last Name</label>
+              <label htmlFor="last_name" className="text-sm text-text_color">Last Name</label>
               <input
-                className="rounded-sm bg-main_color-25  text-sm p-2  focus:outline-none"
+                className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2  focus:outline-none"
                 type="text"
                 name="last_name"
                 value={userData.last_name}
@@ -94,9 +94,9 @@ const SignUp = () => {
             </div>
 
             <div className="flex  flex-col  py-2">
-              <label htmlFor="email" className="text-sm">Email</label>
+              <label htmlFor="email" className="text-sm text-text_color">Email</label>
               <input
-                className="rounded-sm bg-main_color-25  text-sm p-2 focus:outline-none"
+                className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
                 type="email"
                 name="email"
                 value={userData.email}
@@ -105,9 +105,9 @@ const SignUp = () => {
             </div>
 
             <div className="flex flex-col  py-2">
-              <label htmlFor="password" className="text-sm">Password</label>
+              <label htmlFor="password" className="text-sm text-text_color">Password</label>
               <input
-              className="rounded-sm bg-main_color-25 text-sm p-2 focus:outline-none"
+              className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
                 type="Password"
                 name="password"
                 value={userData.password}
@@ -116,9 +116,9 @@ const SignUp = () => {
             </div>
 
             <div className="flex flex-col  ">
-              <label htmlFor="confirmPassword" className="text-sm">Confirm Password</label>
+              <label htmlFor="confirmPassword" className="text-sm text-text_color">Confirm Password</label>
               <input
-                className="rounded-sm bg-main_color-25 text-sm p-2 focus:outline-none"
+                className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
                 type="Password"
                 name="confirmPassword"
                 value={userData.confirmPassword}
@@ -126,13 +126,13 @@ const SignUp = () => {
               />
             </div>
             <button
-              className="w-full my-5 py-2 transition duration-0 hover:duration-150 bg-main_color-150 shadow-lg shadow-text-teal-400 hover:shadow-teal-500/20  text-white font-semibold rounded-sm"
+              className="w-full my-5 py-2 transition   bg-primary shadow-lg shadow-text-teal-400 hover:shadow-teal-500/20  text-text_color font-semibold rounded-sm"
               type="submit"
             >
               Sign In
             </button>
           </form>
-          <p className="text-gray-800">
+          <p className="text-text_color">
             <NavLink to="/login">Already have Account ?</NavLink>
           </p>
           </div>

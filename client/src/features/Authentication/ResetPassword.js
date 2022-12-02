@@ -37,17 +37,17 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div className="bg-main_color-100 min-h-screen flex items-center justify-center">
-        <div className="bg-main_color-200 flex rounded shadow-lg max-w-4xl p-5 items-center">
+      <div className="bg-backgound_white min-h-screen flex items-center justify-center">
+        <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
-          <h2 class="font-bold text-3xl text-main_color-150 mb-10">
+          <h2 class="font-bold text-3xl text-primary mb-10">
             Reset  Password
           </h2>
           <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-            <div className="flex flex-col">
+            <div className="flex flex-col text-text_color">
               <label>Email</label>
               <input
-                className="p-2  text-sm rounded-sm border outline-none"
+                className="p-2  focus:outline-none focus:shadow-md text-sm rounded-sm border outline-none"
                 type="email"
                 name="email"
                 value={userLoginData.email}
@@ -55,7 +55,7 @@ const ResetPassword = () => {
               />
             </div>
             <button
-              className="w-full my-5 bg-main_color-150 py-2 text-mygreen shadow-lg  hover:shadow-green-500/20  text-gray-100 font-semibold rounded-sm"
+              className="w-full my-5 bg-primary hover:shadow-xs duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
               type="submit"
             >
               Reset Password

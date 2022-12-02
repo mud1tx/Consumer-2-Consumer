@@ -1,0 +1,31 @@
+.buttonn {
+  /* position: relative; */
+  /* display: inline-block; */
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #5ec576;
+  outline: 2px solid #5ec576;
+  /* padding: 30px 60px; */
+  overflow: hidden;
+  transition: color 1s;
+}
+
+.buttonn:hover {
+  color: #444;
+}
+.buttonn::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: -50px;
+  z-index: -1;
+  width: 150%;
+  height: 100%;
+  background-color: #5ec576;
+  transform: scalex(0) skewX(35deg);
+  transform-origin: left;
+  transition: transform 1s;
+}
+.buttonn:hover::before {
+  transform: scalex(1) skewX(35deg);
+}

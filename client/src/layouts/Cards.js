@@ -2,8 +2,8 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { BsCartCheck } from "react-icons/bs";
-import classes from './Cards.module.css';
-
+import classes from "./Cards.module.css";
+// import Button from "../components/Button";
 const Cards = (props) => {
   const allProductsData = props.allProductsData;
 
@@ -23,18 +23,16 @@ const Cards = (props) => {
   };
 
   return (
-    <div className=" bg-main_color-100 flex flex-wrap justify-center items-start   ">
-      {/* <h1>This Is card</h1> */}
+    <div className="   flex flex-wrap  p-4 bg-backgound_white justify-evenly items-center   ">
       {allProductsData.map((product) => (
         <div
           key={product._id}
-          className=" border border-main_color-50  p-3  hover:bg-main_color-150 hover:border-main_color-150  duration-700"
+          className="bg-main_white transform transition duration-700 border border-backgound_white  delay-500  hover:scale-105 rounded-md 
+          shadow-xs hover:shadow-2xl
+          mb-6 p-4"
         >
-          <div className=" h-auto  max-w-xs" >
+          <div className=" h-auto  max-w-xs ">
             <Carousel
-              // length={3}
-              // className="w-20"
-              // style={{ width: "1rem" }}
               infiniteLoop
               autoPlay
               showStatus={false}
@@ -47,7 +45,9 @@ const Cards = (props) => {
               {product.image.map((img, index) => (
                 <div key={index} className={classes.productImage}>
                   <img
-                    className="w-full"
+                    className=" h-40
+                    lg md:h-36 w-full object-cover object-center 
+                    "
                     src={`data:${product.imageType[index]};base64,${img}`}
                     alt={`${product.category}`}
                   />
@@ -55,40 +55,37 @@ const Cards = (props) => {
               ))}
             </Carousel>
           </div>
-          <div className="Content mt-10  pt-6 pb-2">
-            <h1 className="text-main_color-25 mt-2 mb-2">
-              <span className="text-md font-bold text-main_color-25">
-                Title:{" "}
-              </span>
+          <div className="Content   rounded-sm mt-10  pt-6 pb-2">
+            <h1 className="text-text_color  mt-2 mb-2">
+              <span className="text-md font-bold ">Title: </span>
               {product.title}
             </h1>
-            <p className="text-main_color-25">
-              <span className="text-md font-bold ">
-                Category:{" "}
-              </span>
+            <p className="text-text_color">
+              <span className="text-md font-bold ">Category: </span>
               {product.category}
             </p>
 
-          
-            <div className="flex justify-between items-center mt-4 ">
-
-
-            <p className="text-3xl text-main_color-25">
-              {product.price}{" "}
-              <span className="text-xs text-main_color-25 ">INR</span>
-            </p>
+            <div className="flex justify-between rounded-md items-center mt-4 ">
+              <p className="text-3xl text-text_color">
+                {product.price}{" "}
+                <span className="text-xs text-primary ">INR</span>
+              </p>
               <div className="flex items-center  justify-center gap-4">
-              <button className="border rounded-md border-main_color-25 text-main_color-25 pl-2 pr-2 pt-1 pb-1">
-                Details
-              </button>
-              <button>
-              <BsCartCheck
-                className="text-main_color-25 text-4xl"
-                onClick={() => {
-                  getProductDetailHandler(product._id);
-                }}
-              />
-              </button>
+                <button className="
+               hover:bg-primary shadow-lg duration-700 border border-primary   text-primary hover:text-text_color
+               focus:outline-none
+                  rounded-sm  px-2 py-1">
+                  Details
+                </button>
+                {/* <Button/> */}
+                <button>
+                  <BsCartCheck
+                    className="text-main_color-25 text-text_color text-3xl"
+                    onClick={() => {
+                      getProductDetailHandler(product._id);
+                    }}
+                  />
+                </button>
               </div>
             </div>
           </div>

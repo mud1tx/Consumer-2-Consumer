@@ -50,11 +50,11 @@ const Login = () => {
 
   return (
     <>
-      <div className=" bg-main_color-100 min-h-screen flex items-center justify-center">
-        <div className="bg-main_color-200 flex rounded shadow-lg max-w-4xl p-5 items-center">
+      <div className=" bg-backgound_white min-h-screen flex items-center justify-center">
+        <div className="bg-white flex rounded shadow-lg max-w-4xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
-            <h2 class="font-bold text-3xl text-main_color-150">Login Here</h2>
-            <p className="text-main_color-150 text-xs mt-4 mb-4 ">
+            <h2 class="font-bold text-3xl text-primary_darker">Login Here</h2>
+            <p className="text-primary text-xs mt-4 mb-4 ">
               <NavLink to="/signup">New User</NavLink>
             </p>
             <form
@@ -63,20 +63,20 @@ const Login = () => {
               // method="POST"
               onSubmit={handleFormSubmit}
             >
-              <div className="flex flex-col  ">
-                <label className="text-sm">Email</label>
+              <div className="flex flex-col text-text_color ">
+                <label className="text-sm text-text_color">Email</label>
                 <input
-                  className="p-2  text-sm rounded-sm border outline-none"
+                  className="p-2  text-sm focus:outline-none focus:shadow-md rounded-sm border outline-none"
                   type="email"
                   name="email"
                   value={userLoginData.email}
                   onChange={handleInputs}
                 />
               </div>
-              <div className="">
+              <div className=" text-text_color">
                 <label className="text-sm">Password</label>
                 <input
-                  className="p-2 text-sm outline-none rounded-sm border w-full"
+                  className="p-2 text-sm focus:outline-none focus:shadow-md outline-none rounded-sm border w-full"
                   type="password"
                   name="password"
                   value={userLoginData.password}
@@ -84,15 +84,15 @@ const Login = () => {
                 />
               </div>
               <button
-                className="w-full my-5 bg-main_color-150 py-2 text-mygreen shadow-lg  hover:shadow-green-500/20  text-gray-100 font-semibold rounded-sm"
+                className="w-full my-5  py-2  shadow-lg  bg-primary  text-text_color font-semibold rounded-sm"
                 type="submit"
               >
                 Log In
               </button>
 
               <div className="flex justify-between">
-                <p className="text-gray-800 relative">
-                  <NavLink to="/reset">Reset Password</NavLink>
+                <p className="text-text_color relative">
+                  <NavLink to="/reset">Reset Password ?</NavLink>
                 </p>
               </div>
             </form>
