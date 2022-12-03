@@ -5,7 +5,6 @@ import AdminProductsPage from "./pages/AdminProductsPage";
 import AddProductsPage from "./pages/AddProductsPage";
 import CartPage from "./pages/CartPage";
 import OrdersPage from "./pages/OrdersPage";
-import ProductsPage from "./pages/ProductsPage";
 import Login from "./features/Authentication/Login";
 import Signup from "./features/Authentication/Signup";
 import PrivateRoute from "./features/PrivateRoutes/PrivateRoutes";
@@ -13,6 +12,7 @@ import { User } from "./redux/action/authUser";
 import { useDispatch } from "react-redux";
 import ResetPassword from "./features/Authentication/ResetPassword";
 import NewPassword from "./features/Authentication/NewPassword";
+import ProductDetail from "./features/ProductDetail/ProductDetail";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<ShopPage />} />
       <Route element={<PrivateRoute />}>
-        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/:prodId" element={<ProductDetail />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/admin/add-product" element={<AddProductsPage />} />

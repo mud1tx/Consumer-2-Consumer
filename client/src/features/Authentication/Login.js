@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { User } from "../../redux/action/authUser";
+import classes from "./Login.module.css";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const [validate, setValidate] = useState([]);
 
   const handleInputs = (e) => {
     const name = e.target.name;
@@ -36,8 +38,9 @@ const Login = () => {
       const formData = await loginApiResponse.json();
       const { ok } = formData;
       if (!ok) {
-        console.log("error aye kya", formData);
+        // console.log("error aye kya", formData.validationErrors);
         setError(formData.message);
+        setValidate(formData.validationErrors);
       } else {
         sessionStorage.setItem("userLoggedIn", JSON.stringify(formData));
         dispatch(User(formData));
@@ -50,63 +53,61 @@ const Login = () => {
 
   return (
     <>
-      <div className=" bg-backgound_white min-h-screen flex items-center justify-center">
-        <div className="bg-white flex rounded shadow-lg max-w-4xl p-5 items-center">
-          <div className="md:w-1/2 px-8 md:px-16">
-            <h2 class="font-bold text-3xl text-primary_darker">Login Here</h2>
-            <p className="text-primary text-xs mt-4 mb-4 ">
-              <NavLink to="/signup">New User</NavLink>
-            </p>
-            <form
-              className=" flex flex-col gap-4 "
-              // action="/login"
-              // method="POST"
-              onSubmit={handleFormSubmit}
-            >
-              <div className="flex flex-col text-text_color ">
-                <label className="text-sm text-text_color">Email</label>
-                <input
-                  className="p-2  text-sm focus:outline-none focus:shadow-md  rounded-sm border outline-none"
-                  type="email"
-                  name="email"
-                  value={userLoginData.email}
-                  onChange={handleInputs}
-                />
-              </div>
-              <div className=" text-text_color">
-                <label className="text-sm">Password</label>
-                <input
-                  className="p-2 text-sm focus:outline-none focus:shadow-md outline-none rounded-sm border w-full"
-                  type="password"
-                  name="password"
-                  value={userLoginData.password}
-                  onChange={handleInputs}
-                />
-              </div>
-              <button
-                className="w-full my-5  py-2  shadow-lg  bg-primary  focus:outline-none text-text_color font-semibold rounded-sm"
-                type="submit"
-              >
-                Log In
-              </button>
+      <div className="grid grid-cols-1 sm:grid-cols-2  h-screen w-full">
+        <div className="hidden sm:block  ">
+          <img
+            className="w-full h-full object-cover"
+            src={require("../../assets/LoginImg.png")}
+            alt="Login"
+          />
+        </div>
 
-              <div className="flex justify-between">
-                <p className="text-text_color relative">
-                  <NavLink to="/reset">Reset Password ?</NavLink>
-                </p>
-              </div>
-            </form>
-          </div>
-          <div class="md:block hidden w-1/2">
-            <img
-              className=" rounded "
-              alt="Logo"
-              src={require("../Shop/BackgroundIllustration.jpg")}
-            />
-          </div>
+        <div className=" flex w-full  bg-gray-800 felx-col items-center justify-center">
+          <h2 className="text-4xl dark:text-white font-bold text-center">
+            Log In
+          </h2>
+          <form
+            className="max-w-[800px]   mx-auto bg-gray-900 p-8 px-8 rounded-lg"
+            // action="/login"
+            // method="POST"
+            onSubmit={handleFormSubmit}
+          >
+            <div className="flex  flex-col text-gray-400 py-2">
+              <label>Email</label>
+              <input
+                className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                type="email"
+                name="email"
+                value={userLoginData.email}
+                onChange={handleInputs}
+              />
+            </div>
+            <div className="flex flex-col text-gray-400 py-2">
+              <label>Password</label>
+              <input
+                className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                type="password"
+                name="password"
+                value={userLoginData.password}
+                onChange={handleInputs}
+              />
+            </div>
+            <button
+              className="w-full my-5 py-2 text-mygreen shadow-lg shadow-mygreen-800 hover:shadow-green-500/20  text-gray-100 font-semibold rounded-lg"
+              type="submit"
+            >
+              Log In
+            </button>
+          </form>
+          <p className="text-white">
+            <NavLink to="/signup">New User</NavLink>
+          </p>
+          <p className="text-white">
+            <NavLink to="/reset">Reset Password</NavLink>
+          </p>
         </div>
       </div>
-      {error && <h1 className="absolute">{error}</h1>}
+      {error && <h1>{error}</h1>}
     </>
   );
 };

@@ -11,6 +11,8 @@ const ResetPassword = () => {
     setUserLoginData({ [name]: value });
   };
 
+  const [error, setError] = useState("");
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -29,6 +31,10 @@ const ResetPassword = () => {
 
       const resetData = await resetPasswordApiResponse.json();
       //message ayega usko set kar do bus
+      const { ok } = resetData;
+      if (!ok) {
+        setError(resetData.message);
+      }
       console.log("resetData", resetData);
     } catch (err) {
       console.log(err);

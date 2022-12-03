@@ -17,14 +17,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../redux/action/authUser";
+import { SearchBar } from "../redux/action/searchBar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
+  // console.log("navbar user", userLoggedIn);
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
-  // const [logoutRefresh, setLogoutRefresh] = useState(false);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -95,6 +96,15 @@ const Navbar = () => {
                       className="  focus:shadow-xl drop-shadow-md  focus:outline-none rounded w-full bg-backgound_white text-sm text-text_color pl-8   py-2"
                       type="text"
                       placeholder="Search"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        dispatch(
+                          SearchBar({
+                            type: "SEARCH_PRODUCT",
+                            payload: val,
+                          })
+                        );
+                      }}
                     />
                     <CiSearch className="text-2xl text-text_color absolute pl-2  " />
                   </div>
@@ -159,6 +169,15 @@ const Navbar = () => {
                   className="bg-backgound_white focus:outline-none drop-shadow-md  focus:shadow-xl rounded w-full text-sm text-text_color  pl-10 py-2"
                   type="text"
                   placeholder="Search"
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    dispatch(
+                      SearchBar({
+                        type: "SEARCH_PRODUCT",
+                        payload: val,
+                      })
+                    );
+                  }}
                 />
                 <CiSearch className="text-2xl text-text_color absolute pl-2  " />
               </div>
