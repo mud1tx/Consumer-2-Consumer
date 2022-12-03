@@ -55,36 +55,35 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2  h-screen w-full">
-        <div className="hidden sm:block  ">
+      <div className="bg-backgound_white min-h-screen flex items-center justify-center">
+        {/* <div className="hidden sm:block  ">
           <img
             className="w-full h-full object-cover"
             src={require("../../assets/LoginImg.png")}
             alt="Signup"
           />
-        </div>
+        </div> */}
 
-        <div className="  bg-gray-800  flex felx-col  justify-center">
-          {error && (
-            <div>
-              <p>{error}</p>
-            </div>
-          )}
-          <h2 className="text-4xl dark:text-white font-bold text-center">
+        <div className="  bg-main_white flex rounded shadow-lg max-w-4xl px-2 py-4 items-center">
+          <div className="md:w-1/2 px-8 md:px-16">
+          <h2 className="font-bold text-3xl text-primary">
             Sign Up
           </h2>
           <form
-            className="max-w-[400px] bg-gray-900 w-full mx-auto bg-gary-900 p-8 px-8 rounded-lg"
+            className="max-w-[400px]  w-full mx-auto bg-gary-900 p-8 px-8 rounded-lg"
+            // method="POST"
+            // action="/signup"
             onSubmit={handleFormSubmit}
           >
-            <div className="flex  flex-col text-gray-400 py-2">
-              <label htmlFor="first_name">First Name</label>
+            <div className="flex  flex-col  py-2">
+              <label htmlFor="first_name" className="text-sm text-text_color" >First Name</label>
               <input
-                className={
-                  validate.find((e) => e.param === "first_name")
-                    ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
-                    : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                }
+                className="rounded-sm border   bg-main_color-25  focus:border-none text-sm p-2  focus:shadow-md focus:outline-none"
+                // className={
+                //   validate.find((e) => e.param === "first_name")
+                //     ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
+                //     : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                // }
                 type="text"
                 name="first_name"
                 value={userData.first_name}
@@ -92,15 +91,16 @@ const SignUp = () => {
               />
             </div>
 
-            <div className="flex  flex-col text-gray-400 py-2">
-              <label htmlFor="last_name">Last Name</label>
+            <div className="flex  flex-col  py-2">
+              <label htmlFor="last_name" className="text-sm text-text_color">Last Name</label>
               <input
+                className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2  focus:outline-none"
                 // className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                className={
-                  validate.find((e) => e.param === "last_name")
-                    ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
-                    : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                }
+                // className={
+                //   validate.find((e) => e.param === "last_name")
+                //     ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
+                //     : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                // }
                 type="text"
                 name="last_name"
                 value={userData.last_name}
@@ -108,15 +108,16 @@ const SignUp = () => {
               />
             </div>
 
-            <div className="flex  flex-col text-gray-400 py-2">
-              <label htmlFor="email">Email</label>
+            <div className="flex  flex-col  py-2">
+              <label htmlFor="email" className="text-sm text-text_color">Email</label>
               <input
+                className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
                 // className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                className={
-                  validate.find((e) => e.param === "email")
-                    ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
-                    : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                }
+                // className={
+                //   validate.find((e) => e.param === "email")
+                //     ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
+                //     : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                // }
                 type="email"
                 name="email"
                 value={userData.email}
@@ -124,15 +125,16 @@ const SignUp = () => {
               />
             </div>
 
-            <div className="flex flex-col text-gray-400 py-2">
-              <label htmlFor="password">Password</label>
+            <div className="flex flex-col  py-2">
+              <label htmlFor="password" className="text-sm text-text_color">Password</label>
               <input
+              className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
                 // className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                className={
-                  validate.find((e) => e.param === "password")
-                    ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
-                    : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                }
+                // className={
+                //   validate.find((e) => e.param === "password")
+                //     ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
+                //     : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                // }
                 type="Password"
                 name="password"
                 value={userData.password}
@@ -140,15 +142,16 @@ const SignUp = () => {
               />
             </div>
 
-            <div className="flex flex-col text-gray-400 py-2">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+            <div className="flex flex-col  ">
+              <label htmlFor="confirmPassword" className="text-sm text-text_color">Confirm Password</label>
               <input
+                className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
                 // className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                className={
-                  validate.find((e) => e.param === "confirmPassword")
-                    ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
-                    : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                }
+                // className={
+                //   validate.find((e) => e.param === "confirmPassword")
+                //     ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
+                //     : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                // }
                 type="Password"
                 name="confirmPassword"
                 value={userData.confirmPassword}
@@ -156,15 +159,24 @@ const SignUp = () => {
               />
             </div>
             <button
-              className="w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/30 hover:shadow-teal-500/20  text-white font-semibold rounded-lg"
+              className="w-full my-5 py-2 transition   bg-primary shadow-lg shadow-text-teal-400 hover:shadow-teal-500/20  text-text_color font-semibold rounded-sm"
               type="submit"
             >
               Sign In
             </button>
           </form>
-          <p className="text-white">
-            <NavLink to="/login">Already have Account</NavLink>
+          <p className="text-text_color">
+            <NavLink to="/login">Already have Account ?</NavLink>
           </p>
+          </div>
+          <div class="md:block hidden w-1/2">
+              <img
+                className=" rounded "
+                alt="Logo"
+                src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
+              />
+            </div>
+       
         </div>
       </div>
     </>

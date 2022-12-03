@@ -2,13 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@layer utilities {
+  .transform-bgr1-s1 {
+    transform: rotatez(45deg) translate(6px, 1px);
+  }
+  .transform-bgr1-s2 {
+    transform: rotatez(-45deg);
+  }
+  .transform-bgr1-s3 {
+    width: 50%;
+    transform: translate(2px, -14px) rotatez(45deg);
+  }
+}
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 :root {
-  --main-bg-color: #3a5a40;
-  --main-bg-color-light: #588157;
-  --hover-color: #a3b18a;
+  --main-bg-color: #4bbb7d;
+  --main-bg-color-light: #5ec576;
+  --hover-color: #4bbb7d;
   --main-white-color: #fff;
   --main-text-color: #dad7cd;
   --main-transition: all 0.3s linear;
@@ -27,11 +38,12 @@ body {
   width: 0.5rem;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--hover-color);
+  background-color:var(--main-bg-color-light);
   border-radius: 100vw;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--main-bg-color-light);
+ 
+  background-color:  var(--hover-color);
 }
 ::-webkit-scrollbar-track {
   background-color: white;

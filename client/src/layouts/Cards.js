@@ -45,17 +45,16 @@ const Cards = (props) => {
   };
 
   return (
-    <div className=" flex flex-wrap justify-center items-start gap-4  mt-8">
+    <div className="flex flex-wrap  p-4 bg-backgound_white justify-evenly items-center">
       {allProductsData.map((product) => (
         <div
           key={product._id}
-          className=" border-2 border-main_color-1000 mb-8 rounded-md p-2 "
+          className="bg-main_white  border border-backgound_white  transform transition duration-700 delay-500  hover:scale-105 rounded-md 
+          shadow-xs hover:shadow-2xl
+          mb-6 p-4"
         >
-          <div className=" h-auto rounded-md" style={{ maxWidth: "30rem" }}>
+          <div className=" h-auto  max-w-xs ">
             <Carousel
-              // length={3}
-              // className="w-20"
-              // style={{ width: "1rem" }}
               infiniteLoop
               autoPlay
               showStatus={false}
@@ -68,7 +67,9 @@ const Cards = (props) => {
               {product.image.map((img, index) => (
                 <div key={index}>
                   <img
-                    className="w-full"
+                    className=" h-40
+                    lg md:h-36 w-full object-cover object-center 
+                    "
                     src={`data:${product.imageType[index]};base64,${img}`}
                     alt={`${product.category}`}
                   />
@@ -76,21 +77,42 @@ const Cards = (props) => {
               ))}
             </Carousel>
           </div>
-          <div className="Content ">
-            <h1>
-              <span className="text-md font-bold text-main_color-1000">
-                Title:{" "}
-              </span>
+          <div className="Content   rounded-sm mt-10  pt-6 pb-2">
+            <h1 className="text-text_color  mt-2 mb-2">
+              <span className="text-md font-bold ">Title: </span>
               {product.title}
             </h1>
-            <p>
-              <span className="text-md font-bold text-main_color-1000">
-                Category:{" "}
-              </span>
+            <p className="text-text_color">
+              <span className="text-md font-bold ">Category: </span>
               {product.category}
             </p>
 
-            <p>
+            <div className="flex justify-between rounded-md items-center mt-4 ">
+              <p className="text-3xl text-text_color">
+                {product.price}{" "}
+                <span className="text-xs text-primary ">INR</span>
+              </p>
+              <div className="flex items-center  justify-center gap-4">
+                <button
+                  className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
+                  onClick={() => {
+                    getProductDetailHandler(product._id);
+                  }}
+                >
+                  Details
+                </button>
+                {userLoggedIn?.isLoggedIn && (
+                  <button>
+                    <BsCartCheck
+                      className="text-main_color-1000 text-2xl"
+                      onClick={() => {
+                        getProductToCartHandler(product._id);
+                      }}
+                    />
+                  </button>
+                )}
+              </div>
+              {/* <p>
               <span className="text-md text-main_color-1000 font-bold">
                 Price:{" "}
               </span>
@@ -114,6 +136,7 @@ const Cards = (props) => {
                   }}
                 />
               )}
+            </div> */}
             </div>
           </div>
         </div>

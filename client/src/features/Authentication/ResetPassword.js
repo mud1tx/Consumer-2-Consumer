@@ -42,37 +42,42 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
-      {error && (
-        <div>
-          <p>{error}</p>
-        </div>
-      )}
-      <div>
-        <h1>Reset Password</h1>
-      </div>
-      <form
-        className="max-w-[800px]   mx-auto bg-gray-900 p-8 px-8 rounded-lg"
-        onSubmit={handleFormSubmit}
-      >
-        <div className="flex  flex-col text-gray-400 py-2">
-          <label>Email</label>
-          <input
-            className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-            type="email"
-            name="email"
-            value={userLoginData.email}
-            onChange={handleInputs}
+    <>
+      <div className="bg-backgound_white min-h-screen flex items-center justify-center">
+        <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
+          <div className="md:w-1/2 px-8 md:px-16">
+          <h2 class="font-bold text-3xl text-primary mb-10">
+            Reset  Password
+          </h2>
+          <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
+            <div className="flex flex-col text-text_color">
+              <label>Email</label>
+              <input
+                className="p-2  focus:outline-none focus:shadow-md text-sm rounded-sm border outline-none"
+                type="email"
+                name="email"
+                value={userLoginData.email}
+                onChange={handleInputs}
+              />
+            </div>
+            <button
+              className="w-full my-5 bg-primary hover:shadow-xs focus:outline-none  duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
+              type="submit"
+            >
+              Reset Password
+            </button>
+          </form>
+          </div>
+        <div class="md:block hidden w-1/2">
+          <img
+            className=" rounded "
+            alt="Logo"
+            src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
           />
         </div>
-        <button
-          className="w-full my-5 py-2 text-mygreen shadow-lg shadow-mygreen-800 hover:shadow-green-500/20  text-gray-100 font-semibold rounded-lg"
-          type="submit"
-        >
-          Reset Password
-        </button>
-      </form>
-    </div>
+        </div>
+      </div>
+    </>
   );
 };
 

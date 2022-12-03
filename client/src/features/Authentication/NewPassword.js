@@ -70,7 +70,7 @@ const NewPassword = () => {
 
   return (
     <form
-      className="max-w-[800px]   mx-auto bg-gray-900 p-8 px-8 rounded-lg"
+      className="max-w-[800px]   mx-auto bg-gray-800 p-8 px-8 rounded-lg"
       onSubmit={handleFormSubmit}
     >
       <div className="flex flex-col text-gray-400 py-2">

@@ -63,11 +63,6 @@ const Login = () => {
         </div>
 
         <div className=" flex w-full  bg-gray-800 felx-col items-center justify-center">
-          {error && (
-            <div>
-              <p>{error}</p>
-            </div>
-          )}
           <h2 className="text-4xl dark:text-white font-bold text-center">
             Log In
           </h2>
@@ -80,12 +75,7 @@ const Login = () => {
             <div className="flex  flex-col text-gray-400 py-2">
               <label>Email</label>
               <input
-                // className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                className={
-                  validate.find((e) => e.param === "email")
-                    ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
-                    : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                }
+                className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="email"
                 name="email"
                 value={userLoginData.email}
@@ -95,12 +85,7 @@ const Login = () => {
             <div className="flex flex-col text-gray-400 py-2">
               <label>Password</label>
               <input
-                // className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                className={
-                  validate.find((e) => e.param === "password")
-                    ? `rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none ${classes.invalid}`
-                    : "rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                }
+                className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
                 type="password"
                 name="password"
                 value={userLoginData.password}
@@ -122,6 +107,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      {error && <h1>{error}</h1>}
     </>
   );
 };

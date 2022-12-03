@@ -1,34 +1,27 @@
-// module.exports = {
-//   future: {
-//     // removeDeprecatedGapUtilities: true,
-//     // purgeLayersByDefault: true,
-//   },
-//   purge: [],
-//   theme: {
-//     extend: {},
-//   },
-//   variants: {},
-//   plugins: [],
-// }
-
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+  plugins: [
+    require('tailwind-clip-path'),
   ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      colors:{
-    main_color:{
-  1000:"#344e41",
-  800:"#3a5a40",
-  600:"#588157",
-  400:"#a3b18a",
-  200:"#dad7cd"
-    },
+      colors: {
+      
+        primary: "#5ec576",
+        secondry: "#ff585f",
+        tertiary: "#4bbb7d",
+        primary_darker: "#4bbb7d",
+        secondry_darker: "#ffbb00",
+        tertiary_darker: "#fd424b",
+        primary_opacity: "#5ec5763a",
+        secondry_opacity: "#ffcd0331",
+        tertiary_opacity: "#ff58602d",
+        backgound_white: "#f3f3f3",
+        text_color: "#444",
+        main_white: "#FFFFFF",
       },
     },
   },
   plugins: [],
-}
+};
