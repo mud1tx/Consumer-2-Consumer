@@ -10,14 +10,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../redux/action/authUser";
+import { SearchBar } from "../redux/action/searchBar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
+  // console.log("navbar user", userLoggedIn);
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
-  // const [logoutRefresh, setLogoutRefresh] = useState(false);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -59,24 +60,24 @@ const Navbar = () => {
                   <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                     <NavLink to="/">Shop</NavLink>
                   </div>
-                  {userLoggedIn?.user.isLoggedIn && (
+                  {userLoggedIn?.isLoggedIn && (
                     <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/cart">Cart</NavLink>
                     </div>
                   )}
-                  {userLoggedIn?.user.isLoggedIn && (
+                  {userLoggedIn?.isLoggedIn && (
                     <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/products">Products</NavLink>
                     </div>
                   )}
 
-                  {userLoggedIn?.user.isLoggedIn && (
+                  {userLoggedIn?.isLoggedIn && (
                     <div className="flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/orders">Orders</NavLink>
                     </div>
                   )}
 
-                  {userLoggedIn?.user.isLoggedIn && (
+                  {userLoggedIn?.isLoggedIn && (
                     <div className=" flex px-5 items-center py-6 text-sm leading-5 text-main_color-200 hover:bg-main_color-200 hover:text-main_color-1000 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
                       <NavLink to="/admin/add-product">Add Products</NavLink>
                     </div>
@@ -88,6 +89,15 @@ const Navbar = () => {
                       className="bg-main_color-200 focus:outline-none rounded w-full text-sm text-main_color-1000  pl-8 py-2"
                       type="text"
                       placeholder="Search"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        dispatch(
+                          SearchBar({
+                            type: "SEARCH_PRODUCT",
+                            payload: val,
+                          })
+                        );
+                      }}
                     />
                   </div>
                   <div className="ml-6 relative">
@@ -152,6 +162,15 @@ const Navbar = () => {
                   className="bg-main_color-200 focus:outline-none rounded w-full text-sm text-main_color-1000  pl-10 py-2"
                   type="text"
                   placeholder="Search"
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    dispatch(
+                      SearchBar({
+                        type: "SEARCH_PRODUCT",
+                        payload: val,
+                      })
+                    );
+                  }}
                 />
               </div>
               <div
