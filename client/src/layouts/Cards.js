@@ -27,7 +27,7 @@ const Cards = (props) => {
       {allProductsData.map((product) => (
         <div
           key={product._id}
-          className="bg-main_white transform transition duration-700 border border-backgound_white  delay-500  hover:scale-105 rounded-md 
+          className="bg-main_white  border border-backgound_white  transform transition duration-700 delay-500  hover:scale-105 rounded-md 
           shadow-xs hover:shadow-2xl
           mb-6 p-4"
         >
@@ -73,7 +73,7 @@ const Cards = (props) => {
               <div className="flex items-center  justify-center gap-4">
                 <button className="
                hover:bg-primary shadow-lg duration-700 border border-primary   text-primary hover:text-text_color
-               focus:outline-none
+                 focus:outline-none
                   rounded-sm  px-2 py-1">
                   Details
                 </button>

@@ -23,7 +23,7 @@ const OrdersPage = () => {
                 <img
                   className="w-full hidden bg-white md:block"
                   src="../features/Shop/View-1.jpg"
-                  alt="Product Image"
+                  alt="ProductImage"
                 />
                 {/* <img
                   className="w-full md:hidden"

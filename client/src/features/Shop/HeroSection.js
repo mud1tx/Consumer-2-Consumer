@@ -5,9 +5,9 @@ import '../../components/Custom.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 const HeroSection = () => {
   return (
-    <div className="dark:bg-gray-900  bg-backgound_white">
-      <div className="flex flex-col lg:flex-row items-stretch justify-between lg:px-0 px-6 lg:py-20 py-8 2xl:mx-auto 2xl:container">
-        <div className="z-30  relative lg:w-1/2">
+    <div className="dark:bg-gray-900  h-full  bg-backgound_white">
+      <div className="flex flex-col lg:flex-row  items-stretch justify-between lg:px-0 px-6 lg:py-20 py-8 2xl:mx-auto 2xl:container">
+        <div className="z-30   relative lg:w-1/2">
           <div className="hidden dark:bg-gray-800  w-full lg:w-10/12 lg:h-full lg:flex justify-end items-center">
             <div className="w-full lg:w-auto lg:-mr-32">
               {/* <img src={require("../Shop/View-1.jpg")} alt="image with decent chairs" className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14" /> */}
@@ -24,28 +24,28 @@ const HeroSection = () => {
                 <div>
                   <img
                     src={require("../Shop/View-1.jpg")}
-                    alt="image with decent chairs"
+                    alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
                 </div>
                 <div>
                   <img
                     src={require("../Shop/View-2.jpg")}
-                    alt="image with decent chairs"
+                    alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
                 </div>
                 <div>
                   <img
                     src={require("../Shop/View-3.jpg")}
-                    alt="image with decent chairs"
+                    alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
                 </div>
                 <div>
                   <img
                     src={require("../Shop/View-4.jpg")}
-                    alt="image with decent chairs"
+                    alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
                 </div>
@@ -69,28 +69,28 @@ const HeroSection = () => {
               <div>
                 <img
                   src={require("../Shop/View-1.jpg")}
-                  alt="image with decent chairs"
+                  alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
               </div>
               <div>
                 <img
                   src={require("../Shop/View-2.jpg")}
-                  alt="image with decent chairs"
+                  alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
               </div>
               <div>
                 <img
                   src={require("../Shop/View-3.jpg")}
-                  alt="image with decent chairs"
+                  alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
               </div>
               <div>
                 <img
                   src={require("../Shop/View-4.jpg")}
-                  alt="image with decent chairs"
+                  alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
               </div>
@@ -101,7 +101,7 @@ const HeroSection = () => {
           <div>
             <h1 className=" md:w-8/12 lg:w-10/12 xl:8/12 2xl:w-8/12 w-full xl:text-6xl sm:text-5xl text-4xl  font-semibold  text-text_color capitalize">
               {" "}
-              Con<span className="text-primary">sumer</span> <span>To</span>{" "}
+              Con<span className="text-primary clip-path-polygon-[0_0,_100%_0,_100%_100%,_0_calc(100%_-_1rem)]">sumer</span><span>To</span>{" "}
               Consum<span className="text-primary">er</span>
             </h1>
             <p className="dark:text-gray-300 md:w-9/12 lg:w-11/12 xl:w-10/12 2xl:9/12 text-base leading-normal text-text_color mt-5">

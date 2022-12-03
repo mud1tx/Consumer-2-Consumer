@@ -1,4 +1,5 @@
 .addProduct_form {
+  
   height: calc(100vh - 70.4px);
   width: 25rem;
   max-width: 90%;
@@ -6,11 +7,19 @@
   display: block;
   padding: 1rem;
 }
+.whole-Acess{
+  background-color:#444;
+}
 .product_form {
   width: 100%;
+  padding: 10px;
 }
+
+
+  
 .form_control {
   margin: 1rem 0;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
 }
 .form_control label,
 .form_control input,
@@ -30,17 +39,63 @@
 .form_control textarea:focus {
   outline-color: var(--main-bg-color);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CSS */
 .addProduct_form_submit_btn {
-  font-size: 16px;
-  color: var(--main-bg-color);
-  background-color: var(--main-white-color);
-  padding: 0.43rem 1rem;
-  border-radius: 2rem;
-  border: 1px solid var(--main-bg-color);
-  outline: none;
-  cursor: pointer;
-}
-.addProduct_form_submit_btn:hover {
+  align-items: center;
   background-color: var(--main-bg-color);
-  color: var(--main-text-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #444;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.addProduct_form_submit_btn:hover,
+.addProduct_form_submit_btn:focus {
+  border-color: var(--main-bg-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.addProduct_form_submit_btn:hover {
+  transform: translateY(-1px);
+}
+
+.addProduct_form_submit_btn:active {
+  background-color: var(--main-bg-color);
+  border-color: var(--main-bg-color);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: #444;
+  transform: translateY(0);
 }

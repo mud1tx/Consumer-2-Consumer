@@ -66,7 +66,7 @@ const Login = () => {
               <div className="flex flex-col text-text_color ">
                 <label className="text-sm text-text_color">Email</label>
                 <input
-                  className="p-2  text-sm focus:outline-none focus:shadow-md rounded-sm border outline-none"
+                  className="p-2  text-sm focus:outline-none focus:shadow-md  rounded-sm border outline-none"
                   type="email"
                   name="email"
                   value={userLoginData.email}
@@ -84,7 +84,7 @@ const Login = () => {
                 />
               </div>
               <button
-                className="w-full my-5  py-2  shadow-lg  bg-primary  text-text_color font-semibold rounded-sm"
+                className="w-full my-5  py-2  shadow-lg  bg-primary  focus:outline-none text-text_color font-semibold rounded-sm"
                 type="submit"
               >
                 Log In
@@ -101,7 +101,7 @@ const Login = () => {
             <img
               className=" rounded "
               alt="Logo"
-              src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
+              src={require("../Shop/BackgroundIllustration.jpg")}
             />
           </div>
         </div>

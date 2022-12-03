@@ -55,7 +55,7 @@ const ResetPassword = () => {
               />
             </div>
             <button
-              className="w-full my-5 bg-primary hover:shadow-xs duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
+              className="w-full my-5 bg-primary hover:shadow-xs focus:outline-none  duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
               type="submit"
             >
               Reset Password

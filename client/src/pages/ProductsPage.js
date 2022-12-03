@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -50,28 +50,28 @@ const ProductsPage = () => {
             <div>
               <img
                 src={require("../features/Shop/View-1.jpg")}
-                alt="image with decent chairs"
+                alt="ProductImage"
                 className=""
               />
             </div>
             <div>
               <img
                 src={require("../features/Shop/View-2.jpg")}
-                alt="image with decent chairs"
+                alt="ProductImage"
                 className=""
               />
             </div>
             <div>
               <img
                 src={require("../features/Shop/View-3.jpg")}
-                alt="image with decent chairs"
+                alt="ProductImage"
                 className=""
               />
             </div>
             <div>
               <img
                 src={require("../features/Shop/View-4.jpg")}
-                alt="image with decent chairs"
+                alt="ProductImage"
                 className=""
               />
             </div>

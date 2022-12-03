@@ -91,13 +91,12 @@ const Navbar = () => {
                 </div>
                 <div className="hidden xl:flex items-center">
                   <div className="relative flex items-center justify-between  md:mr-6 my-2">
-                 
                     <input
                       className="  focus:shadow-xl drop-shadow-md  focus:outline-none rounded w-full bg-backgound_white text-sm text-text_color pl-8   py-2"
                       type="text"
                       placeholder="Search"
                     />
-                    <CiSearch className="text-2xl text-text_color absolute pl-2  "/>
+                    <CiSearch className="text-2xl text-text_color absolute pl-2  " />
                   </div>
                   <div className=" relative flex  items-center ">
                     <div
@@ -106,7 +105,7 @@ const Navbar = () => {
                     >
                       {profile && (
                         <ul className="p-2 w-40 border-r bg-main_color-1000 absolute bg-white rounded right-0 shadow top-0 mt-16 ">
-                          <li className="cursor-pointer px-2 hover:bg-primary  duration-700 text-main_color-200 text-sm leading-3 tracking-normal py-2   focus:outline-none">
+                          <li className="cursor-pointer px-2 hover:bg-primary  rounded-sm duration-700 text-main_color-200 text-sm leading-3 tracking-normal py-2   focus:outline-none">
                             <div className="flex items-center">
                               <AiOutlineLogin className="text-xl" />
                               <span className="ml-2">
@@ -114,7 +113,7 @@ const Navbar = () => {
                               </span>
                             </div>
                           </li>
-                          <li className="cursor-pointer px-2 hover:bg-primary duration-700 text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2  focus:text-main_color-200 focus:outline-none flex items-center">
+                          <li className="cursor-pointer px-2 hover:bg-primary rounded-sm duration-700 text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2  focus:text-main_color-200 focus:outline-none flex items-center">
                             <AiOutlineUserAdd className="text-2xl " />
                             <span className="ml-2">
                               <NavLink to="/signup">SignUp</NavLink>
@@ -161,7 +160,7 @@ const Navbar = () => {
                   type="text"
                   placeholder="Search"
                 />
-                 <CiSearch className="text-2xl text-text_color absolute pl-2  "/>
+                <CiSearch className="text-2xl text-text_color absolute pl-2  " />
               </div>
               <div
                 id="menu"
@@ -189,7 +188,7 @@ const Navbar = () => {
               className="bg-main_white opacity-25 w-full h-full"
               onClick={() => setShow(!show)}
             />
-            <div className="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-main_white shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
+            <div className="w-64 z-40 fixed overflow-y-auto  top-0 bg-main_white shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
               <div className="px-6 h-full">
                 <div className="flex flex-col justify-between h-full w-full">
                   <div>
@@ -203,7 +202,6 @@ const Navbar = () => {
                           />
                         </div>
                       </div>
-
                       <div
                         id="cross"
                         className=""
@@ -213,7 +211,7 @@ const Navbar = () => {
                       </div>
                     </div>
                     <ul className="f-m-m flex flex-col gap-4">
-                      <a className="cursor-pointer mt-10 ">
+                      <span className="cursor-pointer mt-10 ">
                         <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
                           <div className="flex  items-center p-2">
                             <div className="w-6 h-6 md:w-8 md:h-8 ">
@@ -224,8 +222,8 @@ const Navbar = () => {
                             </p>
                           </div>
                         </li>
-                      </a>
-                      <a className="cursor-pointer">
+                      </span>
+                      <span className="cursor-pointer">
                         <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
                           <div className="flex  items-center p-2">
                             <div className="w-6 h-6 md:w-8 md:h-8 ">
@@ -236,8 +234,8 @@ const Navbar = () => {
                             </p>
                           </div>
                         </li>
-                      </a>
-                      <a className="cursor-pointer">
+                      </span>
+                      <span className="cursor-pointer">
                         <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
                           <div className="flex  items-center p-2">
                             <div className="w-6 h-6 md:w-8 md:h-8 ">
@@ -248,8 +246,8 @@ const Navbar = () => {
                             </p>
                           </div>
                         </li>
-                      </a>
-                      <a className="cursor-pointer">
+                      </span>
+                      <span className="cursor-pointer">
                         <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
                           <div className="flex  items-center p-2">
                             <div className="w-6 h-6 md:w-8 md:h-8 ">
@@ -260,9 +258,9 @@ const Navbar = () => {
                             </p>
                           </div>
                         </li>
-                      </a>
+                      </span>
 
-                      <a className="cursor-pointer">
+                      <span className="cursor-pointer">
                         <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
                           <div className="flex  items-center p-2">
                             <div className="w-6 h-6 md:w-8 md:h-8 ">
@@ -275,9 +273,9 @@ const Navbar = () => {
                             </p>
                           </div>
                         </li>
-                      </a>
+                      </span>
 
-                      <a className="cursor-pointer">
+                      <p className="cursor-pointer">
                         <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
                           <div className="flex  items-center p-2">
                             <form onSubmit={handleFormSubmit}>
@@ -294,7 +292,7 @@ const Navbar = () => {
                             </form>
                           </div>
                         </li>
-                      </a>
+                      </p>
                     </ul>
                   </div>
                   <div className="w-full pt-4">

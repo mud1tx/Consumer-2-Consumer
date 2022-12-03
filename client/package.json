@@ -48,6 +48,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
+    "tailwind-clip-path": "^1.0.0",
     "tailwindcss": "^1.9.6"
   }
 }
