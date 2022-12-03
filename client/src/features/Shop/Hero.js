@@ -1,6 +1,6 @@
 import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import classes from "./Hero.module.css";
+// import classes from "./Hero.module.css";
 
 const Hero = () => {
   return (
@@ -12,7 +12,7 @@ const Hero = () => {
               <img
                 src="https://i.ibb.co/YQjkqWr/juan-burgos-FIy-XGZ1q0mc-unsplash-1.png"
                 alt=" decent chairs"
-                className={`${classes.image} w-full relative z-30 lg:pl-20 px-6 py-14`}
+                className=" w-full relative z-30 lg:pl-20 px-6 py-14"
               />
             </div>
           </div>

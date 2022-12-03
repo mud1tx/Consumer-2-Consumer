@@ -1,11 +1,9 @@
-const initial_state = {
-  user: "",
-};
+const initial_state = null;
 
 export const authenticateUser = (state = initial_state, { type, payload }) => {
   switch (type) {
     case "AUTH_USER":
-      return { ...state, user: payload };
+      return { ...payload };
     default:
       return state;
   }
