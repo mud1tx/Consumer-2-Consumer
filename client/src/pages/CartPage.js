@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import Cart from "../features/Cart/Cart";
 
 const CartPage = () => {
   return (
     <>
-    <div>Card Page</div>
-   </>
-  )
-}
+      <Cart />
+      <div>Card Page</div>
+    </>
+  );
+};
 
-export default CartPage
+export default CartPage;

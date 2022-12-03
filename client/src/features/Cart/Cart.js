@@ -1,54 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { BsCartCheck } from "react-icons/bs";
-import { useSelector, useDispatch } from "react-redux";
-import { SingleProduct } from "../redux/action/productDetail";
-import { useNavigate } from "react-router-dom";
-import { AddToCart } from "../redux/action/addCart";
+import { useSelector} from "react-redux";
 
-const Cards = (props) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const Cart = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
-  const allProductsData = props.allProductsData;
+  const [cartProducts, setCartProducts] = useState([]);
 
-  const getProductDetailHandler = async (productId) => {
-    const res = await fetch(`http://localhost:5000/${productId}`);
-    const productData = await res.json();
-    const { ok } = productData;
-    if (!ok) {
-    } else {
-      dispatch(SingleProduct(productData.product));
-      navigate(`/${productId}`);
-    }
-  };
-
-  const getProductToCartHandler = async (productId) => {
-    const res = await fetch("http://localhost:5000/cart", {
+  const getCartData = async () => {
+    const cartApiResponse = await fetch("http://localhost:5000/cart/products", {
       method: "POST",
       body: JSON.stringify({
-        prodId: productId,
-        userId: userLoggedIn.user._id,
+        userData: userLoggedIn.user._id,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const productData = await res.json();
-    const { ok } = productData;
+    const cartData = await cartApiResponse.json();
+    const { ok } = cartData;
     if (!ok) {
     } else {
-      dispatch(AddToCart(productData.products));
+      setCartProducts(cartData.products);
     }
-    console.log("cart", productData.products);
+    console.log("cartData", cartData);
   };
+
+  useEffect(() => {
+    getCartData();
+  }, []);
+  //   const [cartProducts, setCartProducts] = useState([]);
+  //   console.log("reducer", cartData);
 
   return (
     <div className=" flex flex-wrap justify-center items-start gap-4  mt-8">
-      {allProductsData.map((product) => (
+      {cartProducts.map((product) => (
         <div
-          key={product._id}
+          key={product.productId._id}
           className=" border-2 border-main_color-1000 mb-8 rounded-md p-2 "
         >
           <div className=" h-auto rounded-md" style={{ maxWidth: "30rem" }}>
@@ -65,12 +53,12 @@ const Cards = (props) => {
               stopOnHover={true}
               interval={2000}
             >
-              {product.image.map((img, index) => (
+              {product.productId.image.map((img, index) => (
                 <div key={index}>
                   <img
                     className="w-full"
-                    src={`data:${product.imageType[index]};base64,${img}`}
-                    alt={`${product.category}`}
+                    src={`data:${product.productId.imageType[index]};base64,${img}`}
+                    alt={`${product.productId.category}`}
                   />
                 </div>
               ))}
@@ -81,39 +69,31 @@ const Cards = (props) => {
               <span className="text-md font-bold text-main_color-1000">
                 Title:{" "}
               </span>
-              {product.title}
+              {product.productId.title}
             </h1>
             <p>
               <span className="text-md font-bold text-main_color-1000">
                 Category:{" "}
               </span>
-              {product.category}
+              {product.productId.category}
             </p>
 
             <p>
               <span className="text-md text-main_color-1000 font-bold">
                 Price:{" "}
               </span>
-              {product.price}{" "}
+              {product.productId.price}{" "}
               <span className="text-xs text-main_color-600 ">INR</span>
             </p>
             <div className="flex justify-between items-center mt-4 ">
               <button
                 className="border-2 hover:bg-main_color-1000 ease-in-out hover:text-main_color-200 duration-700 border-main_color-1000 rounded-sm  text-main_color-1000 pl-2 pr-2 pt-1 pb-1"
-                onClick={() => {
-                  getProductDetailHandler(product._id);
-                }}
+                // onClick={() => {
+                //   getProductDetailHandler(product._id);
+                // }}
               >
                 Details
               </button>
-              {userLoggedIn?.isLoggedIn && (
-                <BsCartCheck
-                  className="text-main_color-1000 text-2xl"
-                  onClick={() => {
-                    getProductToCartHandler(product._id);
-                  }}
-                />
-              )}
             </div>
           </div>
         </div>
@@ -122,4 +102,4 @@ const Cards = (props) => {
   );
 };
 
-export default Cards;
+export default Cart;
