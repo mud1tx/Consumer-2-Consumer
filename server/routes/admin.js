@@ -12,4 +12,8 @@ router.post(
   adminController.postAddProduct
 );
 
+router.post("/products", adminController.getProducts);
+
+router.post("/order", adminController.postOrderData);
+
 module.exports = router;

@@ -48,3 +48,17 @@ exports.postAddProduct = async (req, res, next) => {
     });
   // res.json(product);
 };
+
+exports.getProducts = (req, res, next) => {
+  Product.find({ userId: req.body.userId })
+    .then((products) => {
+      res.json({ ok: true, userProducts: products });
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.postOrderData = (res, req, next) => {
+  const user = req.body.currentUser;
+  const product = req.body.product;
+  console.log(user, product);
+};
