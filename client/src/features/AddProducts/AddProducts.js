@@ -80,7 +80,7 @@ const AddProducts = () => {
               type="hidden"
               name="userId"
               id="userId"
-              value={userLoggedIn.user._id}
+              value={userLoggedIn?.user._id}
               onChange={handleInputs}
             />
           </div>
