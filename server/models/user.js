@@ -32,6 +32,9 @@ const userSchema = new Schema({
       },
     ],
   },
+  Lend: {
+    type: [String],
+  },
 });
 
 userSchema.methods.addToCart = function (product) {
@@ -41,6 +44,7 @@ userSchema.methods.addToCart = function (product) {
   const updatedCartItems = [...this.cart.items];
 
   if (cartProductIndex >= 0) {
+    return "Product is already present in the cart";
   } else {
     updatedCartItems.push({
       productId: product._id,
@@ -50,6 +54,21 @@ userSchema.methods.addToCart = function (product) {
     items: updatedCartItems,
   };
   this.cart = updatedCart;
+  // return this.save();
+  this.save();
+  return "";
+};
+
+userSchema.methods.removeFromCart = function (productId) {
+  const updatedCartItems = this.cart.items.filter((item) => {
+    return item.productId.toString() !== productId.toString();
+  });
+  this.cart.items = updatedCartItems;
+  return this.save();
+};
+
+userSchema.methods.clearCart = function () {
+  this.cart = { items: [] };
   return this.save();
 };
 

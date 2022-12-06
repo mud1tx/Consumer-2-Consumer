@@ -20,31 +20,35 @@ exports.getProduct = (req, res, next) => {
 exports.postCart = (req, res, next) => {
   const prodId = req.body.prodId;
   const userId = req.body.userId;
-  console.log("prodid hai yaar", prodId, userId);
+  // console.log("prodid hai yaar", prodId, userId);
   Product.findById(prodId).then((product) => {
     return User.findById(userId)
       .then((user) => {
-        user.addToCart(product);
-        // console.log("user hai ye", user);
+        let mes = user.addToCart(product);
+        if (mes.length > 0) {
+          return res.json({ ok:200, message: mes });
+        }
         user
           .populate("cart.items.productId")
           // .execPopulate()
           .then((user) => {
             const products = user.cart.items;
-            // console.log("ho gaya yaar", products);
-            return res.json({ ok: true, products: products });
+            return res.json({
+              ok: true,
+              products: products,
+              message: "Product Added To Cart",
+            });
           })
           .catch((err) => {
+            console.log("1",err);
             res.json({ ok: false, message: "An error occured!!" });
           });
       })
       .catch((err) => {
+        console.log("2", err);
         res.json({ ok: false, message: "An error occured!!" });
       });
   });
-  // .then((result) => {
-  //   console.log("");
-  // });
 };
 
 exports.getCartProducts = (req, res, next) => {
@@ -57,11 +61,35 @@ exports.getCartProducts = (req, res, next) => {
         .then((user) => {
           const products = user.cart.items;
           // console.log("ho gaya yaar", products);
-          return res.json({ ok: true, products: products });
+          return res.json({
+            ok: true,
+            products: products,
+          });
         })
         .catch((err) => {
           res.json({ ok: false, message: "An error occured!!" });
         });
+    })
+    .catch((err) => {
+      res.json({ ok: false, message: "An error occured!!" });
+    });
+};
+
+exports.postCartDeleteProduct = (req, res, next) => {
+  const prodId = req.body.productId;
+  const userId = req.body.userId;
+  // console.log("product id cart se", prodId, userId);
+  User.findById(userId)
+    .then((user) => {
+      user.removeFromCart(prodId);
+      user.populate("cart.items.productId").then((user) => {
+        const products = user.cart.items;
+        return res.json({
+          ok: true,
+          products: products,
+          message: "Product removed successfully",
+        });
+      });
     })
     .catch((err) => {
       res.json({ ok: false, message: "An error occured!!" });

@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { NavLink } from "react-router-dom";
+import classes from "./Login.module.css";
 
 const ResetPassword = () => {
   const [userLoginData, setUserLoginData] = useState({
@@ -11,7 +15,7 @@ const ResetPassword = () => {
     setUserLoginData({ [name]: value });
   };
 
-  const [error, setError] = useState("");
+  const [validate, setValidate] = useState([]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -30,12 +34,14 @@ const ResetPassword = () => {
       );
 
       const resetData = await resetPasswordApiResponse.json();
-      //message ayega usko set kar do bus
       const { ok } = resetData;
+      const { message } = resetData;
       if (!ok) {
-        setError(resetData.message);
+        toast.error(`${message}`);
+        setValidate(resetData.validationErrors);
+      } else {
+        toast.success(`${message}`);
       }
-      console.log("resetData", resetData);
     } catch (err) {
       console.log(err);
     }
@@ -46,37 +52,46 @@ const ResetPassword = () => {
       <div className="bg-backgound_white min-h-screen flex items-center justify-center">
         <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
-          <h2 class="font-bold text-3xl text-primary mb-10">
-            Reset  Password
-          </h2>
-          <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-            <div className="flex flex-col text-text_color">
-              <label>Email</label>
-              <input
-                className="p-2  focus:outline-none focus:shadow-md text-sm rounded-sm border outline-none"
-                type="email"
-                name="email"
-                value={userLoginData.email}
-                onChange={handleInputs}
-              />
-            </div>
-            <button
-              className="w-full my-5 bg-primary hover:shadow-xs focus:outline-none  duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
-              type="submit"
-            >
+            <h2 class="font-bold text-3xl text-primary mb-10">
               Reset Password
-            </button>
-          </form>
+            </h2>
+            <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
+              <div className="flex flex-col text-text_color">
+                <label>Email</label>
+                <input
+                  // className="p-2  focus:outline-none focus:shadow-md text-sm rounded-sm border outline-none"
+                  className={
+                    validate.find((e) => e.param === "email")
+                      ? `rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none ${classes.invalid}`
+                      : "rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
+                  }
+                  type="email"
+                  name="email"
+                  value={userLoginData.email}
+                  onChange={handleInputs}
+                />
+              </div>
+              <button
+                className="w-full my-5 bg-primary hover:shadow-xs focus:outline-none  duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
+                type="submit"
+              >
+                Reset Password
+              </button>
+            </form>
+            <p className="text-text_color">
+              <NavLink to="/login">Log In</NavLink>
+            </p>
           </div>
-        <div class="md:block hidden w-1/2">
-          <img
-            className=" rounded "
-            alt="Logo"
-            src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
-          />
-        </div>
+          <div class="md:block hidden w-1/2">
+            <img
+              className=" rounded "
+              alt="Logo"
+              src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
+            />
+          </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -41,7 +41,12 @@ exports.postLogin = (req, res, next) => {
         .compare(password, user.password)
         .then((doMatch) => {
           if (doMatch) {
-            return res.json({ ok: true, user, isLoggedIn: true });
+            return res.json({
+              ok: true,
+              user,
+              isLoggedIn: true,
+              message: `Hello ${user.first_name} 😀 ,Welcome back`,
+            });
           }
           res.json({
             ok: false,
@@ -51,7 +56,7 @@ exports.postLogin = (req, res, next) => {
         })
         .catch((err) => {
           console.log(err);
-          res.json({ ok: false, message: "Error" });
+          res.json({ ok: false, message: "An error occured!!" });
         });
     })
     .catch((err) => console.log(err));
@@ -64,21 +69,12 @@ exports.postSignup = (req, res, next) => {
   const password = req.body.password;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    // console.log(errors.array()[0].msg);
     return res.json({
       ok: false,
       message: errors.array()[0].msg,
       validationErrors: errors.array(),
     });
   }
-  // User.findOne({ email: email })
-  //   .then((userDoc) => {
-  //     if (userDoc) {
-  //       return res.json({
-  //         ok: false,
-  //         message: "error E-Mail exists already, please pick a different one.",
-  //       });
-  //     }
   bcrypt
     .hash(password, 12)
     .then((hashedPassword) => {
@@ -92,7 +88,7 @@ exports.postSignup = (req, res, next) => {
       return user.save();
     })
     .then((result) => {
-      res.json({ ok: true, message: "Successfull" });
+      res.json({ ok: true, message: "User Account created successfully" });
       return transporter.sendMail(
         {
           to: email,
@@ -102,7 +98,7 @@ exports.postSignup = (req, res, next) => {
         },
         function (err, res) {
           if (err) {
-            console.log({ ok: false, message: err });
+            console.log({ ok: false, message: "An error occured!!" });
           }
           // console.log(res);
         }
@@ -118,15 +114,24 @@ exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err);
-      return res.json({ ok: false, message: "Some error occured" });
+      return res.json({ ok: false, message: "An error occured!!" });
     }
     const token = buffer.toString("hex");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json({
+        ok: false,
+        message: errors.array()[0].msg,
+        validationErrors: errors.array(),
+      });
+    }
     User.findOne({ email: req.body.email })
       .then((user) => {
         if (!user) {
           return res.json({
             ok: false,
             message: "No account with that email found",
+            validationErrors: [],
           });
         }
         user.resetToken = token;
@@ -134,7 +139,10 @@ exports.postReset = (req, res, next) => {
         return user.save();
       })
       .then((result) => {
-        res.json({ ok: true, message: "Successfull" });
+        res.json({
+          ok: true,
+          message: "Check your email for password reset link",
+        });
         return transporter.sendMail(
           {
             to: req.body.email,
@@ -147,7 +155,7 @@ exports.postReset = (req, res, next) => {
             if (err) {
               console.log(err);
             }
-            console.log(res);
+            // console.log(res);
           }
         );
       })
@@ -170,8 +178,16 @@ exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.newPassword;
   const userId = req.body.userId;
   const passwordToken = req.body.passwordToken;
-  console.log(newPassword, userId, passwordToken);
+  // console.log(newPassword, userId, passwordToken);
   let resetUser;
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   return res.json({
+  //     ok: false,
+  //     message: errors.array()[0].msg,
+  //     validationErrors: errors.array(),
+  //   });
+  // }
 
   User.findOne({
     resetToken: passwordToken,
@@ -193,7 +209,11 @@ exports.postNewPassword = (req, res, next) => {
     })
     .catch((err) => {
       console.log(err);
-      res.json({ ok: false, message: `Some error occured` });
+      res.json({
+        ok: false,
+        message: "An error occured!!",
+        // validationErrors: [],
+      });
     });
 };
 
