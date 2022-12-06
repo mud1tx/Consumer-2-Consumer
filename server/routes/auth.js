@@ -63,7 +63,16 @@ router.post(
 
 router.post("/logout", authController.postLogout);
 
-router.post("/reset", authController.postReset);
+router.post(
+  "/reset",
+  [
+    body("email")
+      .isEmail()
+      .withMessage("Please enter a valid email address.")
+      .normalizeEmail(),
+  ],
+  authController.postReset
+);
 
 router.get("/new-password/:token", authController.getNewPassword);
 
