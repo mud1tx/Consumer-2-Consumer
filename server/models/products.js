@@ -19,7 +19,7 @@ const productSchema = new Schema({
     type: [String],
     required: true,
   },
-  image:{
+  image: {
     type: [String],
     required: true,
   },
@@ -31,11 +31,15 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  userId:{
-    type:Schema.Types.ObjectId,
-    ref:'User',
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
-  }
+  },
+  borrowed: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);

@@ -115,7 +115,7 @@ const Cards = (props) => {
                   {product.price}{" "}
                   <span className="text-xs text-primary ">INR</span>
                 </p>
-                {userLoggedIn?.isLoggedIn && (
+                {/* {userLoggedIn?.isLoggedIn && (
                   <button
                     className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
                     type="submit"
@@ -125,7 +125,7 @@ const Cards = (props) => {
                   >
                     Borrow
                   </button>
-                )}
+                )} */}
                 {/* <button
                   className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
                   onClick={() => {

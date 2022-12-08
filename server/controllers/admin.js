@@ -1,6 +1,9 @@
 const Product = require("../models/products");
 const fs = require("fs");
-const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
+// const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
+const Order = require("../models/order");
+const products = require("../models/products");
+const User = require("../models/user");
 
 exports.postAddProduct = async (req, res, next) => {
   const title = req.body.title;
@@ -36,6 +39,7 @@ exports.postAddProduct = async (req, res, next) => {
     price: price,
     description: description,
     userId: userId,
+    borrowed: false,
   });
   product
     .save()
@@ -52,13 +56,156 @@ exports.postAddProduct = async (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   Product.find({ userId: req.body.userId })
     .then((products) => {
-      res.json({ ok: true, userProducts: products });
+      return res.json({ ok: true, userProducts: products });
     })
     .catch((err) => console.log(err));
 };
 
-exports.postOrderData = (res, req, next) => {
-  const user = req.body.currentUser;
-  const product = req.body.product;
-  console.log(user, product);
+exports.postOrderData = (req, res, next) => {
+  const userId = req.body.userId;
+  const productData = req.body.prodData;
+  const days = Number(req.body.days);
+  const currentTime = Date.now();
+  const prodId = productData._id;
+  console.log(userId, productData.userId, days);
+  Order.findOne({ userId: userId }).then((user) => {
+    if (!user) {
+      const prodArray = [];
+      prodArray.push({
+        productId: productData._id,
+        expire: currentTime + days * 24 * 60 * 60 * 1000,
+      });
+      const order = new Order({
+        products: prodArray,
+        userId: userId,
+      });
+      order.save();
+      Product.findOne({ _id: prodId })
+        .then((prod) => {
+          prod.borrowed = true;
+          return prod.save();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      const borrowArray = [];
+      const lendArray = [];
+      borrowArray.push({
+        productId: productData._id,
+        expire: currentTime + days * 24 * 60 * 60 * 1000,
+      });
+      lendArray.push({
+        productId: productData._id,
+        expire: currentTime + days * 24 * 60 * 60 * 1000,
+      });
+      User.findOne({ _id: userId })
+        .then((user) => {
+          // console.log("catch 1", user);
+          user.borrow = borrowArray;
+          return user.save();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      const productOwnerId = productData.userId;
+      User.findOne({ _id: productOwnerId })
+        .then((user) => {
+          // console.log("catch 2", user);
+          user.lend = lendArray;
+          return user.save();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return res.json({ ok: true, message: "data aa gaya yaar pehle baar" });
+    } else {
+      // const prodId = productData._id;
+      console.log(user);
+      user.products.push({
+        productId: productData._id,
+        expire: currentTime + days * 24 * 60 * 60 * 1000,
+      });
+      user.save();
+      Product.findOne({ _id: prodId })
+        .then((prod) => {
+          prod.borrowed = true;
+          return prod.save();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      User.findOne({ _id: userId })
+        .then((user) => {
+          user.borrow.push({
+            productId: productData._id,
+            expire: currentTime + days * 24 * 60 * 60 * 1000,
+          });
+          return user.save();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      const productOwnerId = productData.userId;
+      User.findOne({ _id: productOwnerId })
+        .then((user) => {
+          user.lend.push({
+            productId: productData._id,
+            expire: currentTime + days * 24 * 60 * 60 * 1000,
+          });
+          return user.save();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return res.json({ ok: true, message: "data aa gaya yaar doosre baar" });
+    }
+  });
+  return;
+};
+
+exports.postLendData = (req, res, next) => {
+  const userId = req.body.userId;
+  User.findOne({ _id: userId })
+    .then((user) => {
+      if (user.lend.length === 0) {
+        return res.json({ ok: false, msg: "No product is lended to anyone" });
+      }
+      return Product.find({ userId: userId, borrowed: true })
+        .then((data) => {
+          return res.json({ ok: true, data: data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.postBorrowData = (req, res, next) => {
+  const userId = req.body.userId;
+  User.findOne({ _id: userId })
+    .then((user) => {
+      if (user.borrow.length === 0) {
+        return res.json({
+          ok: false,
+          msg: "No product is borrowed from anyone",
+        });
+      }
+      const array = [];
+      user.borrow.map((data) => {
+        array.push(data.productId);
+      });
+      return Product.find({ _id: [array] })
+        .then((data) => {
+          return res.json({ ok: true, data: data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

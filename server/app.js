@@ -8,14 +8,11 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const cors = require("cors");
 const User = require("./models/user");
+const Order = require("./models/order");
+const Product = require("./models/products");
 
-// const isAuth = require("../middleware/is_auth");
-// mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop?retryWrites=true&w=majority
 const MONGODB_URI =
   "mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop";
-
-// const csrfProtection = csrf({});
-// console.log("process", process.env.SENDGRID_API_KEY);
 
 const app = express();
 
@@ -47,22 +44,59 @@ app.use(
   })
 );
 
-// app.use(csrfProtection);
-
 app.use((req, res, next) => {
-  if (!req.session.user) {
-    return next();
-  }
-  User.findById(req.session.user._id)
+  User.find()
     .then((user) => {
-      req.user = user;
-      next();
+      if (user.lend?.length > 0) {
+        const lendArray = user.lend.filter((lendData) => {
+          if (lendData.expire > Date.now()) {
+            Product.findOne({ _id: lendData.productId })
+              .then((prod) => {
+                return prod.borrowed = false;
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+            return lendData;
+          }
+        });
+        user.lend = lendArray;
+      }
+      if (user.borrow?.length > 0) {
+        const borrowArray = user.borrow.filter((borrowData) => {
+          if (borrowData.expire > Date.now()) {
+            Product.findOne({ _id: borrowData.productId })
+              .then((prod) => {
+                return prod.borrowed = false;
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+            return borrowData;
+          }
+        });
+        user.borrow = borrowArray;
+      }
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
+  next();
 });
 
+// app.use(csrfProtection);
+
+// app.use((req, res, next) => {
+//   if (!req.session.user) {
+//     return next();
+//   }
+//   User.findById(req.session.user._id)
+//     .then((user) => {
+//       req.user = user;
+//       next();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
 app.use("/admin", adminRoutes);
 app.use(authRoutes);

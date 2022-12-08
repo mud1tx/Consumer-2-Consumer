@@ -111,7 +111,7 @@ const Login = () => {
               <NavLink to="/reset">Reset Password</NavLink>
             </p>
           </div>
-          <div class="md:block hidden w-1/2">
+          <div className="md:block hidden w-1/2">
             <img
               className=" rounded "
               alt="Logo"
