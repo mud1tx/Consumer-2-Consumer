@@ -21,7 +21,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
-  // console.log("navbar user", userLoggedIn);
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
 
@@ -37,7 +36,6 @@ const Navbar = () => {
       sessionStorage.clear();
       let data = logoutData;
       dispatch(User({ data }));
-      // setLogoutRefresh(true);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -90,6 +88,11 @@ const Navbar = () => {
                   {userLoggedIn?.isLoggedIn && (
                     <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
                       <NavLink to="/admin/lend">Lend</NavLink>
+                    </div>
+                  )}
+                  {userLoggedIn?.isLoggedIn && (
+                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
+                      <NavLink to="/admin/borrow">Borrowed</NavLink>
                     </div>
                   )}
                 </div>
@@ -316,18 +319,26 @@ const Navbar = () => {
                                 <AiOutlineFolderAdd className="text-xl text-text_color " />
                               </div>
                               <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/admin/lend">
-                                  Lend
-                                </NavLink>
+                                <NavLink to="/admin/lend">Lend</NavLink>
                               </p>
                             </div>
                           </li>
                         </span>
                       )}
-                      {/* <p className="cursor-pointer">
-                        <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                        </li>
-                      </p> */}
+                      {userLoggedIn?.isLoggedIn && (
+                        <span className="cursor-pointer">
+                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                            <div className="flex  items-center p-2">
+                              <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                <AiOutlineFolderAdd className="text-xl text-text_color " />
+                              </div>
+                              <p className="text-text_color xl:text-base text-base ml-3">
+                                <NavLink to="/admin/borrow">Borrowed</NavLink>
+                              </p>
+                            </div>
+                          </li>
+                        </span>
+                      )}
                     </ul>
                     <div className="flex  items-center p-2">
                       <form onSubmit={handleFormSubmit}>
