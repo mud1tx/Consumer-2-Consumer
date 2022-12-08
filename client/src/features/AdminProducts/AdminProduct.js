@@ -49,7 +49,7 @@ const AdminProduct = () => {
       {!marker && secMarker && adminProd?.length > 0 ? (
         <Cards allProductsData={adminProd} />
       ) : (
-        [secMarker && <h1>Shop is Empty😐.Please come again tomorrow</h1>]
+        [secMarker && <h1>You didn't add any product</h1>]
       )}
     </div>
   );
