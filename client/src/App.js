@@ -16,7 +16,8 @@ import NewPassword from "./features/Authentication/NewPassword";
 import ProductDetail from "./features/ProductDetail/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BorrowDetailPage from "./pages/BorrowDetailPage";
+// import BorrowDetailPage from "./pages/BorrowDetailPage";
+import BorrowPage from "./pages/BorrowPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,11 +36,11 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/:prodId" element={<ProductDetail />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/orders/:prodId" element={<BorrowDetailPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/admin/add-product" element={<AddProductsPage />} />
           <Route path="/admin/admin-products" element={<AdminProductsPage />} />
           <Route path="/admin/lend" element={<LendPage />} />
+          <Route path="/admin/borrow" element={<BorrowPage />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/reset" element={<ResetPassword />} />

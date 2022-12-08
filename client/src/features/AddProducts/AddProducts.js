@@ -56,7 +56,7 @@ const AddProducts = () => {
             />
           </div>
           <div className={classes.form_control}>
-            <label htmlFor="price">Price</label>
+            <label htmlFor="price">Price per day</label>
             <input
               type="number"
               name="price"

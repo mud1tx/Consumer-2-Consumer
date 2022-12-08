@@ -14,6 +14,10 @@ router.post(
 
 router.post("/products", adminController.getProducts);
 
-router.post("/order", adminController.postOrderData);
+router.post("/orders", adminController.postOrderData);
+
+router.post("/lend", adminController.postLendData);
+
+router.post("/borrow", adminController.postBorrowData);
 
 module.exports = router;

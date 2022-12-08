@@ -32,9 +32,32 @@ const userSchema = new Schema({
       },
     ],
   },
-  Lend: {
-    type: [String],
-  },
+  lend: [
+    {
+      productId: {
+        type: Schema.Types.ObjectId,
+        // required: true,
+        ref: "Product",
+      },
+      expire: {
+        type: Number,
+        // required: true,
+      },
+    },
+  ],
+  borrow: [
+    {
+      productId: {
+        type: Schema.Types.ObjectId,
+        // required: true,
+        ref: "Product",
+      },
+      expire: {
+        type: Number,
+        // required: true,
+      },
+    },
+  ],
 });
 
 userSchema.methods.addToCart = function (product) {

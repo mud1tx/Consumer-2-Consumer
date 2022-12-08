@@ -210,7 +210,14 @@ const Cart = () => {
         </div>
       ) : (
         <div>
-          <h1>Cart is empty</h1>
+          <h1>
+            Cart is
+            emptyefwj;ertfkwlrwerkjwelgkjeklrjwekrttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttr
+          </h1>
+          <h1>
+            Cart is
+            emptyefwj;ertfkwlrwerkjwelgkjeklrjwekrttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttr
+          </h1>
         </div>
       )}
       <ToastContainer />

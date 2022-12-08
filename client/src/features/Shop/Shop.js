@@ -6,6 +6,7 @@ import SkeletonComp from "../../components/SkeletonComp";
 
 const Shop = () => {
   const searchData = useSelector((state) => state.searchInputReducer);
+  const userLoggedIn = useSelector((state) => state.authenticateUser);
   // console.log(searchData);
 
   const [allProductsData, setAllProductsData] = useState([]);
@@ -14,25 +15,32 @@ const Shop = () => {
   const [secMarker, setSecMarker] = useState(false);
 
   useEffect(() => {
-    const fetchAllProducts = async () => {
+    const fetchAllProducts = async (userLoggedIn) => {
       try {
-        const response = await fetch("http://localhost:5000/");
-        const json = await response.json();
-        console.log(json);
-        setAllProductsData(json);
+        const shopDataApi = await fetch("http://localhost:5000/", {
+          method: "POST",
+          body: JSON.stringify({
+            userData: userLoggedIn?.user?._id,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const res = await shopDataApi.json();
+        console.log("yahi change kiya hai",res);
+        setAllProductsData(res.data);
         setMarker(false);
         setSecMarker(true);
       } catch (err) {
         console.log("Error", err);
       }
     };
-    fetchAllProducts();
-  }, []);
+    fetchAllProducts(userLoggedIn);
+  }, [userLoggedIn]);
 
   useEffect(() => {
     let searchInputDataArray = [];
     searchInputDataArray = allProductsData.filter((product) => {
-      // console.log("data", searchData, allProductsData);
       if (
         searchData !== "" &&
         (product.title.toLowerCase().startsWith(searchData.toLowerCase()) ||
@@ -40,12 +48,10 @@ const Shop = () => {
           product.category.toLowerCase().startsWith(searchData.toLowerCase()) ||
           product.category.toLowerCase().includes(searchData.toLowerCase()))
       ) {
-        // console.log("yahi hai array", product);
         return product;
       }
       return;
     });
-    // console.log("nhkkh", searchInputDataArray);
     setSearchProduct(searchInputDataArray);
   }, [searchData, allProductsData]);
 
@@ -67,7 +73,7 @@ const Shop = () => {
           }
         />
       ) : (
-        [secMarker && <h1>Shop is Empty😐.Please come again tomorrow</h1>]
+        [secMarker && <h1 key="1">Shop is Empty😐.Please come again tomorrow</h1>]
       )}
     </div>
   );

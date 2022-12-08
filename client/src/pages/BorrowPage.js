@@ -1,7 +1,7 @@
 import React from "react";
 import BorrowDetail from "../features/BorrowDetail/BorrowDetail";
 
-const BorrowDetailPage = () => {
+const BorrowPage = () => {
   return (
     <div>
       <BorrowDetail />
@@ -9,4 +9,4 @@ const BorrowDetailPage = () => {
   );
 };
 
-export default BorrowDetailPage;
+export default BorrowPage;

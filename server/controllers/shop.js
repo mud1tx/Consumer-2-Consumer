@@ -2,8 +2,18 @@ const Product = require("../models/products");
 const User = require("../models/user");
 
 exports.getProducts = async (req, res, next) => {
-  const allAddedProducts = await Product.find();
-  res.send(allAddedProducts);
+  const userId = req.body.userData;
+  // console.log("data chal rahga hai", userId);
+  if (userId === undefined) {
+    const allAddedProducts = await Product.find();
+    return res.json({ ok: true, data: allAddedProducts });
+  } else {
+    const allAddedProducts = await Product.find({
+      borrowed: false,
+      userId: { $ne: userId },
+    });
+    return res.json({ ok: true, data: allAddedProducts });
+  }
 };
 
 exports.getProduct = (req, res, next) => {
@@ -26,7 +36,7 @@ exports.postCart = (req, res, next) => {
       .then((user) => {
         let mes = user.addToCart(product);
         if (mes.length > 0) {
-          return res.json({ ok:200, message: mes });
+          return res.json({ ok: 200, message: mes });
         }
         user
           .populate("cart.items.productId")
@@ -40,7 +50,7 @@ exports.postCart = (req, res, next) => {
             });
           })
           .catch((err) => {
-            console.log("1",err);
+            console.log("1", err);
             res.json({ ok: false, message: "An error occured!!" });
           });
       })
