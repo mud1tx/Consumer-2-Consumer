@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { BsCartCheck } from "react-icons/bs";
@@ -20,7 +20,7 @@ const Cards = (props) => {
       method: "POST",
       body: JSON.stringify({
         prodId: productId,
-        userId: userLoggedIn.user._id,
+        userId: userLoggedIn?.user?._id,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -45,6 +45,34 @@ const Cards = (props) => {
     setDateValue(value);
   };
 
+  const chatIdHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const newConvApi = await fetch(
+        "http://localhost:5000/admin/conversation",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            senderId: e.target[0].value,
+            receiverId: e.target[1].value,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const res = await newConvApi.json();
+      console.log("conversation", res);
+      const { ok } = res;
+      if (!ok) {
+        console.log(res.msg);
+      } else {
+        navigate("/admin/messenger");
+      }
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
   const borrowHandler = async (e) => {
     e.preventDefault();
     // try{}catch{}
@@ -109,31 +137,11 @@ const Cards = (props) => {
                 <span className="text-md font-bold ">Category: </span>
                 {product.category}
               </p>
-
               <div className="flex justify-between rounded-md items-center mt-4 ">
                 <p className="text-3xl text-text_color">
                   {product.price}{" "}
                   <span className="text-xs text-primary ">INR</span>
                 </p>
-                {/* {userLoggedIn?.isLoggedIn && (
-                  <button
-                    className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
-                    type="submit"
-                    onClick={() => {
-                      navigate(`/orders/${product._id}`);
-                    }}
-                  >
-                    Borrow
-                  </button>
-                )} */}
-                {/* <button
-                  className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
-                  onClick={() => {
-                    borrowHandler(userLoggedIn.user, product);
-                  }}
-                >
-                  Borrow
-                </button> */}
                 <div className="flex items-center  justify-center gap-4">
                   <button
                     className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
@@ -156,6 +164,15 @@ const Cards = (props) => {
                 </div>
               </div>
             </div>
+            <form onSubmit={chatIdHandler}>
+              <input
+                type="hidden"
+                name="senderId"
+                value={userLoggedIn?.user?._id}
+              />
+              <input type="hidden" name="receiverId" value={product.userId} />
+              <button type="submit">chat</button>
+            </form>
           </div>
         ))}
       </div>
