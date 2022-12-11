@@ -1,9 +1,9 @@
 const Product = require("../models/products");
 const fs = require("fs");
-// const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 const Order = require("../models/order");
-const products = require("../models/products");
 const User = require("../models/user");
+const Conversation = require("../models/conversation");
+const Message = require("../models/message");
 
 exports.postAddProduct = async (req, res, next) => {
   const title = req.body.title;
@@ -208,4 +208,83 @@ exports.postBorrowData = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+exports.getFriendId = async (req, res, next) => {
+  const friendId = req.params.friendId;
+  // console.log("re", req);
+  User.findOne({ _id: friendId })
+    .then((user) => {
+      res.json({ ok: true, data: user });
+    })
+    .catch((err) => {
+      res.json({ ok: false, err: err });
+    });
+};
+
+exports.postNewConv = async (req, res, next) => {
+  // console.log(req.body.senderId, req.body.receiverId);
+  const senderId = req.body.senderId;
+  const receiverId = req.body.receiverId;
+  Conversation.findOne({
+    members: [senderId, receiverId],
+  })
+    .then((conv) => {
+      if (conv) {
+        // console.log("hai yaar pehle se");
+        return res.json({ ok: true, msg: "Conversation is already present" });
+      }
+      const newConversation = new Conversation({
+        members: [senderId, receiverId],
+      });
+      newConversation
+        .save()
+        .then((result) => {
+          console.log("Conv created");
+          res.json({ ok: true, conversation: newConversation });
+        })
+        .catch((err) => {
+          res.json({ ok: false, msg: err });
+        });
+    })
+    .catch((err) => {
+      res.json({ ok: false, msg: err });
+    });
+};
+
+exports.getUserConv = async (req, res, next) => {
+  try {
+    Conversation.find({
+      members: { $in: [req.params.userId] },
+    }).then((data) => {
+      // console.log("data", data);
+      res.json({ ok: true, data: data });
+    });
+  } catch (err) {
+    res.json({ ok: false, msg: err });
+  }
+};
+
+exports.postChatData = async (req, res, next) => {
+  const conversationId = req.body.message.conversationId;
+  const senderId = req.body.message.senderId;
+  const text = req.body.message.text;
+  const newMessage = new Message({ conversationId, senderId, text });
+  try {
+    const savedMessage = await newMessage.save();
+    res.status(200).json(savedMessage);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.getChatData = async (req, res, next) => {
+  try {
+    const messages = await Message.find({
+      conversationId: req.params.conversationId,
+    });
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
