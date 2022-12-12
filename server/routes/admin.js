@@ -20,4 +20,14 @@ router.post("/lend", adminController.postLendData);
 
 router.post("/borrow", adminController.postBorrowData);
 
+router.get("/chatUser/:friendId", adminController.getFriendId);
+
+router.post("/conversation", adminController.postNewConv);
+
+router.get("/conversation/:userId", adminController.getUserConv);
+
+router.post("/message/chat", adminController.postChatData);
+
+router.get("/messages/:conversationId", adminController.getChatData);
+
 module.exports = router;
