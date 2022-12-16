@@ -44,9 +44,9 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="  fixed  bg-main_white shadow-sm  w-full z-40  ">
+      <div className=" fixed bg-main_white shadow-sm  w-full z-40  ">
         {/* Code block starts */}
-        <nav className="shadow xl:block hidden  bg-main_white">
+        <nav className="shadow    xl:block hidden  bg-main_white">
           <div className="mx-auto container px-6 py-2 xl:py-0">
             <div className="flex items-center justify-between">
               <div className="flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">

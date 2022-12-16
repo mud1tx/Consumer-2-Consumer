@@ -5,8 +5,34 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const SkeletonComp = () => {
   return (
-    <div className="flex flex-wrap justify-between w-10/12 m-auto pt-20 sm:pt-0 ">
-      <div className="w-64 rounded-md ">
+    <>
+      <div className="flex border border-gray-200 rounded  gap-4 mb-4 flex-col ">
+        <div className=" p-4">
+          <Skeleton height={200} width={300} />
+        </div>
+        <div className="p-4">
+          <Skeleton height={20} style={{ marginTop: 14 }} width={140} />
+          <Skeleton height={20} style={{ marginTop: 14 }} width={160} />
+
+          <div className="  flex justify-between ">
+            <div>
+              <Skeleton height={28} style={{ marginTop: 14 }} width={60} />
+            </div>
+            <div className="flex gap-4">
+              <Skeleton height={28} style={{ marginTop: 14 }} width={80} />
+              {/* <Skeleton height={28} style={{ marginTop: 14 }} width={40} /> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SkeletonComp;
+
+{
+  /* <div className="  ">
         <div className="">
           <Skeleton className="w-40 h-32" />
         </div>
@@ -29,9 +55,5 @@ const SkeletonComp = () => {
             <Skeleton />
           </p>
         </div>
-      </div>
-    </div>
-  );
-};
-
-export default SkeletonComp;
+      </div> */
+}

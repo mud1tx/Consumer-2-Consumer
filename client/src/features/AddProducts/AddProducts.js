@@ -18,7 +18,8 @@ const AddProducts = () => {
   };
 
   return (
-    <div>
+    <>
+    <div className="pt-20">
       <main className={classes.addProduct_form}>
         <form
           className={classes.product_form}
@@ -90,6 +91,7 @@ const AddProducts = () => {
         </form>
       </main>
     </div>
+    </>
   );
 };
 
