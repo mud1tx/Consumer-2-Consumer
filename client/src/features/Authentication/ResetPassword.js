@@ -86,7 +86,7 @@ const ResetPassword = () => {
             <img
               className=" rounded "
               alt="Logo"
-              src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
+              src={require("../../assets/LoginBg.jpg")}
             />
           </div>
         </div>

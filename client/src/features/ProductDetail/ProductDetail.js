@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import Navbar from "../../components/Navbar"
 import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetail = () => {
@@ -53,16 +54,17 @@ const ProductDetail = () => {
 
   return (
     <>
+    <Navbar/>
       <div>
         {/* {prodData==null?<div><p>nothing in detail</p></div>} */}
         {/* <h1>{prodDetail.singleProduct.title}</h1>
       <h1>{prodDetail.singleProduct.description}</h1>
       <p>{prodDetail.singleProduct.price}</p> */}
-        <div className="2xl:container 2xl:mx-auto h-screen bg-backgound_white lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
-          <div className="flex justify-center items-center px-4 py-4 lg:flex-row flex-col-reverse gap-8">
+        <div className="2xl:container 2xl:mx-auto  h-screen bg-backgound_white lg:py-16 lg:px-20 py-9 px-4  ">
+          <div className="flex justify-center items-center  lg:flex-row flex-col-reverse gap-8">
             {/* <!-- Description Div --> */}
 
-            <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
+            <div className="    w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
               {/* <p className=" focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-text_color">
               Home / ProductName / Product
             </p> */}
@@ -81,15 +83,40 @@ const ProductDetail = () => {
                 {prodDetail?.price} INR
               </p>
 
-              <button className="focus:outline-none focus:ring-2 border border-primary hover:bg-primary  duration-700 focus:ring-offset-2 focus:ring-gray-800 font-medium text-base hover:text-text_color leading-4  text-primary w-full py-5 lg:mt-12 mt-6">
+              <button className="focus:outline-none  focus:ring-2 border bg-primary border-primary hover:bg-backgound_white  duration-700 focus:ring-offset-2 focus:ring-gray-800 font-medium text-base hover:text-primary leading-4  text-text_color w-full py-5 lg:mt-12 mt-6">
                 Add to shopping bag
               </button>
+
+
+        <div className="  border border-primary px-4 py-2 mt-8">
+        <form onSubmit={handleFormSubmit} className="flex items-center justify-between">
+          <label className="text-primary text-center">Borrow Days </label>
+          <input
+           className="text-primary focus:outline-none px-2 py-1"
+            type="number"
+            min="1"
+            max="31"
+            name="days"
+            value={days}
+            onChange={(e) => {
+              setDays(e.target.value);
+            }}
+          />
+          <button
+            className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color mr-4 focus:outline-none rounded-sm  px-3 py-1"
+            type="submit"
+          >
+            Borrow
+          </button>
+        </form>
+      </div>
+
               {/* <button className="focus:outline-none focus:ring-2 border border-primary hover:bg-primary  duration-700 focus:ring-offset-2 focus:ring-gray-800 font-medium text-base hover:text-text_color leading-4  text-primary w-full py-5 lg:mt-12 mt-6">
               Buy Now
             </button> */}
             </div>
 
-            <div className=" w-full sm:w-96 md:w-8/12  lg:w-6/12  lg:gap-8 sm:gap-6 gap-4">
+            <div className=" w-full max-w-2xl  pt-16 sm:w-96 md:w-8/12  lg:w-6/12  lg:gap-8 sm:gap-6 gap-4">
               <Carousel
                 showStatus={false}
                 showArrows={false}
@@ -110,27 +137,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <div>
-        <form onSubmit={handleFormSubmit}>
-          <label>Number of days you want to borrow(1 to 31)</label>
-          <input
-            type="number"
-            min="1"
-            max="31"
-            name="days"
-            value={days}
-            onChange={(e) => {
-              setDays(e.target.value);
-            }}
-          />
-          <button
-            className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
-            type="submit"
-          >
-            Borrow
-          </button>
-        </form>
-      </div>
+    
     </>
   );
 };

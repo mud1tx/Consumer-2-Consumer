@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AddToCart } from "../redux/action/addCart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+// import Navbar '../components/Navbar',;
 const Cards = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -129,11 +129,11 @@ const Cards = (props) => {
               </Carousel>
             </div>
             <div className="Content   rounded-sm mt-10  pt-6 pb-2">
-              <h1 className="text-text_color  mt-2 mb-2">
-                <span className="text-md font-bold ">Title: </span>
+              <h1 className="text-text_color  max-w-xs mt-2 mb-2 truncate">
+                <span className="text-md  overflow-hidden font-bold ">Title: </span>
                 {product.title}
               </h1>
-              <p className="text-text_color">
+              <p className="text-text_color max-w-xs">
                 <span className="text-md font-bold ">Category: </span>
                 {product.category}
               </p>
