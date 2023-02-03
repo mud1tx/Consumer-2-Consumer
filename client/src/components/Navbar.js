@@ -95,6 +95,11 @@ const Navbar = () => {
                       <NavLink to="/admin/borrow">Borrowed</NavLink>
                     </div>
                   )}
+                  {userLoggedIn?.isLoggedIn && (
+                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
+                      <NavLink to="/admin/chats">Chats</NavLink>
+                    </div>
+                  )}
                 </div>
                 <div className="hidden xl:flex items-center">
                   <div className="relative flex items-center justify-between  md:mr-6 my-2">
@@ -334,6 +339,20 @@ const Navbar = () => {
                               </div>
                               <p className="text-text_color xl:text-base text-base ml-3">
                                 <NavLink to="/admin/borrow">Borrowed</NavLink>
+                              </p>
+                            </div>
+                          </li>
+                        </span>
+                      )}
+                      {userLoggedIn?.isLoggedIn && (
+                        <span className="cursor-pointer">
+                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                            <div className="flex  items-center p-2">
+                              <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                <AiOutlineShoppingCart className="text-xl text-text_color " />
+                              </div>
+                              <p className="text-text_color xl:text-base text-base ml-3">
+                                <NavLink to="/admin/chats">Chats</NavLink>
                               </p>
                             </div>
                           </li>
