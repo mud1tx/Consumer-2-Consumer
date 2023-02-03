@@ -7,7 +7,7 @@ import { ChatState } from "../../context/ChatProvider";
 
 const MyChats = ({ fetchAgain }) => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
-  const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+  const { selectedChat, setSelectedChat, chats, setChats } = ChatState();
   const [searchData, setSearchData] = useState([]);
   const toast = useToast();
 

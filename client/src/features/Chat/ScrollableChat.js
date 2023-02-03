@@ -1,15 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-// import ScrollableFeed from "react-scrollable-feed";
-import {
-  isSameSenderMargin,
-  isSameUser,
-} from "../../config/ChatLogics";
+import React, { useEffect, useRef } from "react";
+import { isSameSenderMargin, isSameUser } from "../../config/ChatLogics";
 import { ChatState } from "../../context/ChatProvider";
 
 const ScrollableChat = ({ messages }) => {
   const scrollRef = useRef();
   const { user } = ChatState();
-  console.log("asks", user);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "auto" });

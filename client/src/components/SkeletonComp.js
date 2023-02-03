@@ -20,7 +20,6 @@ const SkeletonComp = () => {
             </div>
             <div className="flex gap-4">
               <Skeleton height={28} style={{ marginTop: 14 }} width={80} />
-              {/* <Skeleton height={28} style={{ marginTop: 14 }} width={40} /> */}
             </div>
           </div>
         </div>
@@ -30,30 +29,3 @@ const SkeletonComp = () => {
 };
 
 export default SkeletonComp;
-
-{
-  /* <div className="  ">
-        <div className="">
-          <Skeleton className="w-40 h-32" />
-        </div>
-        <div>
-          <p>
-            <Skeleton className="w-10px" />
-          </p>
-          <p>
-            <Skeleton className="w-10px" />
-          </p>
-          <p>
-            <Skeleton className="w-10px" />
-          </p>
-        </div>
-        <div className="flex justify-between">
-          <p className="w-20 text-2xl">
-            <Skeleton />
-          </p>
-          <p className="w-20 text-2xl">
-            <Skeleton />
-          </p>
-        </div>
-      </div> */
-}

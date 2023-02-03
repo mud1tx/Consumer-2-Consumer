@@ -7,8 +7,6 @@ import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender } from "../../config/ChatLogics";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import ScrollableChat from "./ScrollableChat";
-// import Lottie from "react-lottie";
-import animationData from "../../animations/typing.json";
 import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import { ChatState } from "../../context/ChatProvider";
@@ -25,15 +23,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
   console.log("????????????????????????this is imp", messages);
-
-  // const defaultOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: animationData,
-  //   rendererSettings: {
-  //     preserveAspectRatio: "xMidYMid slice",
-  //   },
-  // };
   const { selectedChat, setSelectedChat, user, notification, setNotification } =
     ChatState();
 
@@ -214,19 +203,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               isRequired
               mt={3}
             >
-              {istyping ? (
-                {
-                  /* <div>
-                  <Lottie
-                    options={defaultOptions}
-                    width={70}
-                    style={{ marginBottom: 15, marginLeft: 0 }}
-                  />
-                </div> */
-                }
-              ) : (
-                <></>
-              )}
+              {/* {istyping ? {} : <></>} */}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
