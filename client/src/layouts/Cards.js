@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { BsCartCheck } from "react-icons/bs";
@@ -7,13 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { AddToCart } from "../redux/action/addCart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ChatState } from "../context/ChatProvider";
 
 const Cards = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
   const allProductsData = props.allProductsData;
-  const [dateValue, setDateValue] = useState("");
+  // const [product, setProduct] = useState({
+  //   name: "React from fb",
+  //   price: 10,
+  //   productBy: "facebook",
+  // });
+  const { chats, setChats } = ChatState();
 
   const getProductToCartHandler = async (productId) => {
     const res = await fetch("http://localhost:5000/cart", {
@@ -40,59 +46,35 @@ const Cards = (props) => {
     console.log("cart", productData.products);
   };
 
-  const handleInputs = (e) => {
-    const value = e.target.value;
-    setDateValue(value);
-  };
-
   const chatIdHandler = async (e) => {
     e.preventDefault();
     try {
-      const newConvApi = await fetch(
-        "http://localhost:5000/admin/conversation",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            senderId: e.target[0].value,
-            receiverId: e.target[1].value,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const newConvApi = await fetch("http://localhost:5000/admin/chats", {
+        method: "POST",
+        body: JSON.stringify({
+          senderId: e.target[0].value,
+          receiverId: e.target[1].value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const res = await newConvApi.json();
-      console.log("conversation", res);
+      console.log("conversation hu yaar card me", res);
+      console.log("Asdas", res);
       const { ok } = res;
       if (!ok) {
-        console.log(res.msg);
+        navigate("/admin/chats");
       } else {
-        navigate("/admin/messenger");
+        navigate("/admin/chats");
+        if (!chats.find((c) => c._id === res.data._id)) {
+          setChats([res, ...chats]);
+        }
       }
     } catch (err) {
       console.log("error", err);
     }
   };
-  const borrowHandler = async (e) => {
-    e.preventDefault();
-    // try{}catch{}
-    // const orderApi = await fetch("http://localhost:5000/order", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     currentUser: currentUser,
-    //     productData: productData,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // const orderRes = await orderApi.json();
-    console.log(e);
-  };
-
-  const date = new Date();
-  let currentDate = date.toISOString().substring(0, 10);
-  console.log(currentDate);
 
   return (
     <>
@@ -115,7 +97,7 @@ const Cards = (props) => {
                 stopOnHover={true}
                 interval={2000}
               >
-                {product.image.map((img, index) => (
+                {product.image?.map((img, index) => (
                   <div key={100 * index}>
                     <img
                       className=" h-40
@@ -168,9 +150,13 @@ const Cards = (props) => {
               <input
                 type="hidden"
                 name="senderId"
-                value={userLoggedIn?.user?._id}
+                value={userLoggedIn?.user?._id || ""}
               />
-              <input type="hidden" name="receiverId" value={product.userId} />
+              <input
+                type="hidden"
+                name="receiverId"
+                value={product.userId || ""}
+              />
               <button type="submit">chat</button>
             </form>
           </div>
