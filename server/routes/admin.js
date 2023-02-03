@@ -16,18 +16,20 @@ router.post("/products", adminController.getProducts);
 
 router.post("/orders", adminController.postOrderData);
 
+router.get("/orders", adminController.getOrderData);
+
 router.post("/lend", adminController.postLendData);
 
 router.post("/borrow", adminController.postBorrowData);
 
-router.get("/chatUser/:friendId", adminController.getFriendId);
+router.post("/checkout", adminController.getCheckout);
 
-router.post("/conversation", adminController.postNewConv);
+router.post("/chats", adminController.accessChat);
 
-router.get("/conversation/:userId", adminController.getUserConv);
+router.get("/chats", adminController.fetchChats);
 
-router.post("/message/chat", adminController.postChatData);
+router.get("/message/:chatId", adminController.allMessages);
 
-router.get("/messages/:conversationId", adminController.getChatData);
+router.post("/message", adminController.sendMessage);
 
 module.exports = router;
