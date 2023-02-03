@@ -28,8 +28,6 @@ const NewPassword = () => {
     });
     const data = await res.json();
     if (data.ok) {
-      // console.log("user valid");
-      // console.log(data);
       setUserData(data);
     } else {
       navigate("/404");

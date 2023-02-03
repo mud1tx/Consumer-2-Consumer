@@ -59,7 +59,6 @@ const ResetPassword = () => {
               <div className="flex flex-col text-text_color">
                 <label>Email</label>
                 <input
-                  // className="p-2  focus:outline-none focus:shadow-md text-sm rounded-sm border outline-none"
                   className={
                     validate.find((e) => e.param === "email")
                       ? `rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none ${classes.invalid}`

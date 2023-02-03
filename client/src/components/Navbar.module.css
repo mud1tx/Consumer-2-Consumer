@@ -17,10 +17,6 @@
   flex: 1;
   gap: 0 1rem;
 }
-/* .navbar_page {
-  color: var(--main-text-color);
-  padding: 0.5rem;
-} */
 .navbar_searchBox {
   display: flex;
   gap: 1rem;

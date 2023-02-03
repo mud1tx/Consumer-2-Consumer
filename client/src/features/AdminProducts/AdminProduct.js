@@ -30,12 +30,11 @@ const AdminProduct = () => {
       setMarker(false);
       setSecMarker(true);
     }
-    // console.log("adminData", adminData);
   };
 
   useEffect(() => {
     getAdminProducts();
-  },[]);
+  }, []);
 
   return (
     <>
@@ -51,7 +50,7 @@ const AdminProduct = () => {
       {!marker && secMarker && adminProd?.length > 0 ? (
         <Cards allProductsData={adminProd} />
       ) : (
-        [secMarker && <h1>You didn't add any product</h1>]
+        [secMarker && <h1 key="1">You didn't add any product</h1>]
       )}
     </div>
     </>

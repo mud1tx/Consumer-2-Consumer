@@ -2,63 +2,62 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  first_name: {
-    type: String,
-    required: true,
-  },
-  last_name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  resetToken: String,
-  resetTokenExpiration: Date,
-  cart: {
-    items: [
+const userSchema = new Schema(
+  {
+    first_name: {
+      type: String,
+      required: true,
+    },
+    last_name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    resetToken: String,
+    resetTokenExpiration: Date,
+    cart: {
+      items: [
+        {
+          productId: {
+            type: Schema.Types.ObjectId,
+            ref: "Product",
+            required: true,
+          },
+        },
+      ],
+    },
+    lend: [
       {
         productId: {
           type: Schema.Types.ObjectId,
           ref: "Product",
-          required: true,
+        },
+        expire: {
+          type: Number,
+        },
+      },
+    ],
+    borrow: [
+      {
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+        },
+        expire: {
+          type: Number,
         },
       },
     ],
   },
-  lend: [
-    {
-      productId: {
-        type: Schema.Types.ObjectId,
-        // required: true,
-        ref: "Product",
-      },
-      expire: {
-        type: Number,
-        // required: true,
-      },
-    },
-  ],
-  borrow: [
-    {
-      productId: {
-        type: Schema.Types.ObjectId,
-        // required: true,
-        ref: "Product",
-      },
-      expire: {
-        type: Number,
-        // required: true,
-      },
-    },
-  ],
-});
+  { timestamps: true }
+);
 
 userSchema.methods.addToCart = function (product) {
   const cartProductIndex = this.cart.items.findIndex((cp) => {
@@ -77,7 +76,6 @@ userSchema.methods.addToCart = function (product) {
     items: updatedCartItems,
   };
   this.cart = updatedCart;
-  // return this.save();
   this.save();
   return "";
 };

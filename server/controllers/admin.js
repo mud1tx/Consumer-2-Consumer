@@ -2,8 +2,14 @@ const Product = require("../models/products");
 const fs = require("fs");
 const Order = require("../models/order");
 const User = require("../models/user");
-const Conversation = require("../models/conversation");
 const Message = require("../models/message");
+const Chat = require("../models/chat");
+const stripe = require("stripe")(
+  "sk_test_51LO0nNSBfCKAZDAkBeBjpCVA6hhotgxyEnPbKPTBytitrHihIop2OisbrkDeJUm6WNqXIokkhkzGvk4Oi9uQnzLt001gpYggAm"
+);
+const uuid = require("uuid");
+
+// const idempotencyKey = uuid();
 
 exports.postAddProduct = async (req, res, next) => {
   const title = req.body.title;
@@ -50,7 +56,6 @@ exports.postAddProduct = async (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-  // res.json(product);
 };
 
 exports.getProducts = (req, res, next) => {
@@ -100,7 +105,6 @@ exports.postOrderData = (req, res, next) => {
       });
       User.findOne({ _id: userId })
         .then((user) => {
-          // console.log("catch 1", user);
           user.borrow = borrowArray;
           return user.save();
         })
@@ -110,7 +114,6 @@ exports.postOrderData = (req, res, next) => {
       const productOwnerId = productData.userId;
       User.findOne({ _id: productOwnerId })
         .then((user) => {
-          // console.log("catch 2", user);
           user.lend = lendArray;
           return user.save();
         })
@@ -119,8 +122,6 @@ exports.postOrderData = (req, res, next) => {
         });
       return res.json({ ok: true, message: "data aa gaya yaar pehle baar" });
     } else {
-      // const prodId = productData._id;
-      console.log(user);
       user.products.push({
         productId: productData._id,
         expire: currentTime + days * 24 * 60 * 60 * 1000,
@@ -163,6 +164,45 @@ exports.postOrderData = (req, res, next) => {
   return;
 };
 
+exports.getCheckout = (req, res, next) => {
+  const { token, prodData, days } = req.body;
+  console.log("df;l,g,kl;dmglkdsm", prodData);
+  stripe.checkout.sessions
+    .create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          name: prodData.title,
+          currency: "usd",
+          amount: prodData.price * days,
+          quantity: 1,
+        },
+      ],
+      success_url: req.protocol + "://" + req.get("host") + "/checkout/success",
+      cancel_url: req.protocol + "://" + req.get("host") + "/checkout/cancel",
+    })
+    .then((session) => {
+      return res.json({ ok: true, sessionId: session.id });
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.getOrderData = async (req, res, next) => {
+  const currentUserId = req.headers.currentuserid;
+  try {
+    var isOrder = await Order.find({ userId: currentUserId })
+      .populate("products.productId")
+      .populate("userId");
+    if (isOrder) {
+      res.json({ ok: true, data: isOrder });
+    } else {
+      res.json({ ok: false, msg: "No Order Placed" });
+    }
+  } catch (err) {
+    res.json({ ok: false, msg: err });
+  }
+};
+
 exports.postLendData = (req, res, next) => {
   const userId = req.body.userId;
   User.findOne({ _id: userId })
@@ -183,108 +223,143 @@ exports.postLendData = (req, res, next) => {
     });
 };
 
-exports.postBorrowData = (req, res, next) => {
+exports.postBorrowData = async (req, res, next) => {
   const userId = req.body.userId;
-  User.findOne({ _id: userId })
+  User.findById(userId)
     .then((user) => {
-      if (user.borrow.length === 0) {
-        return res.json({
-          ok: false,
-          msg: "No product is borrowed from anyone",
-        });
+      if (!user) {
+        return res.json({ ok: false, msg: "No Item is Borrowed" });
       }
-      const array = [];
-      user.borrow.map((data) => {
-        array.push(data.productId);
-      });
-      return Product.find({ _id: [array] })
-        .then((data) => {
-          return res.json({ ok: true, data: data });
+      user
+        .populate("borrow.productId")
+        .then((user) => {
+          const products = user.borrow;
+          return res.json({
+            ok: true,
+            data: products,
+          });
         })
         .catch((err) => {
           console.log(err);
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-exports.getFriendId = async (req, res, next) => {
-  const friendId = req.params.friendId;
-  // console.log("re", req);
-  User.findOne({ _id: friendId })
-    .then((user) => {
-      res.json({ ok: true, data: user });
-    })
-    .catch((err) => {
-      res.json({ ok: false, err: err });
-    });
-};
-
-exports.postNewConv = async (req, res, next) => {
-  // console.log(req.body.senderId, req.body.receiverId);
-  const senderId = req.body.senderId;
-  const receiverId = req.body.receiverId;
-  Conversation.findOne({
-    members: [senderId, receiverId],
-  })
-    .then((conv) => {
-      if (conv) {
-        // console.log("hai yaar pehle se");
-        return res.json({ ok: true, msg: "Conversation is already present" });
-      }
-      const newConversation = new Conversation({
-        members: [senderId, receiverId],
-      });
-      newConversation
-        .save()
-        .then((result) => {
-          console.log("Conv created");
-          res.json({ ok: true, conversation: newConversation });
-        })
-        .catch((err) => {
           res.json({ ok: false, msg: err });
         });
     })
     .catch((err) => {
+      console.log(err);
       res.json({ ok: false, msg: err });
     });
 };
 
-exports.getUserConv = async (req, res, next) => {
-  try {
-    Conversation.find({
-      members: { $in: [req.params.userId] },
-    }).then((data) => {
-      // console.log("data", data);
-      res.json({ ok: true, data: data });
-    });
-  } catch (err) {
-    res.json({ ok: false, msg: err });
+/////////////////////////////////////////////////////////////////
+
+exports.accessChat = async (req, res, next) => {
+  const currentUserId = req.body.senderId;
+  const userId = req.body.receiverId;
+
+  if (!userId) {
+    console.log("UserId param not sent with request");
+    return res.sendStatus(400);
+  }
+
+  var isChat = await Chat.find({
+    isGroupChat: false,
+    $and: [
+      { users: { $elemMatch: { $eq: currentUserId } } },
+      { users: { $elemMatch: { $eq: userId } } },
+    ],
+  })
+    .populate("users", "-password")
+    .populate("latestMessage");
+
+  isChat = await User.populate(isChat, {
+    path: "latestMessage.sender",
+    select: "first_name last_name email",
+  });
+
+  if (isChat.length > 0) {
+    res.send(isChat[0]);
+  } else {
+    var chatData = {
+      chatName: "sender",
+      isGroupChat: false,
+      users: [currentUserId, userId],
+    };
+
+    try {
+      const createdChat = await Chat.create(chatData);
+      const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
+        "users",
+        "-password"
+      );
+      res.json({ ok: true, data: FullChat });
+    } catch (error) {
+      res.json({ ok: false, msg: "Conversation already created" });
+    }
   }
 };
 
-exports.postChatData = async (req, res, next) => {
-  const conversationId = req.body.message.conversationId;
-  const senderId = req.body.message.senderId;
-  const text = req.body.message.text;
-  const newMessage = new Message({ conversationId, senderId, text });
+exports.fetchChats = async (req, res, next) => {
+  const currentUserId = req.headers.currentuserid;
   try {
-    const savedMessage = await newMessage.save();
-    res.status(200).json(savedMessage);
-  } catch (err) {
-    res.status(500).json(err);
+    Chat.find({ users: { $elemMatch: { $eq: currentUserId } } })
+      .populate("users", "-password")
+      .populate("groupAdmin", "-password")
+      .populate("latestMessage")
+      .sort({ updatedAt: -1 })
+      .then(async (results) => {
+        results = await User.populate(results, {
+          path: "latestMessage.sender",
+          select: "first_name last_name email",
+        });
+        res.status(200).send(results);
+      });
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
   }
 };
 
-exports.getChatData = async (req, res, next) => {
+exports.allMessages = async (req, res) => {
   try {
-    const messages = await Message.find({
-      conversationId: req.params.conversationId,
+    const messages = await Message.find({ chat: req.params.chatId })
+      .populate("sender", "first_name last_name email")
+      .populate("chat");
+    res.send(messages);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+};
+
+exports.sendMessage = async (req, res) => {
+  const { currentUserId, content, chatId } = req.body;
+
+  if (!content || !chatId) {
+    console.log("Invalid data passed into request");
+    return res.sendStatus(400);
+  }
+
+  var newMessage = {
+    sender: currentUserId,
+    content: content,
+    chat: chatId,
+  };
+
+  try {
+    var message = await Message.create(newMessage);
+
+    message = await message.populate("sender", "name");
+    message = await message.populate("chat");
+    message = await User.populate(message, {
+      path: "chat.users",
+      select: "first_name last_name email",
     });
-    res.status(200).json(messages);
-  } catch (err) {
-    res.status(500).json(err);
+
+    await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
+
+    res.json(message);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
   }
 };

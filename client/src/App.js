@@ -17,7 +17,7 @@ import ProductDetail from "./features/ProductDetail/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BorrowPage from "./pages/BorrowPage";
-import MessengerPage from "./pages/MessengerPage";
+import ChatPager from "./pages/ChatPager";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,17 +37,16 @@ const App = () => {
           <Route path="/:prodId" element={<ProductDetail />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/admin/messenger" element={<MessengerPage />} />
           <Route path="/admin/add-product" element={<AddProductsPage />} />
           <Route path="/admin/admin-products" element={<AdminProductsPage />} />
           <Route path="/admin/lend" element={<LendPage />} />
           <Route path="/admin/borrow" element={<BorrowPage />} />
+          <Route path="/admin/chats" element={<ChatPager />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/new-password/:token" element={<NewPassword />} />
         <Route path="/signup" element={<Signup />} />
-        {/* <Navbar /> */}
       </Routes>
     </>
   );

@@ -28,11 +28,12 @@ const Lend = () => {
       if (!ok) {
         setMessage(res.msg);
       } else {
-        setLendData(res.data);
+        const lendProductArray = [];
+        res.data.map((prod) => lendProductArray.push(prod));
+        setLendData(lendProductArray);
       }
       setMarker(false);
       setSecMarker(true);
-      console.log("lend", res);
     };
     lendItemHandler();
   }, [userLoggedIn]);
