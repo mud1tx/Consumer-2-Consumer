@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import Cards from "../../layouts/Cards";
 import SkeletonComp from "../../components/SkeletonComp";
 
+
+
 const Lend = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
   const [lendData, setLendData] = useState([]);
@@ -37,9 +39,11 @@ const Lend = () => {
   }, [userLoggedIn]);
 
   return (
-    <div className=" pt-20 bg-main_color-200 ">
+    <>
+    {/* <Navbar/> */}
+    <div className=" pt-16 flex mb-4 gap-2  flex-wrap  items-center justify-center   h-full ">
       {marker && (
-        <div className="flex flex-wrap  p-4 bg-backgound_white justify-evenly items-center">
+        <div className=" flex flex-wrap  p-4  justify-evenly items-center">
           {Array.from({ length: 8 }).map((_, index) => (
             <SkeletonComp key={index} />
           ))}
@@ -51,6 +55,7 @@ const Lend = () => {
         [secMarker && <h1 key="1">{message}</h1>]
       )}
     </div>
+    </>
   );
 };
 

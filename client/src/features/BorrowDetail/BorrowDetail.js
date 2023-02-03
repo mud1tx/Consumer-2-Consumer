@@ -38,9 +38,9 @@ const BorrowDetail = () => {
   }, [userLoggedIn]);
 
   return (
-    <div className=" pt-20 bg-main_color-200 ">
+    <div className=" pt-20  ">
       {marker && (
-        <div className="flex flex-wrap  p-4 bg-backgound_white justify-evenly items-center">
+        <div className="flex flex-wrap  p-4  justify-evenly items-center">
           {Array.from({ length: 8 }).map((_, index) => (
             <SkeletonComp key={index} />
           ))}

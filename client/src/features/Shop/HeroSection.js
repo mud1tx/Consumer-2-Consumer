@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const HeroSection = () => {
   return (
-    <div className="dark:bg-gray-900  h-full  bg-backgound_white">
+    <div className="dark:bg-gray-900  h-full flex items-center  bg-backgound_white">
       <div className="flex flex-col lg:flex-row  items-stretch justify-between lg:px-0 px-6 lg:py-20 py-8 2xl:mx-auto 2xl:container">
         <div className="z-30   relative lg:w-1/2">
           <div className="hidden dark:bg-gray-800  w-full lg:w-10/12 lg:h-full lg:flex justify-end items-center">
@@ -23,28 +23,28 @@ const HeroSection = () => {
               >
                 <div>
                   <img
-                    src={require("../Shop/View-1.jpg")}
+                    src={require("../../assets/View-1.jpg")}
                     alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
                 </div>
                 <div>
                   <img
-                    src={require("../Shop/View-2.jpg")}
+                    src={require("../../assets/View-2.jpg")}
                     alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
                 </div>
                 <div>
                   <img
-                    src={require("../Shop/View-3.jpg")}
+                    src={require("../../assets/View-3.jpg")}
                     alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
                 </div>
                 <div>
                   <img
-                    src={require("../Shop/View-4.jpg")}
+                    src={require("../../assets/View-4.jpg")}
                     alt="ProductImage"
                     className="w-full rounded-sm relative z-30 lg:pl-20 px-6 py-14"
                   />
@@ -66,28 +66,28 @@ const HeroSection = () => {
             >
               <div>
                 <img
-                  src={require("../Shop/View-1.jpg")}
+                  src={require("../../assets/View-1.jpg")}
                   alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
               </div>
               <div>
                 <img
-                  src={require("../Shop/View-2.jpg")}
+                  src={require("../../assets/View-2.jpg")}
                   alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
               </div>
               <div>
                 <img
-                  src={require("../Shop/View-3.jpg")}
+                  src={require("../../assets/View-3.jpg")}
                   alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
               </div>
               <div>
                 <img
-                  src={require("../Shop/View-4.jpg")}
+                  src={require("../../assets/View-4.jpg")}
                   alt="ProductImage"
                   className="w-full rounded-sm relative  lg:pl-20 md:px-6 py-5 md:py-14"
                 />
@@ -119,7 +119,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      
     </div>
+    
   );
 };
 

@@ -20,7 +20,14 @@ module.exports = {
         backgound_white: "#f3f3f3",
         text_color: "#444",
         main_white: "#FFFFFF",
+        facebook:"#3b5998",
+        instagram:"#bc2a8d",
+        linkedin:"#0077b5",
+        github:"#333",
       },
+      //  backgroundImage: {
+      //   'hero-pattern': "url('./src/assets/BackgroundSvg.svg')",
+      // }
     },
   },
   plugins: [],

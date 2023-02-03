@@ -74,7 +74,7 @@ const NewPassword = () => {
 
   return (
     <>
-      <div className="bg-backgound_white min-h-screen flex items-center justify-center">
+      <div className=" bg-backgound_white  min-h-screen flex items-center justify-center">
         <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
             <h2 className="font-bold text-3xl text-primary mb-10">
@@ -90,6 +90,7 @@ const NewPassword = () => {
                   //     ? `rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none ${classes.invalid}`
                   //     : "rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
                   // }
+
                   type="password"
                   name="password"
                   value={userLoginData}
@@ -120,7 +121,7 @@ const NewPassword = () => {
             <img
               className=" rounded "
               alt="Logo"
-              src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
+              src={require("../../assets/LoginBg.jpg")}
             />
           </div>
         </div>

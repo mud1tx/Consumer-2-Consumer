@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { User } from "../../redux/action/authUser";
 import { ToastContainer, toast } from "react-toastify";
+import { AiOutlineUserAdd } from "react-icons/ai";
+
 import "react-toastify/dist/ReactToastify.css";
 import classes from "./Login.module.css";
 
@@ -52,15 +54,22 @@ const Login = () => {
       console.log(err);
     }
   };
-
+  // style={{backgroundImage:`url(${svg})`,backgroundRepeat: 'no-repeat' ,objectFit: 'fill' }}
   return (
     <>
-      <div className="bg-backgound_white min-h-screen flex items-center justify-center">
-        <div className="  bg-main_white flex rounded shadow-lg max-w-4xl px-2 py-4 items-center">
+      <div     className=" bg-backgound_white  min-h-screen flex items-center justify-center ">
+        <div className="   flex bg-main_white rounded shadow-lg max-w-4xl px-2 py-4 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
-            <h2 className="font-bold text-3xl text-primary">Log In</h2>
+            <div>
+            <h2 className="font-bold text-4xl  px-8 text-primary text-shadow-lg ">Log In</h2>
+            <p className=" mt-4 flex items-center gap-1  px-8 text-sm text-primary hover:text-text_color">
+              <NavLink to="/signup" >
+                New User</NavLink>
+                <AiOutlineUserAdd className=""/>
+            </p>
+            </div>
             <form
-              className="max-w-[400px]  w-full mx-auto bg-gary-900 p-8 px-8 rounded-lg"
+              className="max-w-[400px]  w-full  bg-gary-900 p-8 px-8 rounded-lg"
               onSubmit={handleFormSubmit}
             >
               <div className="flex  flex-col  py-2">
@@ -97,24 +106,24 @@ const Login = () => {
                 />
               </div>
               <button
-                className="w-full my-5 py-2 transition   bg-primary shadow-lg shadow-text-teal-400 hover:shadow-teal-500/20  text-text_color font-semibold rounded-sm"
+                className="w-full my-5 py-2 transition  focus:outline-none  bg-gradient-to-r from-tertiary to-primary shadow-lg  hover:shadow-teal-500/20  text-main_white font-semibold rounded-sm"
                 type="submit"
               >
                 Log In
               </button>
             </form>
-            <p className="text-text_color">
-              <NavLink to="/signup">New User</NavLink>
-            </p>
+            <div className="px-8 flex items-center justify-between">
+         
             <p className="text-text_color">
               <NavLink to="/reset">Reset Password</NavLink>
             </p>
+            </div>
           </div>
           <div className="md:block hidden w-1/2">
             <img
               className=" rounded "
               alt="Logo"
-              src={require("../Shop/pexels-oladimeji-ajegbile-2861798.jpg")}
+              src={require("../../assets/LoginBg.jpg")}
             />
           </div>
         </div>

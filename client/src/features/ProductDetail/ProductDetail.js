@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import Navbar from "../../components/Navbar"
 import "react-toastify/dist/ReactToastify.css";
 import StripeCheckout from "react-stripe-checkout";
 
@@ -87,6 +88,7 @@ const ProductDetail = () => {
 
   return (
     <>
+    <Navbar/>
       <div>
         <div className="2xl:container 2xl:mx-auto h-screen bg-backgound_white lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
           <div className="flex justify-center items-center px-4 py-4 lg:flex-row flex-col-reverse gap-8">
@@ -106,12 +108,12 @@ const ProductDetail = () => {
                 {prodDetail?.price} INR
               </p>
 
-              <button className="focus:outline-none focus:ring-2 border border-primary hover:bg-primary  duration-700 focus:ring-offset-2 focus:ring-gray-800 font-medium text-base hover:text-text_color leading-4  text-primary w-full py-5 lg:mt-12 mt-6">
+              <button className="focus:outline-none  focus:ring-2 border bg-primary border-primary hover:bg-backgound_white  duration-700 focus:ring-offset-2 focus:ring-gray-800 font-medium text-base hover:text-primary leading-4  text-text_color w-full py-5 lg:mt-12 mt-6">
                 Add to shopping bag
               </button>
             </div>
 
-            <div className=" w-full sm:w-96 md:w-8/12  lg:w-6/12  lg:gap-8 sm:gap-6 gap-4">
+            <div className=" w-full max-w-2xl  pt-16 sm:w-96 md:w-8/12  lg:w-6/12  lg:gap-8 sm:gap-6 gap-4">
               <Carousel
                 showStatus={false}
                 showArrows={false}
