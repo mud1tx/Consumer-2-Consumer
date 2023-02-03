@@ -5,7 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import Navbar from "../../components/Navbar"
+import Navbar from "../../components/Navbar";
 import "react-toastify/dist/ReactToastify.css";
 import StripeCheckout from "react-stripe-checkout";
 
@@ -52,6 +52,7 @@ const ProductDetail = () => {
         },
       });
       const res = await ordersApi.json();
+      toast.success("Order Successfully placed");
       navigate("/orders");
     } catch (err) {
       console.log(err);
@@ -88,7 +89,7 @@ const ProductDetail = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div>
         <div className="2xl:container 2xl:mx-auto h-screen bg-backgound_white lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
           <div className="flex justify-center items-center px-4 py-4 lg:flex-row flex-col-reverse gap-8">
@@ -164,6 +165,7 @@ const ProductDetail = () => {
           </StripeCheckout>
         )}
       </div>
+      <ToastContainer />
     </>
   );
 };

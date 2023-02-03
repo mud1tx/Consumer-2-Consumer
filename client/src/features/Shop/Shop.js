@@ -270,9 +270,6 @@ const Shop = () => {
                   />
                 </svg>
               </div>
-              {/* <h1 className="text-xl  font-bold  md:text-4xl text-primary">
-                Our Shop Is Empty Please Do Visit After Sometime
-              </h1> */}
             </div>
           ),
         ]

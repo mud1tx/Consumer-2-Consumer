@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import classes from "./Login.module.css";
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -85,12 +84,6 @@ const NewPassword = () => {
                 <label>Password</label>
                 <input
                   className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
-                  // className={
-                  //   validate.find((e) => e.param === "password")
-                  //     ? `rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none ${classes.invalid}`
-                  //     : "rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
-                  // }
-
                   type="password"
                   name="password"
                   value={userLoginData}
