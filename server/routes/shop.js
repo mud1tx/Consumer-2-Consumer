@@ -10,6 +10,8 @@ router.get("/:productId", shopController.getProduct);
 
 router.post("/cart", shopController.postCart);
 
+// router.get("/checkout", shopController.getCheckout);
+
 router.post("/cart/products", shopController.getCartProducts);
 
 router.post("/cart-delete-item", shopController.postCartDeleteProduct);

@@ -44,7 +44,6 @@ const Login = () => {
         setValidate(formData.validationErrors);
       } else {
         toast.success(`${message}`);
-        // console.log("message aaya kya", message);
         sessionStorage.setItem("userLoggedIn", JSON.stringify(formData));
         dispatch(User(formData));
         navigate("/");

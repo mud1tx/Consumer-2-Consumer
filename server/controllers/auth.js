@@ -100,7 +100,6 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             console.log({ ok: false, message: "An error occured!!" });
           }
-          // console.log(res);
         }
       );
     })
@@ -155,7 +154,6 @@ exports.postReset = (req, res, next) => {
             if (err) {
               console.log(err);
             }
-            // console.log(res);
           }
         );
       })
@@ -178,16 +176,7 @@ exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.newPassword;
   const userId = req.body.userId;
   const passwordToken = req.body.passwordToken;
-  // console.log(newPassword, userId, passwordToken);
   let resetUser;
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return res.json({
-  //     ok: false,
-  //     message: errors.array()[0].msg,
-  //     validationErrors: errors.array(),
-  //   });
-  // }
 
   User.findOne({
     resetToken: passwordToken,
@@ -212,7 +201,6 @@ exports.postNewPassword = (req, res, next) => {
       res.json({
         ok: false,
         message: "An error occured!!",
-        // validationErrors: [],
       });
     });
 };

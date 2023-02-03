@@ -5,11 +5,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const csrf = require("csurf");
 const cors = require("cors");
 const User = require("./models/user");
-const Order = require("./models/order");
 const Product = require("./models/products");
+const stripe = require("stripe")(
+  "sk_test_51LO0nNSBfCKAZDAkBeBjpCVA6hhotgxyEnPbKPTBytitrHihIop2OisbrkDeJUm6WNqXIokkhkzGvk4Oi9uQnzLt001gpYggAm"
+);
 
 const MONGODB_URI =
   "mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop";
@@ -44,58 +45,57 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  User.find()
-    .then((user) => {
-      if (user.lend?.length > 0) {
-        const lendArray = user.lend.filter((lendData) => {
-          if (lendData.expire > Date.now()) {
-            Product.findOne({ _id: lendData.productId })
-              .then((prod) => {
-                return prod.borrowed = false;
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-            return lendData;
-          }
-        });
-        user.lend = lendArray;
-      }
-      if (user.borrow?.length > 0) {
-        const borrowArray = user.borrow.filter((borrowData) => {
-          if (borrowData.expire > Date.now()) {
-            Product.findOne({ _id: borrowData.productId })
-              .then((prod) => {
-                return prod.borrowed = false;
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-            return borrowData;
-          }
-        });
-        user.borrow = borrowArray;
-      }
-    })
-    .catch((err) => console.log(err));
-  next();
-});
 
-// app.use(csrfProtection);
-
-// app.use((req, res, next) => {
-//   if (!req.session.user) {
-//     return next();
-//   }
-//   User.findById(req.session.user._id)
-//     .then((user) => {
-//       req.user = user;
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
+User.find()
+  .then((user) => {
+    for (let i = 0; i < user.length; i++) {
+      if (user[i].lend?.length > 0) {
+        User.findOne({ _id: user[i]._id })
+          .then((us) => {
+            for (let i = 0; i < us.lend.length; i++) {
+              if (us.lend[i].expire < Date.now()) {
+                Product.findOne({ _id: us.lend[i].productId })
+                  .then((prod) => {
+                    prod.borrowed = false;
+                    prod.save();
+                    return;
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+                us.lend.splice(i, 1);
+              }
+            }
+            us.save();
+          })
+          .catch((err) => console.log(err));
+      }
+      if (user[i].borrow?.length > 0) {
+        User.findOne({ _id: user[i]._id })
+          .then((us) => {
+            for (let i = 0; i < us.borrow.length; i++) {
+              if (us.borrow[i].expire < Date.now()) {
+                Product.findOne({ _id: us.borrow[i].productId })
+                  .then((prod) => {
+                    prod.borrowed = false;
+                    prod.save();
+                    return;
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+                us.borrow.splice(i, 1);
+              }
+            }
+            us.save();
+          })
+          .catch((err) => console.log(err));
+      }
+    }
+    return;
+  })
+  .catch((err) => console.log(err));
+// next();
 // });
 
 app.use("/admin", adminRoutes);

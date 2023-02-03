@@ -26,7 +26,9 @@ const BorrowDetail = () => {
       if (!ok) {
         setMessage(res.msg);
       } else {
-        setBorrowData(res.data);
+        const borrowProductArray = [];
+        res.data.map((prod) => borrowProductArray.push(prod.productId));
+        setBorrowData(borrowProductArray);
       }
       setMarker(false);
       setSecMarker(true);

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const ShopPage = () => {
   const searchData = useSelector((state) => state.searchInputReducer);
-
   const [searchProduct, setSearchProduct] = useState(searchData);
 
   useEffect(() => {

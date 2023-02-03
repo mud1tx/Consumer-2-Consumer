@@ -15,7 +15,7 @@ const Cart = () => {
     const cartApiResponse = await fetch("http://localhost:5000/cart/products", {
       method: "POST",
       body: JSON.stringify({
-        userData: userLoggedIn.user._id,
+        userData: userLoggedIn?.user._id,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const Cart = () => {
     const cartData = await cartApiResponse.json();
     const { ok } = cartData;
     let totalPrice = 0;
-    for (let i = 0; i < cartData.products.length; i++) {
+    for (let i = 0; i < cartData?.products?.length; i++) {
       totalPrice = totalPrice + cartData.products[i].productId.price;
     }
     setPrice(totalPrice);
@@ -34,7 +34,6 @@ const Cart = () => {
     } else {
       setCartProducts(cartData.products);
     }
-    console.log("cartData", cartData);
   };
 
   useEffect(() => {
@@ -97,11 +96,6 @@ const Cart = () => {
                       key={product.productId._id}
                       className="md:flex items-center mt-18 py-8    border-t  border-backgound_white "
                     >
-                      {/* <div className="w-1/4"> */}
-                      {/* <img
-                          src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller3.png"
-                          className="w-full h-full object-center object-cover"
-                        /> */}
                       <div className=" h-auto  max-w-xs ">
                         <Carousel
                           infiniteLoop
@@ -123,7 +117,6 @@ const Cart = () => {
                             </div>
                           ))}
                         </Carousel>
-                        {/* </div> */}
                       </div>
                       <div className="md:pl-3 md:w-3/4">
                         <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">
@@ -137,9 +130,6 @@ const Cart = () => {
                         <p className="text-xs leading-3 text-text_color pt-2 py-4">
                           Product Name: {product.productId.title}
                         </p>
-                        {/* <p className="text-xs leading-3 text-text_color py-4">
-                          About Prosuct is Here : Little Bit
-                        </p> */}
                         <p className="w-96 text-xs leading-3 text-text_color">
                           Product Details h: {product.productId.description}
                         </p>
@@ -196,7 +186,6 @@ const Cart = () => {
                         </p>
                       </div>
                       <button
-                        //  onClick={() => setShow(!show)}
                         className="text-base leading-none w-full py-5 hover:bg-primary border border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-primary  hover:text-text_color duration-700 "
                       >
                         Checkout
