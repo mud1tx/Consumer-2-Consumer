@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 const app = express();
-console.log("sdsdsvsdsdv", process.env.MONGODB_URL);
+console.log("sdsdsvsdsdv", process.env.MONGODB_URL, process.env.PORT);
 
 const store = new MongoDBStore({
   uri: "mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop",
