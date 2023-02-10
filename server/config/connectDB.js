@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const colors = require("colors");
 
 const connectDB = async () => {
+  mongoose.set("strictQuery", true);
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
