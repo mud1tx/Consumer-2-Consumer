@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
 import classes from "./Login.module.css";
+import { BASE_URL } from "../../BASE_URL";
 
 const ResetPassword = () => {
   const [userLoginData, setUserLoginData] = useState({
@@ -20,18 +21,15 @@ const ResetPassword = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const resetPasswordApiResponse = await fetch(
-        "http://localhost:5000/reset",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: userLoginData.email,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const resetPasswordApiResponse = await fetch(`${BASE_URL}/reset`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: userLoginData.email,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const resetData = await resetPasswordApiResponse.json();
       const { ok } = resetData;

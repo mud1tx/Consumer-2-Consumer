@@ -10,7 +10,8 @@ import ScrollableChat from "./ScrollableChat";
 import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import { ChatState } from "../../context/ChatProvider";
-const ENDPOINT = "ws://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+import { BASE_URL } from "../../BASE_URL";
+const ENDPOINT = "https://consumer-2-consumer.onrender.com"; // "ws://localhost:5000"; -> After deployment
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -32,7 +33,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     try {
       setLoading(true);
       const fetchMessageApi = await fetch(
-        `/admin/message/${selectedChat._id}`,
+        `${BASE_URL}/admin/message/${selectedChat._id}`,
         {
           method: "GET",
           headers: {
@@ -65,7 +66,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       socket.emit("stop typing", selectedChat._id);
       try {
         setNewMessage("");
-        const sendMessageApi = await fetch("/admin/message", {
+        const sendMessageApi = await fetch(`${BASE_URL}/admin/message`, {
           method: "POST",
           body: JSON.stringify({
             currentUserId: userLoggedIn?.user?._id,

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Cards from "../../layouts/Cards";
 import SkeletonComp from "../../components/SkeletonComp";
+import { BASE_URL } from "../../BASE_URL";
+
 const AdminProduct = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
   const [adminProd, setAdminProd] = useState([]);
@@ -9,18 +11,16 @@ const AdminProduct = () => {
   const [secMarker, setSecMarker] = useState(false);
 
   const getAdminProducts = async () => {
-    const adminProductApiResponse = await fetch(
-      "http://localhost:5000/admin/products",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          userId: userLoggedIn.user._id,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const adminProductApiResponse = await fetch(`${BASE_URL}/admin/products`, {
+      method: "POST",
+      body: JSON.stringify({
+        
+        userId: userLoggedIn.user._id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const adminData = await adminProductApiResponse.json();
     const { ok } = adminData;
     if (!ok) {

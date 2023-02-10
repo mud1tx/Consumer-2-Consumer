@@ -11,10 +11,11 @@ const Product = require("./models/products");
 const connectDB = require("./config/connectDB");
 const stripe = require("stripe")(process.env.STRIPE_KEY_SERVER);
 const PORT = process.env.PORT || 5000;
+const BASE_URL = process.env.BASE_URL;
 
 connectDB();
 const app = express();
-console.log("sdsdsvsdsdv", process.env.MONGODB_URL, process.env.PORT);
+console.log("sdsdsvsdsdv", BASE_URL);
 
 const store = new MongoDBStore({
   uri: "mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop",
@@ -22,7 +23,7 @@ const store = new MongoDBStore({
 });
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://rainbow-empanada-33b884.netlify.app"],
     method: ["GET", "POST"],
     credentials: true,
   })

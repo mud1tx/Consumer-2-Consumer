@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Cards from "../../layouts/Cards";
 import { useSelector } from "react-redux";
 import SkeletonComp from "../../components/SkeletonComp";
+import { BASE_URL } from "../../BASE_URL";
 
 const Shop = () => {
   const searchData = useSelector((state) => state.searchInputReducer);
@@ -17,7 +18,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchAllProducts = async (userLoggedIn) => {
       try {
-        const shopDataApi = await fetch("http://localhost:5000/", {
+        const shopDataApi = await fetch(`${BASE_URL}/`, {
           method: "POST",
           body: JSON.stringify({
             userData: userLoggedIn?.user?._id,
@@ -84,7 +85,7 @@ const Shop = () => {
             >
               <div className=" max-w-6xl">
                 <svg
-                 className="sm:w-200"
+                  className="sm:w-200"
                   xmlns="http://www.w3.org/2000/svg"
                   width="500"
                   height="400"

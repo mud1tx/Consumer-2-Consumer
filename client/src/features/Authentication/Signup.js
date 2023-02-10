@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../BASE_URL";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const SignUp = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const loginApiResponse = await fetch("http://localhost:5000/signup", {
+      const loginApiResponse = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
         body: JSON.stringify({
           first_name: userData.first_name,

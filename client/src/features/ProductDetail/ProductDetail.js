@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import Navbar from "../../components/Navbar";
 import "react-toastify/dist/ReactToastify.css";
 import StripeCheckout from "react-stripe-checkout";
+import { BASE_URL } from "../../BASE_URL";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const ProductDetail = () => {
   // });
 
   const getProductDetailHandler = async (prodId) => {
-    const res = await fetch(`http://localhost:5000/${prodId}`);
+    const res = await fetch(`${BASE_URL}/${prodId}`);
     const productData = await res.json();
     const { ok } = productData;
     console.log("data ayaa hai yaar", productData);
@@ -40,7 +41,7 @@ const ProductDetail = () => {
 
   const handleFormSubmit = async () => {
     try {
-      const ordersApi = await fetch("http://localhost:5000/admin/orders", {
+      const ordersApi = await fetch(`${BASE_URL}/admin/orders`, {
         method: "POST",
         body: JSON.stringify({
           userId: userLoggedIn.user._id,

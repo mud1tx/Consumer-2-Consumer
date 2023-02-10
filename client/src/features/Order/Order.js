@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { BASE_URL } from "../../BASE_URL";
 
 const Order = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -10,7 +11,7 @@ const Order = () => {
 
   const fetchOrderHandler = async () => {
     try {
-      const orderApi = await fetch("http://localhost:5000/admin/orders", {
+      const orderApi = await fetch(`${BASE_URL}/admin/orders`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

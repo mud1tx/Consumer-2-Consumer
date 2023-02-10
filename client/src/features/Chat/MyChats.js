@@ -4,6 +4,7 @@ import { useToast } from "@chakra-ui/toast";
 import { getSender } from "../../config/ChatLogics";
 import { useSelector } from "react-redux";
 import { ChatState } from "../../context/ChatProvider";
+import { BASE_URL } from "../../BASE_URL";
 
 const MyChats = ({ fetchAgain }) => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -13,7 +14,7 @@ const MyChats = ({ fetchAgain }) => {
 
   const fetchChats = async () => {
     try {
-      const fetchChatsApi = await fetch("/admin/chats", {
+      const fetchChatsApi = await fetch(`${BASE_URL}/admin/chats`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
