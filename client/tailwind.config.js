@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  plugins: [
-    require('tailwind-clip-path'),
-  ],
+  plugins: [require("tailwind-clip-path")],
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-      
         primary: "#5ec576",
         secondry: "#ff585f",
         tertiary: "#4bbb7d",
@@ -20,15 +17,22 @@ module.exports = {
         backgound_white: "#f3f3f3",
         text_color: "#444",
         main_white: "#FFFFFF",
-        facebook:"#3b5998",
-        instagram:"#bc2a8d",
-        linkedin:"#0077b5",
-        github:"#333",
+        facebook: "#3b5998",
+        instagram: "#bc2a8d",
+        linkedin: "#0077b5",
+        github: "#333",
       },
       //  backgroundImage: {
       //   'hero-pattern': "url('./src/assets/BackgroundSvg.svg')",
       // }
     },
   },
+  purge: [
+    "./pages/**/*.vue",
+    "./components/**/*.vue",
+    "./plugins/**/*.vue",
+    "./static/**/*.vue",
+    "./store/**/*.vue",
+  ], 
   plugins: [],
 };

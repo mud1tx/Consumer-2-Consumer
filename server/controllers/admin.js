@@ -4,9 +4,7 @@ const Order = require("../models/order");
 const User = require("../models/user");
 const Message = require("../models/message");
 const Chat = require("../models/chat");
-const stripe = require("stripe")(
-  "sk_test_51LO0nNSBfCKAZDAkBeBjpCVA6hhotgxyEnPbKPTBytitrHihIop2OisbrkDeJUm6WNqXIokkhkzGvk4Oi9uQnzLt001gpYggAm"
-);
+const stripe = require("stripe")(process.env.STRIPE_KEY_SERVER);
 const uuid = require("uuid");
 
 // const idempotencyKey = uuid();
