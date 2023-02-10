@@ -26,13 +26,6 @@ module.exports = {
       //   'hero-pattern': "url('./src/assets/BackgroundSvg.svg')",
       // }
     },
-  },
-  purge: [
-    "./pages/**/*.vue",
-    "./components/**/*.vue",
-    "./plugins/**/*.vue",
-    "./static/**/*.vue",
-    "./store/**/*.vue",
-  ], 
+  }, 
   plugins: [],
 };
