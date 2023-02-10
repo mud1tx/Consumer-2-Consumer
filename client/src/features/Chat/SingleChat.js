@@ -10,7 +10,7 @@ import ScrollableChat from "./ScrollableChat";
 import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import { ChatState } from "../../context/ChatProvider";
-const ENDPOINT = "ws://localhost:8900"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = "ws://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
