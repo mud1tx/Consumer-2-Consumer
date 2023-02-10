@@ -17,6 +17,7 @@ exports.getProducts = async (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
+  console.log("SDfsljmnfjksndkfjs",prodId)
   Product.findById(prodId)
     .then((product) => {
       res.json({ ok: true, product: product });
