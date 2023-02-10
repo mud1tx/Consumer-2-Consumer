@@ -23,7 +23,7 @@ const store = new MongoDBStore({
 });
 app.use(
   cors({
-    origin: ["https://rainbow-empanada-33b884.netlify.app"],
+    origin: "https://rainbow-empanada-33b884.netlify.app",
     method: ["GET", "POST"],
     credentials: true,
   })
