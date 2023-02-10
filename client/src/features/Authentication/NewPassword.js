@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../BASE_URL";
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const NewPassword = () => {
   const { token } = useParams();
 
   const userValid = async () => {
-    const res = await fetch(`http://localhost:5000/new-password/${token}`, {
+    const res = await fetch(`${BASE_URL}/new-password/${token}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -40,20 +41,17 @@ const NewPassword = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const resetPasswordApiResponse = await fetch(
-        "http://localhost:5000/new-password",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            newPassword: userLoginData,
-            userId: userData.userId,
-            passwordToken: userData.passwordToken,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const resetPasswordApiResponse = await fetch(`${BASE_URL}/new-password`, {
+        method: "POST",
+        body: JSON.stringify({
+          newPassword: userLoginData,
+          userId: userData.userId,
+          passwordToken: userData.passwordToken,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const resetData = await resetPasswordApiResponse.json();
       console.log("resetdata", resetData);

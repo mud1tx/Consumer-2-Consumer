@@ -8,6 +8,7 @@ import { AddToCart } from "../redux/action/addCart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ChatState } from "../context/ChatProvider";
+import { BASE_URL } from "../BASE_URL";
 
 const Cards = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Cards = (props) => {
   const { chats, setChats } = ChatState();
 
   const getProductToCartHandler = async (productId) => {
-    const res = await fetch("http://localhost:5000/cart", {
+    const res = await fetch(`${BASE_URL}/cart`, {
       method: "POST",
       body: JSON.stringify({
         prodId: productId,
@@ -49,7 +50,7 @@ const Cards = (props) => {
   const chatIdHandler = async (e) => {
     e.preventDefault();
     try {
-      const newConvApi = await fetch("http://localhost:5000/admin/chats", {
+      const newConvApi = await fetch(`${BASE_URL}/admin/chats`, {
         method: "POST",
         body: JSON.stringify({
           senderId: e.target[0].value,
@@ -112,7 +113,9 @@ const Cards = (props) => {
             </div>
             <div className="Content   rounded-sm mt-10  pt-6 pb-2">
               <h1 className="text-text_color  max-w-xs mt-2 mb-2 truncate">
-                <span className="text-md  overflow-hidden font-bold ">Title: </span>
+                <span className="text-md  overflow-hidden font-bold ">
+                  Title:{" "}
+                </span>
                 {product.title}
               </h1>
               <p className="text-text_color max-w-xs">

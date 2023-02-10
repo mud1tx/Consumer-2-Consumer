@@ -16,6 +16,7 @@ exports.postAddProduct = async (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const userId = req.body.userId;
+  console.log(req);
   if (!images) {
     const error = new Error("Please choose files");
     error.httpStatusCode = 400;

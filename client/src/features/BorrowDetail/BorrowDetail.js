@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Cards from "../../layouts/Cards";
 import SkeletonComp from "../../components/SkeletonComp";
+import { BASE_URL } from "../../BASE_URL";
 
 const BorrowDetail = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -12,7 +13,7 @@ const BorrowDetail = () => {
 
   useEffect(() => {
     const borrowItemHandler = async () => {
-      const borrowItemApi = await fetch("http://localhost:5000/admin/borrow", {
+      const borrowItemApi = await fetch(`${BASE_URL}/admin/borrow`, {
         method: "POST",
         body: JSON.stringify({
           userId: userLoggedIn?.user?._id,

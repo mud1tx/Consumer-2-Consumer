@@ -6,6 +6,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
 import { GiEmptyWoodBucket } from "react-icons/gi";
 import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../BASE_URL";
 
 const Cart = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -13,7 +14,7 @@ const Cart = () => {
   const [price, setPrice] = useState(0);
 
   const getCartData = async () => {
-    const cartApiResponse = await fetch("http://localhost:5000/cart/products", {
+    const cartApiResponse = await fetch(`${BASE_URL}/cart/products`, {
       method: "POST",
       body: JSON.stringify({
         userData: userLoggedIn?.user._id,
@@ -42,19 +43,16 @@ const Cart = () => {
   }, []);
 
   const removeCartProduct = async (prodId) => {
-    const removeProductApi = await fetch(
-      "http://localhost:5000/cart-delete-item",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          productId: prodId,
-          userId: userLoggedIn.user._id,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const removeProductApi = await fetch(`${BASE_URL}/cart-delete-item`, {
+      method: "POST",
+      body: JSON.stringify({
+        productId: prodId,
+        userId: userLoggedIn.user._id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const res = await removeProductApi.json();
     let totalPrice = 0;
     for (let i = 0; i < res.products.length; i++) {
@@ -190,9 +188,7 @@ const Cart = () => {
                           {price + cartProducts.length * 10} INR
                         </p>
                       </div>
-                      <button
-                        className="text-base leading-none w-full py-5 hover:bg-primary border border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-primary  hover:text-text_color duration-700 "
-                      >
+                      <button className="text-base leading-none w-full py-5 hover:bg-primary border border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-primary  hover:text-text_color duration-700 ">
                         Checkout
                       </button>
                     </div>
@@ -375,12 +371,7 @@ const Cart = () => {
                 points="362.06 702.184 125.274 702.184 125.274 700.481 360.356 700.481 360.356 617.861 145.18 617.861 134.727 596.084 136.263 595.347 146.252 616.157 362.06 616.157 362.06 702.184"
                 fill="#2f2e41"
               />
-              <circle
-                cx="156.78851"
-                cy="726.03301"
-                r="17.88673"
-                fill="#444"
-              />
+              <circle cx="156.78851" cy="726.03301" r="17.88673" fill="#444" />
               <circle
                 cx="333.10053"
                 cy="726.03301"
@@ -617,11 +608,11 @@ const Cart = () => {
               />
             </svg>
           </div>
-          <div  className="flex items-center">
-          <h1 className="text-4xl  text-primary font-bold   ">
-            Your Cart is Empty  
-          </h1>
-          <GiEmptyWoodBucket className="text-4xl text-primary_darker"/>
+          <div className="flex items-center">
+            <h1 className="text-4xl  text-primary font-bold   ">
+              Your Cart is Empty
+            </h1>
+            <GiEmptyWoodBucket className="text-4xl text-primary_darker" />
           </div>
         </div>
       )}

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { User } from "../../redux/action/authUser";
 import { ToastContainer, toast } from "react-toastify";
 import { AiOutlineUserAdd } from "react-icons/ai";
-
+import { BASE_URL } from "../../BASE_URL";
 import "react-toastify/dist/ReactToastify.css";
 import classes from "./Login.module.css";
 
@@ -27,7 +27,7 @@ const Login = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const loginApiResponse = await fetch("http://localhost:5000/login", {
+      const loginApiResponse = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         body: JSON.stringify({
           email: userLoginData.email,
@@ -54,19 +54,20 @@ const Login = () => {
       console.log(err);
     }
   };
-  // style={{backgroundImage:`url(${svg})`,backgroundRepeat: 'no-repeat' ,objectFit: 'fill' }}
+
   return (
     <>
-      <div     className=" bg-backgound_white  min-h-screen flex items-center justify-center ">
+      <div className=" bg-backgound_white  min-h-screen flex items-center justify-center ">
         <div className="   flex bg-main_white rounded shadow-lg max-w-4xl px-2 py-4 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
             <div>
-            <h2 className="font-bold text-4xl  px-8 text-primary text-shadow-lg ">Log In</h2>
-            <p className=" mt-4 flex items-center gap-1  px-8 text-sm text-primary hover:text-text_color">
-              <NavLink to="/signup" >
-                New User</NavLink>
-                <AiOutlineUserAdd className=""/>
-            </p>
+              <h2 className="font-bold text-4xl  px-8 text-primary text-shadow-lg ">
+                Log In
+              </h2>
+              <p className=" mt-4 flex items-center gap-1  px-8 text-sm text-primary hover:text-text_color">
+                <NavLink to="/signup">New User</NavLink>
+                <AiOutlineUserAdd className="" />
+              </p>
             </div>
             <form
               className="max-w-[400px]  w-full  bg-gary-900 p-8 px-8 rounded-lg"
@@ -113,10 +114,9 @@ const Login = () => {
               </button>
             </form>
             <div className="px-8 flex items-center justify-between">
-         
-            <p className="text-text_color">
-              <NavLink to="/reset">Reset Password</NavLink>
-            </p>
+              <p className="text-text_color">
+                <NavLink to="/reset">Reset Password</NavLink>
+              </p>
             </div>
           </div>
           <div className="md:block hidden w-1/2">

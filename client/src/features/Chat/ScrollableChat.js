@@ -14,7 +14,7 @@ const ScrollableChat = ({ messages }) => {
     <div>
       {messages &&
         messages.map((m, i) => (
-          <div style={{ display: "flex" }} key={m._id}>
+          <div style={{ display: "flex" }} key={Math.random() * 100000000000}>
             <span
               style={{
                 backgroundColor: `${

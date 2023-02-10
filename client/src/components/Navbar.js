@@ -16,6 +16,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../redux/action/authUser";
 import { SearchBar } from "../redux/action/searchBar";
+import { BASE_URL } from "../BASE_URL";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Navbar = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const logoutApiResponse = await fetch("http://localhost:5000/logout", {
+      const logoutApiResponse = await fetch(`${BASE_URL}/logout`, {
         method: "POST",
       });
 
