@@ -49,7 +49,11 @@ const Lend = () => {
           </div>
         )}
         {!marker && secMarker && lendData?.length > 0 ? (
-          <Cards allProductsData={lendData} />
+          <Cards
+            allProductsData={lendData}
+            showChatsCartBtn={true}
+            showDeleteBtn={false}
+          />
         ) : (
           [secMarker && <h1 key="1">{message}</h1>]
         )}

@@ -48,7 +48,11 @@ const BorrowDetail = () => {
         </div>
       )}
       {!marker && secMarker && borrowData?.length > 0 ? (
-        <Cards allProductsData={borrowData} />
+        <Cards
+          allProductsData={borrowData}
+          showChatsCartBtn={true}
+          showDeleteBtn={false}
+        />
       ) : (
         [secMarker && <h1 key="1">{message}</h1>]
       )}

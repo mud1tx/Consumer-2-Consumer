@@ -75,6 +75,8 @@ const Shop = () => {
           allProductsData={
             searchProduct.length > 0 ? searchProduct : allProductsData
           }
+          showChatsCartBtn={true}
+          showDeleteBtn={false}
         />
       ) : (
         [
