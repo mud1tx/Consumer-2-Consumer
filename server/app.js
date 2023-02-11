@@ -15,12 +15,7 @@ const BASE_URL = process.env.BASE_URL;
 
 connectDB();
 const app = express();
-console.log("sdsdsvsdsdv", BASE_URL);
 
-const store = new MongoDBStore({
-  uri: "mongodb+srv://Mudit:firstbest@cluster0.e7bmssl.mongodb.net/shop",
-  collection: "sessions",
-});
 app.use(
   cors({
     origin: "https://customer-2-customer.netlify.app",
@@ -33,17 +28,9 @@ const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
-app.use(bodyParser.json());
-app.use(
-  session({
-    secret: "my secret",
-    resave: false,
-    saveUninitialized: false,
-    store: store,
-  })
-);
+// app.use(bodyParser.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json());
 
 User.find()
   .then((user) => {
