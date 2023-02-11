@@ -20,6 +20,22 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: String,
+      // required: true,
+    },
+    pin_code: {
+      type: Number,
+      // required: true,
+    },
+    city: {
+      type: String,
+      // required: true,
+    },
+    country: {
+      type: String,
+      // required: true,
+    },
     resetToken: String,
     resetTokenExpiration: Date,
     cart: {
