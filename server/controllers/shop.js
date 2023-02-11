@@ -17,14 +17,53 @@ exports.getProducts = async (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findById(prodId)
+  Product.findOne({ _id: prodId })
     .then((product) => {
-      console.log("SDfsljmnfjksndkfjs", prodId);
-      res.json({ ok: true, product: product });
+      product
+        .populate("userId")
+        .then((product) => {
+          return res.json({
+            ok: true,
+            product: product,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.json({ ok: false, msg: err });
+        });
     })
     .catch((err) => {
       console.log(err);
       res.json({ ok: false, message: "Some error occur" });
+    });
+};
+
+exports.postDeleteProduct = (req, res, next) => {
+  const prodId = req.body.prodId;
+  const userId = req.body.userId;
+  console.log(prodId);
+  Product.deleteOne({
+    _id: prodId,
+    borrowed: false,
+    userId: userId,
+  })
+    .then((response) => {
+      console.log(response);
+      if (response.deletedCount !== 1) {
+        return res.json({
+          ok: false,
+          message: "Product can not be remove as someone borrowed it",
+        });
+      } else {
+        return res.json({
+          ok: true,
+          message: "Product remove sucessfully",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ ok: false, message: "Some Error Occured!!" });
     });
 };
 

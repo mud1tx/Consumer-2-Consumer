@@ -7,8 +7,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { GiEmptyWoodBucket } from "react-icons/gi";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../../BASE_URL";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
   const [cartProducts, setCartProducts] = useState([]);
   const [price, setPrice] = useState(0);
@@ -146,6 +148,24 @@ const Cart = () => {
                                 }}
                               />
                             </p>
+                          </div>
+                          <div>
+                            <button
+                              onClick={() => {
+                                navigate(`/${product.productId._id}`);
+                              }}
+                            >
+                              Details
+                            </button>
+                          </div>
+                          <div>
+                            <button
+                              onClick={() => {
+                                navigate("/admin/chats");
+                              }}
+                            >
+                              chat
+                            </button>
                           </div>
                           <p className="text-xl font-black leading-none text-gray-800">
                             {product.productId.price} INR

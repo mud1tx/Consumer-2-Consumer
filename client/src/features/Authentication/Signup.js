@@ -14,6 +14,10 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    address: "",
+    city: "",
+    pin_code: "",
+    country: "",
   });
   const [error, setError] = useState("");
   const [validate, setValidate] = useState([]);
@@ -26,6 +30,7 @@ const SignUp = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    console.log(userData);
     try {
       const loginApiResponse = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
@@ -35,6 +40,10 @@ const SignUp = () => {
           email: userData.email,
           password: userData.password,
           confirmPassword: userData.confirmPassword,
+          address: userData.address,
+          city: userData.city,
+          pin_code: userData.pin_code,
+          country: userData.country,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -155,6 +164,54 @@ const SignUp = () => {
                   onChange={handleInputs}
                 />
               </div>
+              <div className="flex  flex-col  py-2">
+                <label htmlFor="address" className="text-sm text-text_color">
+                  Address
+                </label>
+                <input
+                  className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
+                  type="text"
+                  name="address"
+                  value={userData.address}
+                  onChange={handleInputs}
+                />
+              </div>
+              <div className="flex  flex-col  py-2">
+                <label htmlFor="pin_code" className="text-sm text-text_color">
+                  Pin Code
+                </label>
+                <input
+                  className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
+                  type="number"
+                  name="pin_code"
+                  value={userData.pin_code}
+                  onChange={handleInputs}
+                />
+              </div>
+              <div className="flex  flex-col  py-2">
+                <label htmlFor="city" className="text-sm text-text_color">
+                  City
+                </label>
+                <input
+                  className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
+                  type="text"
+                  name="city"
+                  value={userData.city}
+                  onChange={handleInputs}
+                />
+              </div>
+              <div className="flex  flex-col  py-2">
+                <label htmlFor="country" className="text-sm text-text_color">
+                  Country
+                </label>
+                <input
+                  className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
+                  type="text"
+                  name="country"
+                  value={userData.country}
+                  onChange={handleInputs}
+                />
+              </div>
               <button
                 className="w-full my-5 py-2 transition    bg-gradient-to-r from-tertiary to-primary text-main_white shadow-lg shadow-text-teal-400 hover:shadow-teal-500/20   font-semibold rounded-sm"
                 type="submit"
@@ -166,7 +223,7 @@ const SignUp = () => {
               <NavLink to="/login">Already have Account ?</NavLink>
             </p>
           </div>
-          <div class="md:block hidden w-1/2">
+          <div className="md:block hidden w-1/2">
             <img
               className=" rounded "
               alt="Logo"

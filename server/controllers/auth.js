@@ -64,6 +64,20 @@ exports.postSignup = (req, res, next) => {
   const lastname = req.body.last_name;
   const email = req.body.email;
   const password = req.body.password;
+  const address = req.body.address;
+  const city = req.body.city;
+  const pin_code = req.body.pin_code;
+  const country = req.body.country;
+  console.log(
+    firstname,
+    lastname,
+    email,
+    password,
+    address,
+    pin_code,
+    city,
+    country
+  );
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.json({
@@ -81,6 +95,10 @@ exports.postSignup = (req, res, next) => {
         email: email,
         password: hashedPassword,
         cart: { items: [] },
+        address: address,
+        pin_code: pin_code,
+        city: city,
+        country: country,
       });
       return user.save();
     })
@@ -145,7 +163,7 @@ exports.postReset = (req, res, next) => {
             from: "c2c16@outlook.com",
             subject: "Password Reset",
             html: `<p>You requested a password reset</p>
-            <p>Click this <a href="http://localhost:3000/new-password/${token}">link</a> to set a new password.</p>`,
+              <p>Click this <a href="http://localhost:3000/new-password/${token}">link</a> to set a new password.</p>`,
           },
           function (err, res) {
             if (err) {

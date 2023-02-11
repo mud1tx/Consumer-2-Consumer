@@ -5,7 +5,7 @@ import { BsCartCheck } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AddToCart } from "../redux/action/addCart";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ChatState } from "../context/ChatProvider";
 import { BASE_URL } from "../BASE_URL";
@@ -15,6 +15,8 @@ const Cards = (props) => {
   const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
   const allProductsData = props.allProductsData;
+  const showChatsCartBtn = props.showChatsCartBtn;
+  const showDeleteBtn = props.showDeleteBtn;
   // const [product, setProduct] = useState({
   //   name: "React from fb",
   //   price: 10,
@@ -71,6 +73,32 @@ const Cards = (props) => {
         if (!chats.find((c) => c._id === res.data._id)) {
           setChats([res, ...chats]);
         }
+      }
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+
+  const onDeleteHandler = async (data) => {
+    try {
+      const deleteProductApi = await fetch(`${BASE_URL}/delete`, {
+        method: "POST",
+        body: JSON.stringify({
+          userId: userLoggedIn?.user?._id,
+          prodId: data,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const res = await deleteProductApi.json();
+      console.log("conversation hu yaar card me", res);
+      const { ok } = res;
+      if (ok) {
+        toast.success(`${res.message}`);
+        navigate("/");
+      } else {
+        toast.error(`${res.message}`);
       }
     } catch (err) {
       console.log("error", err);
@@ -136,7 +164,18 @@ const Cards = (props) => {
                   >
                     Details
                   </button>
-                  {userLoggedIn?.isLoggedIn && (
+                  {showDeleteBtn && (
+                    <button
+                      className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
+                      onClick={() => {
+                        onDeleteHandler(product._id);
+                        // navigate(`/${product._id}`);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  )}
+                  {userLoggedIn?.isLoggedIn && showChatsCartBtn && (
                     <button>
                       <BsCartCheck
                         className="text-main_color-1000 text-2xl"
@@ -149,23 +188,24 @@ const Cards = (props) => {
                 </div>
               </div>
             </div>
-            <form onSubmit={chatIdHandler}>
-              <input
-                type="hidden"
-                name="senderId"
-                value={userLoggedIn?.user?._id || ""}
-              />
-              <input
-                type="hidden"
-                name="receiverId"
-                value={product.userId || ""}
-              />
-              <button type="submit">chat</button>
-            </form>
+            {showChatsCartBtn && (
+              <form onSubmit={chatIdHandler}>
+                <input
+                  type="hidden"
+                  name="senderId"
+                  value={userLoggedIn?.user?._id || ""}
+                />
+                <input
+                  type="hidden"
+                  name="receiverId"
+                  value={product.userId || ""}
+                />
+                <button type="submit">chat</button>
+              </form>
+            )}
           </div>
         ))}
       </div>
-      <ToastContainer />
     </>
   );
 };

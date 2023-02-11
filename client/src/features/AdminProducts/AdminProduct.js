@@ -14,7 +14,6 @@ const AdminProduct = () => {
     const adminProductApiResponse = await fetch(`${BASE_URL}/admin/products`, {
       method: "POST",
       body: JSON.stringify({
-        
         userId: userLoggedIn.user._id,
       }),
       headers: {
@@ -46,7 +45,11 @@ const AdminProduct = () => {
           </div>
         )}
         {!marker && secMarker && adminProd?.length > 0 ? (
-          <Cards allProductsData={adminProd} />
+          <Cards
+            allProductsData={adminProd}
+            showChatsCartBtn={false}
+            showDeleteBtn={true}
+          />
         ) : (
           [secMarker && <h1 key="1">You didn't add any product</h1>]
         )}

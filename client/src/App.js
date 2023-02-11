@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer position="bottom-right" autoClose={3000} />
       <Routes>
         <Route path="/" element={<ShopPage />} />
         <Route element={<PrivateRoute />}>

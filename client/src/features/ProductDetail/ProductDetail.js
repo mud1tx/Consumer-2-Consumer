@@ -3,7 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import { useParams } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/Navbar";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,7 @@ const ProductDetail = () => {
   const { prodId } = useParams();
   const [prodDetail, setProdDetail] = useState(null);
   const [days, setDays] = useState("");
+  const [showBorrowBtn, setShowBorrowBtn] = useState(true);
   // const [product, setProduct] = useState({
   //   name: "React from fb",
   //   price: 10,
@@ -31,6 +32,9 @@ const ProductDetail = () => {
       const { message } = productData;
       toast.error(`${message}`);
     } else {
+      if (productData.product.userId == userLoggedIn.user._id) {
+        setShowBorrowBtn(false);
+      }
       setProdDetail(productData.product);
     }
   };
@@ -106,6 +110,34 @@ const ProductDetail = () => {
                 Category:{" "}
                 <span className="text-base">{prodDetail?.category}</span>
               </h1>
+              <p className=" font-normal text-base leading-6 text-text_color mt-8">
+                {prodDetail?.userId.first_name +
+                  " " +
+                  prodDetail?.userId.last_name}
+              </p>
+              <p className=" font-normal text-base leading-6 text-text_color mt-8">
+                {prodDetail?.userId.email}
+              </p>
+              {prodDetail?.userId.address && (
+                <p className=" font-normal text-base leading-6 text-text_color mt-8">
+                  {prodDetail?.userId.address}
+                </p>
+              )}
+              {prodDetail?.userId.pin_code && (
+                <p className=" font-normal text-base leading-6 text-text_color mt-8">
+                  {prodDetail?.userId.pin_code}
+                </p>
+              )}
+              {prodDetail?.userId.city && (
+                <p className=" font-normal text-base leading-6 text-text_color mt-8">
+                  {prodDetail?.userId.city}
+                </p>
+              )}
+              {prodDetail?.userId.country && (
+                <p className=" font-normal text-base leading-6 text-text_color mt-8">
+                  {prodDetail?.userId.country}
+                </p>
+              )}
               <p className=" font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 mt-6 ">
                 {prodDetail?.price} INR
               </p>
@@ -136,37 +168,38 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <div>
-        <label>Number of days you want to borrow(1 to 31)</label>
-        <input
-          type="number"
-          min="1"
-          max="31"
-          name="days"
-          value={days}
-          onChange={(e) => {
-            setDays(e.target.value);
-          }}
-        />
-        {days && (
-          <StripeCheckout
-            stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
-            token={makePayment}
-            name="PAYMENT"
-            image="https://picsum.photos/seed/picsum/200/300"
-            currency="INR"
-            amount={prodDetail.price * 100 * days}
-          >
-            <button
-              className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
-              type="submit"
+      {showBorrowBtn && (
+        <div>
+          <label>Number of days you want to borrow(1 to 31)</label>
+          <input
+            type="number"
+            min="1"
+            max="31"
+            name="days"
+            value={days}
+            onChange={(e) => {
+              setDays(e.target.value);
+            }}
+          />
+          {days && (
+            <StripeCheckout
+              stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
+              token={makePayment}
+              name="PAYMENT"
+              image="https://picsum.photos/seed/picsum/200/300"
+              currency="INR"
+              amount={prodDetail.price * 100 * days}
             >
-              Borrow
-            </button>
-          </StripeCheckout>
-        )}
-      </div>
-      <ToastContainer />
+              <button
+                className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
+                type="submit"
+              >
+                Borrow
+              </button>
+            </StripeCheckout>
+          )}
+        </div>
+      )}
     </>
   );
 };

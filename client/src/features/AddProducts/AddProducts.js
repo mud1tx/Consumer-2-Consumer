@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import classes from "./AddProducts.module.css";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../BASE_URL";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
+  const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
 
   const [user, setUser] = useState({
@@ -24,29 +27,46 @@ const AddProducts = () => {
     setUser({ ...user, [name]: value });
   };
 
-  // const postAddProduct = async (e) => {
-  //   e.preventDefault();
-  //   const adminPostProductApi = await fetch(`${BASE_URL}/admin/add-product`, {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       title: user.title,
-  //       category: user.category,
-  //       images: user.images,
-  //       price: user.price,
-  //       description: user.description,
-  //       userId: userLoggedIn?.user?._id,
-  //     }),
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   });
-  //   const addedProductRes = await adminPostProductApi.json();
-  //   console.log("sdjklfnsjdfnjdsnfsjknd",addedProductRes)
-  //   const { ok } = addedProductRes;
-  //   if (!ok) {
-  //   } else {
-  //   }
-  // };
+  const postAddProduct = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", user.title);
+    formData.append("category", user.category);
+    formData.append("price", user.price);
+    formData.append("description", user.description);
+    formData.append("userId", userLoggedIn?.user?._id);
+    // console.log("yuny",user.images[0])
+    for (let i = 0; i < user.images.length; i++) {
+      formData.append("images", user.images[i]);
+    }
+
+    // for (var key of formData.entries()) {
+    //   console.log("Sdfdssdfsd", key[0] + ", " + key[1]);
+    // }
+    // console.log("aaaaanananana", formData, e);
+
+    const adminPostProductApi = await fetch(`${BASE_URL}/admin/add-product`, {
+      method: "POST",
+      body: formData,
+    });
+    const addedProductRes = await adminPostProductApi.json();
+    console.log("sdjklfnsjdfnjdsnfsjknd", addedProductRes);
+    const { ok } = addedProductRes;
+    const { message } = addedProductRes;
+    if (ok) {
+      setUser({
+        title: "",
+        category: "",
+        price: "",
+        description: "",
+        images: {},
+      });
+      toast.success(`${message}`);
+      navigate("/");
+    } else {
+      toast.error(`${message}`);
+    }
+  };
 
   return (
     <>
@@ -54,10 +74,10 @@ const AddProducts = () => {
         <main className={classes.addProduct_form}>
           <form
             className={classes.product_form}
-            action="/admin/add-product"
-            encType="multipart/form-data"
-            method="POST"
-            // onSubmit={postAddProduct}
+            // action="/admin/add-product"
+            // encType="multipart/form-data"
+            // method="POST"
+            onSubmit={postAddProduct}
           >
             <div className={classes.form_control}>
               <label htmlFor="title">Title</label>
@@ -84,7 +104,8 @@ const AddProducts = () => {
                 type="file"
                 className={classes.image_input}
                 name="images"
-                id="formFile"
+                // id="formFile"
+                id="files"
                 multiple
                 onChange={handleInputs}
               />
