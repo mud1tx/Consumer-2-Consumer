@@ -19,6 +19,7 @@ const Order = () => {
         },
       });
       const res = await orderApi.json();
+      console.log("order aaya hai", res);
       const { ok } = res;
       if (!ok) {
         setMessage(res.msg);
@@ -105,6 +106,46 @@ const Order = () => {
                                 {product.productId.price} INR
                               </p>
                             </div>
+                            <div className="flex items-center justify-between pt-5 pr-6">
+                              <p className="text-xl font-black leading-none text-gray-800">
+                                {product.productId.userId.first_name +
+                                  " " +
+                                  product.productId.userId.first_name}
+                              </p>
+                            </div>
+                            <div className="flex items-center justify-between pt-5 pr-6">
+                              <p className="text-xl font-black leading-none text-gray-800">
+                                {product.productId.userId.email}
+                              </p>
+                            </div>
+                            {product.productId.userId.address && (
+                              <div className="flex items-center justify-between pt-5 pr-6">
+                                <p className="text-xl font-black leading-none text-gray-800">
+                                  {product.productId.userId.address}
+                                </p>
+                              </div>
+                            )}
+                            {product.productId.userId.pin_code && (
+                              <div className="flex items-center justify-between pt-5 pr-6">
+                                <p className="text-xl font-black leading-none text-gray-800">
+                                  {product.productId.userId.pin_code}
+                                </p>
+                              </div>
+                            )}
+                            {product.productId.userId.city && (
+                              <div className="flex items-center justify-between pt-5 pr-6">
+                                <p className="text-xl font-black leading-none text-gray-800">
+                                  {product.productId.userId.city}
+                                </p>
+                              </div>
+                            )}
+                            {product.productId.userId.country && (
+                              <div className="flex items-center justify-between pt-5 pr-6">
+                                <p className="text-xl font-black leading-none text-gray-800">
+                                  {product.productId.userId.country}
+                                </p>
+                              </div>
+                            )}
                             <p>
                               {product.expire > Date.now()
                                 ? `${Math.ceil(
