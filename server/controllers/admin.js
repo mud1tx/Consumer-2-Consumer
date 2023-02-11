@@ -16,7 +16,6 @@ exports.postAddProduct = async (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const userId = req.body.userId;
-  console.log(req);
   if (!images) {
     const error = new Error("Please choose files");
     error.httpStatusCode = 400;
@@ -50,10 +49,11 @@ exports.postAddProduct = async (req, res, next) => {
     .save()
     .then((result) => {
       console.log("Created Product");
-      res.redirect("/");
+      res.json({ ok: true, message: "Product Added Successfully🙂" });
     })
     .catch((err) => {
       console.log(err);
+      res.json({ ok: true, message: "Some Error Occured!!" });
     });
 };
 
@@ -190,7 +190,11 @@ exports.getOrderData = async (req, res, next) => {
   const currentUserId = req.headers.currentuserid;
   try {
     var isOrder = await Order.find({ userId: currentUserId })
-      .populate("products.productId")
+      .populate({
+        path: "products.productId",
+        model: "Product",
+        populate: { path: "userId", model: "User" },
+      })
       .populate("userId");
     if (isOrder) {
       res.json({ ok: true, data: isOrder });
@@ -198,6 +202,7 @@ exports.getOrderData = async (req, res, next) => {
       res.json({ ok: false, msg: "No Order Placed" });
     }
   } catch (err) {
+    console.log(err);
     res.json({ ok: false, msg: err });
   }
 };
