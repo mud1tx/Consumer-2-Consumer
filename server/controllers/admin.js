@@ -6,6 +6,10 @@ const Message = require("../models/message");
 const Chat = require("../models/chat");
 const stripe = require("stripe")(process.env.STRIPE_KEY_SERVER);
 const uuid = require("uuid");
+const mongoose = require("mongoose");
+const Image = mongoose.model("Image", {
+  data: Buffer,
+});
 
 // const idempotencyKey = uuid();
 
@@ -22,24 +26,27 @@ exports.postAddProduct = async (req, res, next) => {
     return next(error);
   }
   // convert images into base64 encoding
-  let imgArray = images.map((file) => {
-    let img = fs.readFileSync(file.path);
-    return (en = img.toString("base64"));
-  });
-  const imageArray = [];
-  const imageTypeArray = [];
-  const imageNameArray = [];
-  imgArray.map((src, index) => {
-    imageNameArray.push(images[index].originalname);
-    imageTypeArray.push(images[index].mimetype);
-    imageArray.push(src);
-  });
+  // let imgArray = images.map((file) => {
+  //   let img = fs.readFileSync(file.path);
+  //   return (en = img.toString("base64"));
+  // });
+  // const imageArray = [];
+  // const imageTypeArray = [];
+  // const imageNameArray = [];
+  // imgArray.map((src, index) => {
+  //   imageNameArray.push(images[index].originalname);
+  //   imageTypeArray.push(images[index].mimetype);
+  //   imageArray.push(src);
+  // });
+  const imagess = req.body.images.map((image) => new Image(image));
+  // console.log("lksmdmkl", imagess);
+  console.log("imagesdhfjknbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", imagess);
   const product = new Product({
     title: title,
     category: category,
-    imageName: imageNameArray,
-    imageType: imageTypeArray,
-    image: imageArray,
+    // imageName: imageNameArray,
+    // imageType: imageTypeArray,
+    image: imagess,
     price: price,
     description: description,
     userId: userId,
@@ -49,6 +56,7 @@ exports.postAddProduct = async (req, res, next) => {
     .save()
     .then((result) => {
       console.log("Created Product");
+      console.log("imagesdhfjknbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", result);
       res.json({ ok: true, message: "Product Added Successfully🙂" });
     })
     .catch((err) => {
@@ -60,6 +68,7 @@ exports.postAddProduct = async (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   Product.find({ userId: req.body.userId })
     .then((products) => {
+      console.log("ksadjnfkjsfnnkjdf", products);
       return res.json({ ok: true, userProducts: products });
     })
     .catch((err) => console.log(err));

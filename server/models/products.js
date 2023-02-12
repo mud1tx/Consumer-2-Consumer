@@ -12,16 +12,16 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    imageName: {
-      type: [String],
-      required: true,
-    },
-    imageType: {
-      type: [String],
-      required: true,
-    },
+    // imageName: {
+    //   type: [String],
+    //   required: true,
+    // },
+    // imageType: {
+    //   type: [String],
+    //   required: true,
+    // },
     image: {
-      type: [String],
+      type: Object,
       required: true,
     },
     price: {

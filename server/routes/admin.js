@@ -3,12 +3,16 @@ const express = require("express");
 const adminController = require("../controllers/admin");
 
 const store = require("../util/multer");
+const upload = require("../util/multer");
+const compress = require("../util/sharp");
 
 const router = express.Router();
 
 router.post(
   "/add-product",
-  store.array("images", 12),
+  // store.array("images", 12),
+  upload,
+  compress,
   adminController.postAddProduct
 );
 
