@@ -47,7 +47,7 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://customer-2-customer.netlify.app/orders`,
+    success_url: `https://customer-2-customer.netlify.app/admin/orders`,
     cancel_url: `https://customer-2-customer.netlify.app/`,
   });
 
