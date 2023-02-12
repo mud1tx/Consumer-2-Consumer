@@ -21,6 +21,7 @@ const AdminProduct = () => {
       },
     });
     const adminData = await adminProductApiResponse.json();
+    console.log("admin product", adminData);
     const { ok } = adminData;
     if (!ok) {
     } else {
