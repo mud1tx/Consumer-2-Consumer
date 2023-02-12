@@ -49,7 +49,6 @@ const ProductDetail = () => {
         method: "POST",
         body: JSON.stringify({
           userId: userLoggedIn.user._id,
-          prodData: prodDetail,
           days: days,
         }),
         headers: {
@@ -64,16 +63,23 @@ const ProductDetail = () => {
     }
   };
 
-  const makePayment = async (token) => {
+  const makePayment = async (productData) => {
+    const prodData = {
+      category: productData.category,
+      title: productData.title,
+      price: productData.price,
+      _id: productData._id,
+      description: productData.description,
+      userId: productData.userId._id,
+    };
     try {
       const makePaymentApi = await fetch(
-        "https://ry7v05l6on.sse.codesandbox.io/checkout",
+        `${BASE_URL}/payment/create-checkout-session`,
         {
-          mode: "no-cors",
           method: "POST",
           body: JSON.stringify({
-            token: token,
-            prodData: prodDetail,
+            userId: userLoggedIn.user._id,
+            prodData: prodData,
             days: days,
           }),
           headers: {
@@ -81,9 +87,11 @@ const ProductDetail = () => {
           },
         }
       );
-      console.log("payment hoga kya", makePaymentApi);
-      if (makePaymentApi.status === 0) {
-        handleFormSubmit();
+      const res = await makePaymentApi.json();
+      console.log("payment ki problem", res);
+      if (res.url) {
+        // handleFormSubmit();
+        window.location.href = res.url;
       } else {
         console.log("error occured");
       }
@@ -158,7 +166,7 @@ const ProductDetail = () => {
                   <div key={index}>
                     <img
                       className=""
-                      src={`data:${prodDetail?.imageType[index]};base64,${img}`}
+                      src={`data:image/jpeg;base64,${img.data}`}
                       alt={`${prodDetail?.category}`}
                     />
                   </div>
@@ -182,6 +190,16 @@ const ProductDetail = () => {
             }}
           />
           {days && (
+            <button
+              className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
+              onClick={() => {
+                makePayment(prodDetail);
+              }}
+            >
+              Borrow
+            </button>
+          )}
+          {/* {days && (
             <StripeCheckout
               stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
               token={makePayment}
@@ -197,7 +215,7 @@ const ProductDetail = () => {
                 Borrow
               </button>
             </StripeCheckout>
-          )}
+          )} */}
         </div>
       )}
     </>

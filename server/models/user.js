@@ -22,19 +22,19 @@ const userSchema = new Schema(
     },
     address: {
       type: String,
-      // required: true,
+      required: true,
     },
     pin_code: {
       type: Number,
-      // required: true,
+      required: true,
     },
     city: {
       type: String,
-      // required: true,
+      required: true,
     },
     country: {
       type: String,
-      // required: true,
+      required: true,
     },
     resetToken: String,
     resetTokenExpiration: Date,

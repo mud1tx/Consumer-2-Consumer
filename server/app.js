@@ -9,12 +9,17 @@ const cors = require("cors");
 const User = require("./models/user");
 const Product = require("./models/products");
 const connectDB = require("./config/connectDB");
-const stripe = require("stripe")(process.env.STRIPE_KEY_SERVER);
+const stripe = require("./routes/stripe");
+// const stripe = require("stripe")(process.env.STRIPE_KEY_SERVER);
 const PORT = process.env.PORT || 5000;
 const BASE_URL = process.env.BASE_URL;
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+const authRoutes = require("./routes/auth");
 
 connectDB();
 const app = express();
+app.use(express.json());
 
 app.use(
   cors({
@@ -24,13 +29,14 @@ app.use(
   })
 );
 
-const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
-const authRoutes = require("./routes/auth");
-
-// app.use(bodyParser.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.json());
+app.use(
+  express.json({
+    limit: "5mb",
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString();
+    },
+  })
+);
 
 User.find()
   .then((user) => {
@@ -85,6 +91,7 @@ User.find()
 app.use("/admin", adminRoutes);
 app.use(authRoutes);
 app.use(shopRoutes);
+app.use("/payment", stripe);
 
 // const __dirname1 = path.resolve();
 
@@ -111,7 +118,7 @@ const server = app.listen(
 //     useUnifiedTopology: true,
 //   })
 //   .then((result) => {
-//     app.listen(PORT);
+//     server;
 //     console.log(`listening at port ${PORT}`);
 //   })
 //   .catch((err) => {
