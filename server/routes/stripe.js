@@ -47,8 +47,8 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `${process.env.CLIENT_URL}/orders`,
-    cancel_url: `${process.env.CLIENT_URL}/`,
+    success_url: `https://customer-2-customer.netlify.app/orders`,
+    cancel_url: `https://customer-2-customer.netlify.app/`,
   });
 
   res.send({ url: session.url });
@@ -179,11 +179,7 @@ router.post(
       let event;
 
       try {
-        event = stripe.webhooks.constructEvent(
-          req.body,
-          sig,
-          endpointSecret
-        );
+        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
         console.log(`Webhook Verified.`);
       } catch (err) {
         console.log(`Webhook Error: ${errmessage}`);
