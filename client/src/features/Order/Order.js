@@ -78,7 +78,7 @@ const Order = () => {
                                 <div key={index}>
                                   <img
                                     className="h-40 lg md:h-36 w-full object-cover object-center"
-                                    src={`data:${product.productId.imageType[index]};base64,${img}`}
+                                    src={`data:image/jpeg;base64,${img.data}`}
                                     alt={`${product.productId.category}`}
                                   />
                                 </div>
