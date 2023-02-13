@@ -11,10 +11,10 @@ const compress = async (req, res, next) => {
       const image = await sharp(file.buffer)
         .resize({ width: 500, height: 500 })
         .toFormat("jpeg")
-        .jpeg({ quality: 60 })
+        .jpeg({ mozjpeg: true })
         .toBuffer();
 
-      req.body.images.push({data: image });
+      req.body.images.push({ data: image });
       console.log("stripe", req.body.images);
     })
   );
