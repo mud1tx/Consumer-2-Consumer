@@ -179,7 +179,11 @@ router.post(
       let event;
 
       try {
-        event = stripe.webhooks.constructEvent(req.rawBody, sig, endpointSecret);
+        event = stripe.webhooks.constructEvent(
+          req.rawBody,
+          sig,
+          endpointSecret
+        );
         console.log(`Webhook Verified.`);
       } catch (err) {
         console.log(`Webhook Error: ${errmessage}`);
@@ -206,7 +210,7 @@ router.post(
     }
 
     // Return a 200 res to acknowledge receipt of the event
-    res.send().end();
+    res.send();
   }
 );
 
