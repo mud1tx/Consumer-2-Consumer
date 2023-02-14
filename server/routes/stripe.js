@@ -47,8 +47,8 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `consumer-2-consumer.vercel.app/orders`,
-    cancel_url: `consumer-2-consumer.vercel.app/`,
+    success_url: `https://consumer-2-consumer.vercel.app/orders`,
+    cancel_url: `https://consumer-2-consumer.vercel.app/`,
   });
 
   res.send({ url: session.url });
