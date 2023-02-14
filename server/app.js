@@ -23,7 +23,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://consumer-2-consumer.vercel.app",
+    origin: "https://customer-2-customer.netlify.app",
     method: ["GET", "POST"],
     credentials: true,
   })
@@ -130,7 +130,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://consumer-2-consumer.vercel.app",
+    origin: "https://customer-2-customer.netlify.app",
   },
 });
 
