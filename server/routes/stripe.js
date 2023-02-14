@@ -47,8 +47,8 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://consumer-2-consumer.vercel.app/orders`,
-    cancel_url: `https://consumer-2-consumer.vercel.app/`,
+    success_url: `https://customer-2-customer.netlify.app/orders`,
+    cancel_url: `https://customer-2-customer.netlify.app/`,
   });
 
   res.send({ url: session.url });
@@ -172,15 +172,12 @@ router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
   (req, res) => {
-    console.log("hello1");
     const sig = req.headers["stripe-signature"];
     let data;
     let eventType;
     if (endpointSecret) {
       let event;
-      console.log("hello2");
       try {
-        console.log("hello3");
         event = stripe.webhooks.constructEvent(
           req.rawBody,
           sig,
@@ -194,11 +191,14 @@ router.post(
       }
       data = event.data.object;
       eventType = event.type;
+      console.log("if if if data", data);
+      console.log("if if if eventType", eventType);
     } else {
       data = req.body.data.object;
       eventType = req.body.type;
+      console.log("else data", data);
+      console.log("else eventType", eventType);
     }
-    console.log("hello4");
 
     // Handle the event
     if (eventType === "checkout.session.completed") {
@@ -207,7 +207,6 @@ router.post(
         .then((customer) => {
           //   console.log(customer);
           //   console.log("data", data);
-          console.log("hello5");
           createOrder(customer, data);
         })
         .catch((err) => console.log(err));
