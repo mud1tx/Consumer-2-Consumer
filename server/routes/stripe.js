@@ -47,8 +47,8 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `https://consumer-xi.vercel.app/orders`,
-    cancel_url: `https://consumer-xi.vercel.app/`,
+    success_url: `consumer-2-consumer.vercel.app/orders`,
+    cancel_url: `consumer-2-consumer.vercel.app/`,
   });
 
   res.send({ url: session.url });
@@ -172,13 +172,15 @@ router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
   (req, res) => {
+    console.log("hello1");
     const sig = req.headers["stripe-signature"];
     let data;
     let eventType;
     if (endpointSecret) {
       let event;
-
+      console.log("hello2");
       try {
+        console.log("hello3");
         event = stripe.webhooks.constructEvent(
           req.rawBody,
           sig,
@@ -196,6 +198,7 @@ router.post(
       data = req.body.data.object;
       eventType = req.body.type;
     }
+    console.log("hello4");
 
     // Handle the event
     if (eventType === "checkout.session.completed") {
@@ -204,6 +207,7 @@ router.post(
         .then((customer) => {
           //   console.log(customer);
           //   console.log("data", data);
+          console.log("hello5");
           createOrder(customer, data);
         })
         .catch((err) => console.log(err));
