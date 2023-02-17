@@ -17,17 +17,11 @@ const ProductDetail = () => {
   const [prodDetail, setProdDetail] = useState(null);
   const [days, setDays] = useState("");
   const [showBorrowBtn, setShowBorrowBtn] = useState(true);
-  // const [product, setProduct] = useState({
-  //   name: "React from fb",
-  //   price: 10,
-  //   productBy: "facebook",
-  // });
 
   const getProductDetailHandler = async (prodId) => {
     const res = await fetch(`${BASE_URL}/${prodId}`);
     const productData = await res.json();
     const { ok } = productData;
-    console.log("data ayaa hai yaar", productData);
     if (!ok) {
       const { message } = productData;
       toast.error(`${message}`);
@@ -44,11 +38,18 @@ const ProductDetail = () => {
   }, []);
 
   const handleFormSubmit = async () => {
+    const prodData = {
+      title: prodDetail.title,
+      price: prodDetail.price,
+      _id: prodDetail._id,
+      userId: prodDetail.userId._id,
+    };
     try {
       const ordersApi = await fetch(`${BASE_URL}/admin/orders`, {
         method: "POST",
         body: JSON.stringify({
           userId: userLoggedIn.user._id,
+          prodData: prodData,
           days: days,
         }),
         headers: {
@@ -65,33 +66,25 @@ const ProductDetail = () => {
 
   const makePayment = async (productData) => {
     const prodData = {
-      category: productData.category,
       title: productData.title,
       price: productData.price,
       _id: productData._id,
-      description: productData.description,
-      userId: productData.userId._id,
     };
     try {
-      const makePaymentApi = await fetch(
-        `${BASE_URL}/payment/create-checkout-session`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            userId: userLoggedIn.user._id,
-            prodData: prodData,
-            days: days,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const makePaymentApi = await fetch(`${BASE_URL}/admin/checkout`, {
+        method: "POST",
+        body: JSON.stringify({
+          userId: userLoggedIn.user._id,
+          prodData: prodData,
+          days: days,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const res = await makePaymentApi.json();
-      console.log("payment ki problem", res);
-      if (res.url) {
-        // handleFormSubmit();
-        window.location.href = res.url;
+      if (res.sessionId) {
+        handleFormSubmit();
       } else {
         console.log("error occured");
       }
@@ -182,14 +175,14 @@ const ProductDetail = () => {
           <input
             type="number"
             min="1"
-            max="31"
+            max="30"
             name="days"
             value={days}
             onChange={(e) => {
               setDays(e.target.value);
             }}
           />
-          {days && (
+          {/* {days && (
             <button
               className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
               onClick={() => {
@@ -198,11 +191,13 @@ const ProductDetail = () => {
             >
               Borrow
             </button>
-          )}
-          {/* {days && (
+          )} */}
+          {days && days<=31 && (
             <StripeCheckout
               stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
-              token={makePayment}
+              token={() => {
+                makePayment(prodDetail);
+              }}
               name="PAYMENT"
               image="https://picsum.photos/seed/picsum/200/300"
               currency="INR"
@@ -215,7 +210,7 @@ const ProductDetail = () => {
                 Borrow
               </button>
             </StripeCheckout>
-          )} */}
+          )}
         </div>
       )}
     </>

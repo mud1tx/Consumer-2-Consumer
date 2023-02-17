@@ -14,20 +14,6 @@ const orderSchema = new Schema({
         type: Number,
         required: true,
       },
-      total: {
-        type: Number,
-        required: true,
-      },
-      payment_status: {
-        type: String,
-        required: true,
-      },
-      customerId: {
-        type: String,
-      },
-      paymentIntentId: {
-        type: String,
-      },
     },
   ],
   userId: {

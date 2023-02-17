@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { User } from "../../redux/action/authUser";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { BASE_URL } from "../../BASE_URL";
 import "react-toastify/dist/ReactToastify.css";
@@ -128,7 +128,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

@@ -19,7 +19,6 @@ const Order = () => {
         },
       });
       const res = await orderApi.json();
-      console.log("order aaya hai", res);
       const { ok } = res;
       if (!ok) {
         setMessage(res.msg);
@@ -54,7 +53,7 @@ const Order = () => {
                   id="scroll"
                 >
                   <p className="text-5xl font-black leading-10  mb-10  text-primary pt-3">
-                    Your Cart
+                    Your Orders
                   </p>
                   {orderData.map((order) => (
                     <div key={order._id}>
@@ -84,7 +83,6 @@ const Order = () => {
                                 </div>
                               ))}
                             </Carousel>
-                            {/* </div> */}
                           </div>
                           <div className="md:pl-3 md:w-3/4">
                             <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">

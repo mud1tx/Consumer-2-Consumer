@@ -17,11 +17,6 @@ const Cards = (props) => {
   const allProductsData = props.allProductsData;
   const showChatsCartBtn = props.showChatsCartBtn;
   const showDeleteBtn = props.showDeleteBtn;
-  // const [product, setProduct] = useState({
-  //   name: "React from fb",
-  //   price: 10,
-  //   productBy: "facebook",
-  // });
   const { chats, setChats } = ChatState();
 
   const getProductToCartHandler = async (productId) => {
@@ -46,7 +41,6 @@ const Cards = (props) => {
       dispatch(AddToCart(productData.products));
       toast.success(`${message}`);
     }
-    console.log("cart", productData.products);
   };
 
   const chatIdHandler = async (e) => {
@@ -63,8 +57,6 @@ const Cards = (props) => {
         },
       });
       const res = await newConvApi.json();
-      console.log("conversation hu yaar card me", res);
-      console.log("Asdas", res);
       const { ok } = res;
       if (!ok) {
         navigate("/admin/chats");
@@ -92,7 +84,6 @@ const Cards = (props) => {
         },
       });
       const res = await deleteProductApi.json();
-      console.log("conversation hu yaar card me", res);
       const { ok } = res;
       if (ok) {
         toast.success(`${res.message}`);

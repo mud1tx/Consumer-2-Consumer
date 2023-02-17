@@ -360,20 +360,22 @@ const Navbar = () => {
                         </span>
                       )}
                     </ul>
-                    <div className="flex  items-center p-2">
-                      <form onSubmit={handleFormSubmit}>
-                        <input type="hidden" name="logout" value="" />
-                        <button
-                          type="submit"
-                          className="text-text_color gap-4 flex flex-row items-center justify-between focus:outline-none xl:text-base  text-base "
-                        >
-                          <span className="">
-                            <HiOutlineLogout className=" text-xl text-text_color focus:outline-none outline-none  hover:text-secondry " />
-                          </span>
-                          Logout
-                        </button>
-                      </form>
-                    </div>
+                    {userLoggedIn?.isLoggedIn && (
+                      <div className="flex  items-center p-2">
+                        <form onSubmit={handleFormSubmit}>
+                          <input type="hidden" name="logout" value="" />
+                          <button
+                            type="submit"
+                            className="text-text_color gap-4 flex flex-row items-center justify-between focus:outline-none xl:text-base  text-base "
+                          >
+                            <span className="">
+                              <HiOutlineLogout className=" text-xl text-text_color focus:outline-none outline-none  hover:text-secondry " />
+                            </span>
+                            Logout
+                          </button>
+                        </form>
+                      </div>
+                    )}
                   </div>
                   {!userLoggedIn?.isLoggedIn && (
                     <div className="w-full pt-4">

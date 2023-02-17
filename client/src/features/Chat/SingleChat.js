@@ -23,7 +23,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
-  console.log("????????????????????????this is imp", messages);
   const { selectedChat, setSelectedChat, user, notification, setNotification } =
     ChatState();
 
@@ -44,7 +43,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
       console.log("chal kahe nahi raha");
       const res = await fetchMessageApi.json();
-      console.log("fetch message single chaat me hua kya", res);
       setMessages(res);
       setLoading(false);
 
@@ -79,7 +77,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         });
 
         const res = await sendMessageApi.json();
-        socket.emit("new message", res);
         setMessages([...messages, res]);
       } catch (error) {
         toast({

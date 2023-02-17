@@ -1,11 +1,9 @@
 const Product = require("../models/products");
-const fs = require("fs");
 const Order = require("../models/order");
 const User = require("../models/user");
 const Message = require("../models/message");
 const Chat = require("../models/chat");
 const stripe = require("stripe")(process.env.STRIPE_KEY_SERVER);
-const uuid = require("uuid");
 const mongoose = require("mongoose");
 const Image = mongoose.model("Image", {
   data: Buffer,
@@ -181,13 +179,13 @@ exports.getCheckout = (req, res, next) => {
       line_items: [
         {
           name: prodData.title,
-          currency: "usd",
-          amount: prodData.price * days,
+          currency: "inr",
+          amount: prodData.price * days*100,
           quantity: 1,
         },
       ],
-      success_url: req.protocol + "://" + req.get("host") + "/checkout/success",
-      cancel_url: req.protocol + "://" + req.get("host") + "/checkout/cancel",
+      success_url: req.protocol + "://" + req.get("host") + "/orders",
+      cancel_url: req.protocol + "://" + req.get("host") + "/",
     })
     .then((session) => {
       return res.json({ ok: true, sessionId: session.id });
