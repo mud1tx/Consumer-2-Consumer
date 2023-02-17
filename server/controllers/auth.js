@@ -163,7 +163,7 @@ exports.postReset = (req, res, next) => {
             from: "c2c16@outlook.com",
             subject: "Password Reset",
             html: `<p>You requested a password reset</p>
-              <p>Click this <a href="http://localhost:3000/new-password/${token}">link</a> to set a new password.</p>`,
+              <p>Click this <a href="https://consumer-2-consumer.netlify.app/new-password/${token}">link</a> to set a new password.</p>`,
           },
           function (err, res) {
             if (err) {
