@@ -13,7 +13,6 @@ const ChatProvider = ({ children }) => {
 
   useEffect(() => {
     const userInfo = JSON.parse(sessionStorage.getItem("userLoggedIn"));
-    // console.log("sjlafakjsdnfasjkdn", userInfo);
     setUser(userInfo);
 
   }, [navigate]);

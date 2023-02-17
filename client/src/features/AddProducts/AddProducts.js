@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./AddProducts.module.css";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../BASE_URL";
@@ -17,12 +17,10 @@ const AddProducts = () => {
     images: {},
   });
   const handleInputs = (e) => {
-    console.log("efwfwf", user);
     const name = e.target.name;
     let value = e.target.value;
     if (name === "images") {
       value = e.target.files;
-      console.log("jnkj", value);
     }
     setUser({ ...user, [name]: value });
   };
@@ -50,7 +48,6 @@ const AddProducts = () => {
       body: formData,
     });
     const addedProductRes = await adminPostProductApi.json();
-    console.log("sdjklfnsjdfnjdsnfsjknd", addedProductRes);
     const { ok } = addedProductRes;
     const { message } = addedProductRes;
     if (ok) {
@@ -72,13 +69,7 @@ const AddProducts = () => {
     <>
       <div className="pt-20">
         <main className={classes.addProduct_form}>
-          <form
-            className={classes.product_form}
-            // action="/admin/add-product"
-            // encType="multipart/form-data"
-            // method="POST"
-            onSubmit={postAddProduct}
-          >
+          <form className={classes.product_form} onSubmit={postAddProduct}>
             <div className={classes.form_control}>
               <label htmlFor="title">Title</label>
               <input
