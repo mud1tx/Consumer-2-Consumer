@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Cards from "../../layouts/Cards";
 import SkeletonComp from "../../components/SkeletonComp";
 import { BASE_URL } from "../../BASE_URL";
-
+import EmptyBorrowSvg from "../../assets/EmptyBorrowSvg";
 const BorrowDetail = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
   const [borrowData, setBorrowData] = useState([]);
@@ -54,7 +54,16 @@ const BorrowDetail = () => {
           showDeleteBtn={false}
         />
       ) : (
-        [secMarker && <h1 key="1">{message}</h1>]
+        [
+          secMarker && (
+            <div
+              key="1"
+              className="flex font-Poppins flex-col justify-center h-screen items-center"
+            >
+              <EmptyBorrowSvg />
+            </div>
+          ),
+        ]
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Cards from "../../layouts/Cards";
 import SkeletonComp from "../../components/SkeletonComp";
 import { BASE_URL } from "../../BASE_URL";
-
+import NoProductSvg from "../../assets/NoProductSvg";
 const Lend = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
   const [lendData, setLendData] = useState([]);
@@ -55,7 +55,16 @@ const Lend = () => {
             showDeleteBtn={false}
           />
         ) : (
-          [secMarker && <h1 key="1">{message}</h1>]
+          [
+            secMarker && (
+              <div
+                className="md:text-4xl flex flex-col items-center justify-center h-screen text-lg sm:text-xl text-text_color font-semibold font-Poppins "
+                key="1"
+              >
+                <NoProductSvg />
+              </div>
+            ),
+          ]
         )}
       </div>
     </>

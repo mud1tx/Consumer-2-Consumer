@@ -14,7 +14,10 @@ const Chat = () => {
         justifyContent="space-between"
         w="100%"
         h="91.5vh"
-        p="10px"
+        pb="5px"
+        pt="70px"
+        pl="10px"
+        pr="10px"
       >
         {user?.isLoggedIn && <MyChats fetchAgain={fetchAgain} />}
         {user && (

@@ -14,7 +14,7 @@ const ShopPage = () => {
   }, [searchData]);
   return (
     <div className="bg-main_white">
-      <Navbar />
+      {/* <Navbar /> */}
       {searchProduct === "" ? <HeroSection /> : <></>}
       <Shop />
       <Footer/>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Cards from "../../layouts/Cards";
+import Footer from "../../components/Footer";
 import SkeletonComp from "../../components/SkeletonComp";
 import { BASE_URL } from "../../BASE_URL";
+import EmptyAdminSvg from "../../assets/EmptyAdminSvg";
 
 const AdminProduct = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -52,9 +54,17 @@ const AdminProduct = () => {
             showDeleteBtn={true}
           />
         ) : (
-          [secMarker && <h1 key="1">You didn't add any product</h1>]
+          //
+          [
+            secMarker && (
+              <div className="flex flex-col font-Poppins items-center justify-center h-screen">
+                <EmptyAdminSvg />
+              </div>
+            ),
+          ]
         )}
       </div>
+      <Footer />
     </>
   );
 };

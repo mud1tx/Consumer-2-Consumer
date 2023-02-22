@@ -18,7 +18,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BorrowPage from "./pages/BorrowPage";
 import ChatPager from "./pages/ChatPager";
-
+import Navbar from "./components/Navbar";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -31,6 +31,7 @@ const App = () => {
   return (
     <>
       <ToastContainer position="bottom-right" autoClose={3000} />
+      <Navbar/>
       <Routes>
         <Route path="/" element={<ShopPage />} />
         <Route element={<PrivateRoute />}>

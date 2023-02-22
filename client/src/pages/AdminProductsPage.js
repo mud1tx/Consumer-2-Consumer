@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar"
 const AdminProductsPage = () => {
   return (
     <>
-     <Navbar/>
+     {/* <Navbar/> */}
      <AdminProduct/>
     </>
    

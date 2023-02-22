@@ -5,7 +5,7 @@ import Footer from "../components/Footer"
 const LendPage = () => {
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Lend />
       <Footer/>
     </div>

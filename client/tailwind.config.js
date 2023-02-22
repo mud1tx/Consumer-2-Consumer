@@ -21,10 +21,11 @@ module.exports = {
         instagram: "#bc2a8d",
         linkedin: "#0077b5",
         github: "#333",
+        svg_color:"#3F3D56",
       },
-      //  backgroundImage: {
-      //   'hero-pattern': "url('./src/assets/BackgroundSvg.svg')",
-      // }
+      fontFamily: {
+        Poppins: ["Poppins"],
+      },
     },
   }, 
   plugins: [],
