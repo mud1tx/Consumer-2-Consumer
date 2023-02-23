@@ -1,11 +1,13 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { BsCartCheck } from "react-icons/bs";
+import { BsCartCheck ,BsFillCartCheckFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FaWhatsappSquare,FaWhatsapp} from "react-icons/fa";
 import { AddToCart } from "../redux/action/addCart";
 import { toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ChatState } from "../context/ChatProvider";
 import { BASE_URL } from "../BASE_URL";
@@ -130,6 +132,7 @@ const Cards = (props) => {
                 ))}
               </Carousel>
             </div>
+
             <div className="Content   rounded-sm mt-10  pt-6 pb-2">
               <h1 className="text-text_color  max-w-xs mt-2 mb-2 truncate">
                 <span className="text-md  overflow-hidden font-bold ">
@@ -146,9 +149,10 @@ const Cards = (props) => {
                   {product.price}{" "}
                   <span className="text-xs text-primary ">INR</span>
                 </p>
-                <div className="flex items-center  justify-center gap-4">
+
+                <div className="flex items-center flex-row  justify-center gap-3">
                   <button
-                    className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
+                    className="hover:bg-primary font-Poppins  duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-1 py-1"
                     onClick={() => {
                       navigate(`/${product._id}`);
                     }}
@@ -157,7 +161,7 @@ const Cards = (props) => {
                   </button>
                   {showDeleteBtn && (
                     <button
-                      className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
+                      className="hover:bg-primary  duration-700 border  px-1 py-1 border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  "
                       onClick={() => {
                         onDeleteHandler(product._id);
                         // navigate(`/${product._id}`);
@@ -166,10 +170,29 @@ const Cards = (props) => {
                       Delete
                     </button>
                   )}
+
+                  {showChatsCartBtn && (
+                    <form onSubmit={chatIdHandler}>
+                      <input
+                        type="hidden"
+                        name="senderId"
+                        value={userLoggedIn?.user?._id || ""}
+                      />
+                      <input
+                        type="hidden"
+                        name="receiverId"
+                        value={product.userId || ""}
+                      />
+                      <button type="submit">
+                        <FaWhatsappSquare className="text-3xl text-primary"/>
+                      </button>
+                    </form>
+                  )}
+
                   {userLoggedIn?.isLoggedIn && showChatsCartBtn && (
                     <button>
-                      <BsCartCheck
-                        className="text-main_color-1000 text-2xl"
+                      <BsFillCartCheckFill
+                        className="text-main_color-1000  text-primary text-3xl"
                         onClick={() => {
                           getProductToCartHandler(product._id);
                         }}
@@ -179,21 +202,6 @@ const Cards = (props) => {
                 </div>
               </div>
             </div>
-            {showChatsCartBtn && (
-              <form onSubmit={chatIdHandler}>
-                <input
-                  type="hidden"
-                  name="senderId"
-                  value={userLoggedIn?.user?._id || ""}
-                />
-                <input
-                  type="hidden"
-                  name="receiverId"
-                  value={product.userId || ""}
-                />
-                <button type="submit">chat</button>
-              </form>
-            )}
           </div>
         ))}
       </div>

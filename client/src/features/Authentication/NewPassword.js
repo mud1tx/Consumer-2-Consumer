@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NewPasswordSvg from "../../assets/NewPasswordSvg";
 import { BASE_URL } from "../../BASE_URL";
 
 const NewPassword = () => {
@@ -71,7 +72,7 @@ const NewPassword = () => {
 
   return (
     <>
-      <div className=" bg-backgound_white  min-h-screen flex items-center justify-center">
+      <div className=" bg-backgound_white sm:pt-20 min-h-screen flex items-center justify-center">
         <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
             <h2 className="font-bold text-3xl text-primary mb-10">
@@ -109,11 +110,7 @@ const NewPassword = () => {
             </form>
           </div>
           <div class="md:block hidden w-1/2">
-            <img
-              className=" rounded "
-              alt="Logo"
-              src={require("../../assets/LoginBg.jpg")}
-            />
+            <NewPasswordSvg />
           </div>
         </div>
       </div>

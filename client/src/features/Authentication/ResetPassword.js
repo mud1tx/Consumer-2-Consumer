@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
 import classes from "./Login.module.css";
 import { BASE_URL } from "../../BASE_URL";
-
+import ResetSvg from "../../assets/ResetSvg";
 const ResetPassword = () => {
   const [userLoginData, setUserLoginData] = useState({
     email: "",
@@ -47,7 +47,7 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div className="bg-backgound_white min-h-screen flex items-center justify-center">
+      <div className="bg-backgound_white font-Poppins font-Poppins sm:pt-5 min-h-screen flex items-center justify-center">
         <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
             <h2 class="font-bold text-3xl text-primary mb-10">
@@ -69,7 +69,7 @@ const ResetPassword = () => {
                 />
               </div>
               <button
-                className="w-full my-5 bg-primary hover:shadow-xs focus:outline-none  duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
+                className="w-full my-5 text-white bg-primary hover:shadow-xs  focus:outline-none  duration-700 py-2  shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
                 type="submit"
               >
                 Reset Password
@@ -80,11 +80,7 @@ const ResetPassword = () => {
             </p>
           </div>
           <div class="md:block hidden w-1/2">
-            <img
-              className=" rounded "
-              alt="Logo"
-              src={require("../../assets/LoginBg.jpg")}
-            />
+          <ResetSvg/>
           </div>
         </div>
       </div>

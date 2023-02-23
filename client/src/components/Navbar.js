@@ -45,61 +45,77 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=" fixed bg-main_white shadow-sm  w-full z-40  ">
+      <div className=" fixed font-Poppins mb-10 bg-main_white shadow-sm  w-full z-40  ">
         {/* Code block starts */}
         <nav className="shadow    xl:block hidden  bg-main_white">
           <div className="mx-auto container px-6 py-2 xl:py-0">
             <div className="flex items-center justify-between">
               <div className="flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
-                <div className="flex flex-row items-center ">
-                  <img
-                    className="rounded h-10 w-10 object-cover"
-                    alt="Logo"
-                    src={require("../assets/company-logo.png")}
-                  />
-                </div>
+                <NavLink to="/">
+                  <div className="flex flex-row items-center ">
+                    <img
+                      className="rounded h-10 w-10 object-cover"
+                      alt="Logo"
+                      src={require("../assets/company-logo.png")}
+                    />
+                  </div>
+                </NavLink>
               </div>
               <div className="flex">
-                <div className="hidden xl:flex md:mr-6 xl:mr-16">
-                  <div className=" flex px-5 items-center transform  overflow-x-hidden overflow-y-hidden  focus:bg-primary   py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color  focus:outline-none transition duration-500 ease-in-out">
-                    <NavLink to="/">Shop</NavLink>
-                  </div>
-                  {userLoggedIn?.isLoggedIn && (
-                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
-                      <NavLink to="/cart">Cart</NavLink>
+                <div className="hidden text-sm xl:flex md:mr-6 xl:mr-16">
+                  <NavLink to="/">
+                    <div className=" flex px-5 items-center transform  overflow-x-hidden overflow-y-hidden  focus:bg-primary text-sm  py-6  leading-5 text-text_color hover:bg-primary hover:text-text_color  focus:outline-none transition duration-500 ease-in-out">
+                      Shop
                     </div>
+                  </NavLink>
+                  {userLoggedIn?.isLoggedIn && (
+                    <NavLink to="/cart">
+                      <div className=" flex px-5 items-center py-6  leading-5 text-text_color hover:bg-primary hover:text-text_color active:bg-violet-700 focus:outline-none transition duration-700 ease-in-out">
+                        Cart
+                      </div>
+                    </NavLink>
                   )}
                   {userLoggedIn?.isLoggedIn && (
-                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
-                      <NavLink to="/orders">Orders</NavLink>
-                    </div>
+                    <NavLink to="/orders">
+                      <div className=" flex px-5 items-center py-6 leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
+                        Orders
+                      </div>
+                    </NavLink>
                   )}
                   {userLoggedIn?.isLoggedIn && (
-                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
-                      <NavLink to="/admin/add-product">Add Products</NavLink>
-                    </div>
+                    <NavLink to="/admin/add-product">
+                      <div className=" flex px-5 items-center py-6  leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
+                        Add Products
+                      </div>
+                    </NavLink>
                   )}
                   {userLoggedIn?.isLoggedIn && (
-                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
-                      <NavLink to="/admin/admin-products">
+                    <NavLink to="/admin/admin-products">
+                      <div className=" flex px-5 items-center py-6  leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
                         Admin Products
-                      </NavLink>
-                    </div>
+                      </div>
+                    </NavLink>
                   )}
                   {userLoggedIn?.isLoggedIn && (
-                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
-                      <NavLink to="/admin/lend">Lend</NavLink>
-                    </div>
+                    <NavLink to="/admin/lend">
+                      <div className=" flex px-5 items-center py-6  leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
+                        Lend
+                      </div>
+                    </NavLink>
                   )}
                   {userLoggedIn?.isLoggedIn && (
-                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
-                      <NavLink to="/admin/borrow">Borrowed</NavLink>
-                    </div>
+                    <NavLink to="/admin/borrow">
+                      <div className=" flex px-5 items-center py-6  leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
+                        Borrowed
+                      </div>
+                    </NavLink>
                   )}
                   {userLoggedIn?.isLoggedIn && (
-                    <div className=" flex px-5 items-center py-6 text-md leading-5 text-text_color hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
-                      <NavLink to="/admin/chats">Chats</NavLink>
-                    </div>
+                    <NavLink to="/admin/chats">
+                      <div className=" flex px-5 items-center py-6  leading-5 text-text_color  hover:bg-primary hover:text-text_color focus:bg-gray-100 focus:outline-none transition duration-700 ease-in-out">
+                        Chats
+                      </div>
+                    </NavLink>
                   )}
                 </div>
                 <div className="hidden xl:flex items-center">
@@ -128,19 +144,19 @@ const Navbar = () => {
                       {!userLoggedIn?.isLoggedIn && profile && (
                         <ul className="p-2 w-40 border-r bg-main_color-1000 absolute bg-white rounded right-0 shadow top-0 mt-16 ">
                           <li className="cursor-pointer px-2 hover:bg-primary  rounded-sm duration-700 text-main_color-200 text-sm leading-3 tracking-normal py-2   focus:outline-none">
-                            <div className="flex items-center">
-                              <AiOutlineLogin className="text-xl" />
-                              <span className="ml-2">
-                                <NavLink to="/login">Login</NavLink>
-                              </span>
-                            </div>
+                            <NavLink to="/login">
+                              <div className="flex items-center">
+                                <AiOutlineLogin className="text-xl" />
+                                <span className="ml-2">Login</span>
+                              </div>
+                            </NavLink>
                           </li>
-                          <li className="cursor-pointer px-2 hover:bg-primary rounded-sm duration-700 text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2  focus:text-main_color-200 focus:outline-none flex items-center">
-                            <AiOutlineUserAdd className="text-2xl " />
-                            <span className="ml-2">
-                              <NavLink to="/signup">SignUp</NavLink>
-                            </span>
-                          </li>
+                          <NavLink to="/signup">
+                            <li className="cursor-pointer px-2 hover:bg-primary rounded-sm duration-700 text-main_color-200 text-sm leading-3 tracking-normal mt-2 py-2  focus:text-main_color-200 focus:outline-none flex items-center">
+                              <AiOutlineUserAdd className="text-2xl " />
+                              <span className="ml-2">SignUp</span>
+                            </li>
+                          </NavLink>
                         </ul>
                       )}
                       {/* <div className="cursor-pointer  text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out"></div> */}
@@ -151,11 +167,15 @@ const Navbar = () => {
                       )}
                     </div>
                     {userLoggedIn?.isLoggedIn && (
-                      <div className="cursor-pointer flex items-center  flex-row-reverse text-text_color text-lg leading-3 tracking-normal  ml-4  focus:outline-none ">
+                      <div className="cursor-pointer  hover:text-red-500 focus:outline-none flex items-center  flex-row-reverse  text-lg leading-3 tracking-normal  ml-4   ">
                         <form onSubmit={handleFormSubmit}>
                           <input type="hidden" name="logout" value="" />
-                          <button type="submit" className="text-base">
-                            <HiOutlineLogout className="text-3xl text-text_color focus:outline-none outline-none  hover:text-red-500  ml-4" />
+                          <button
+                            type="submit"
+                            className="text-sm flex items-center justify-center"
+                          >
+                            LogOut
+                            {/* <HiOutlineLogout className="text-xl text-text_color focus:outline-none outline-none  " /> */}
                           </button>
                         </form>
                       </div>
@@ -245,137 +265,147 @@ const Navbar = () => {
                       </div>
                     </div>
                     <ul className="f-m-m flex flex-col gap-4">
-                      <span className="cursor-pointer mt-10 ">
-                        <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                          <div className="flex  items-center p-2">
-                            <div className="w-6 h-6 md:w-8 md:h-8 ">
-                              <AiOutlineShopping className="text-xl text-text_color " />
-                            </div>
-                            <p className="text-text_color xl:text-base text-base ml-3">
-                              <NavLink to="/">Shop</NavLink>
-                            </p>
-                          </div>
-                        </li>
-                      </span>
-                      {userLoggedIn?.isLoggedIn && (
-                        <span className="cursor-pointer">
+                      <NavLink to="/">
+                        <span className="cursor-pointer mt-10 ">
                           <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
                             <div className="flex  items-center p-2">
                               <div className="w-6 h-6 md:w-8 md:h-8 ">
-                                <AiOutlineShoppingCart className="text-xl text-text_color " />
+                                <AiOutlineShopping className="text-xl text-text_color " />
                               </div>
                               <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/cart">Cart</NavLink>
+                                Shop
                               </p>
                             </div>
                           </li>
                         </span>
+                      </NavLink>
+                      {userLoggedIn?.isLoggedIn && (
+                        <NavLink to="/cart">
+                          <span className="cursor-pointer">
+                            <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                              <div className="flex  items-center p-2">
+                                <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                  <AiOutlineShoppingCart className="text-xl text-text_color " />
+                                </div>
+                                <p className="text-text_color xl:text-base text-base ml-3">
+                                  Cart
+                                </p>
+                              </div>
+                            </li>
+                          </span>
+                        </NavLink>
                       )}
                       {userLoggedIn?.isLoggedIn && (
-                        <span className="cursor-pointer">
-                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                            <div className="flex  items-center p-2">
-                              <div className="w-6 h-6 md:w-8 md:h-8 ">
-                                <MdAddTask className="text-xl text-text_color " />
+                        <NavLink to="/orders">
+                          <span className="cursor-pointer">
+                            <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                              <div className="flex  items-center p-2">
+                                <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                  <MdAddTask className="text-xl text-text_color " />
+                                </div>
+                                <p className="text-text_color xl:text-base text-base ml-3">
+                                  Orders
+                                </p>
                               </div>
-                              <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/orders">Orders</NavLink>
-                              </p>
-                            </div>
-                          </li>
-                        </span>
+                            </li>
+                          </span>
+                        </NavLink>
                       )}
                       {userLoggedIn?.isLoggedIn && (
-                        <span className="cursor-pointer">
-                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                            <div className="flex  items-center p-2">
-                              <div className="w-6 h-6 md:w-8 md:h-8 ">
-                                <AiOutlineFolderAdd className="text-xl text-text_color " />
-                              </div>
-                              <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/admin/add-product">
+                        <NavLink to="/admin/add-product">
+                          <span className="cursor-pointer">
+                            <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                              <div className="flex  items-center p-2">
+                                <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                  <AiOutlineFolderAdd className="text-xl text-text_color " />
+                                </div>
+                                <p className="text-text_color xl:text-base text-base ml-3">
                                   Add Products
-                                </NavLink>
-                              </p>
-                            </div>
-                          </li>
-                        </span>
+                                </p>
+                              </div>
+                            </li>
+                          </span>
+                        </NavLink>
                       )}
                       {userLoggedIn?.isLoggedIn && (
-                        <span className="cursor-pointer">
-                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                            <div className="flex  items-center p-2">
-                              <div className="w-6 h-6 md:w-8 md:h-8 ">
-                                <AiOutlineFolderAdd className="text-xl text-text_color " />
-                              </div>
-                              <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/admin/admin-products">
+                        <NavLink to="/admin/admin-products">
+                          <span className="cursor-pointer">
+                            <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                              <div className="flex  items-center p-2">
+                                <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                  <AiOutlineFolderAdd className="text-xl text-text_color " />
+                                </div>
+                                <p className="text-text_color xl:text-base text-base ml-3">
                                   Admin Products
-                                </NavLink>
-                              </p>
-                            </div>
-                          </li>
-                        </span>
+                                </p>
+                              </div>
+                            </li>
+                          </span>
+                        </NavLink>
                       )}
                       {userLoggedIn?.isLoggedIn && (
-                        <span className="cursor-pointer">
-                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                            <div className="flex  items-center p-2">
-                              <div className="w-6 h-6 md:w-8 md:h-8 ">
-                                <AiOutlineFolderAdd className="text-xl text-text_color " />
+                        <NavLink to="/admin/lend">
+                          <span className="cursor-pointer">
+                            <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                              <div className="flex  items-center p-2">
+                                <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                  <AiOutlineFolderAdd className="text-xl text-text_color " />
+                                </div>
+                                <p className="text-text_color xl:text-base text-base ml-3">
+                                  Lend
+                                </p>
                               </div>
-                              <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/admin/lend">Lend</NavLink>
-                              </p>
-                            </div>
-                          </li>
-                        </span>
+                            </li>
+                          </span>
+                        </NavLink>
                       )}
                       {userLoggedIn?.isLoggedIn && (
-                        <span className="cursor-pointer">
-                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                            <div className="flex  items-center p-2">
-                              <div className="w-6 h-6 md:w-8 md:h-8 ">
-                                <AiOutlineFolderAdd className="text-xl text-text_color " />
+                        <NavLink to="/admin/borrow">
+                          <span className="cursor-pointer">
+                            <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                              <div className="flex  items-center p-2">
+                                <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                  <AiOutlineFolderAdd className="text-xl text-text_color " />
+                                </div>
+                                <p className="text-text_color xl:text-base text-base ml-3">
+                                  Borrowed
+                                </p>
                               </div>
-                              <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/admin/borrow">Borrowed</NavLink>
-                              </p>
-                            </div>
-                          </li>
-                        </span>
+                            </li>
+                          </span>
+                        </NavLink>
                       )}
                       {userLoggedIn?.isLoggedIn && (
-                        <span className="cursor-pointer">
-                          <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
-                            <div className="flex  items-center p-2">
-                              <div className="w-6 h-6 md:w-8 md:h-8 ">
-                                <AiOutlineShoppingCart className="text-xl text-text_color " />
+                        <NavLink to="/admin/chats">
+                          <span className="cursor-pointer">
+                            <li className=" hover:bg-primary transform transition duration-500 hover:scale-105 ">
+                              <div className="flex  items-center p-2">
+                                <div className="w-6 h-6 md:w-8 md:h-8 ">
+                                  <AiOutlineShoppingCart className="text-xl text-text_color " />
+                                </div>
+                                <p className="text-text_color xl:text-base text-base ml-3">
+                                  Chats
+                                </p>
                               </div>
-                              <p className="text-text_color xl:text-base text-base ml-3">
-                                <NavLink to="/admin/chats">Chats</NavLink>
-                              </p>
-                            </div>
-                          </li>
-                        </span>
+                            </li>
+                          </span>
+                        </NavLink>
                       )}
                     </ul>
-                    {userLoggedIn?.isLoggedIn && (
-                      <div className="flex  items-center p-2">
-                        <form onSubmit={handleFormSubmit}>
-                          <input type="hidden" name="logout" value="" />
-                          <button
-                            type="submit"
-                            className="text-text_color gap-4 flex flex-row items-center justify-between focus:outline-none xl:text-base  text-base "
-                          >
-                            <span className="">
-                              <HiOutlineLogout className=" text-xl text-text_color focus:outline-none outline-none  hover:text-secondry " />
-                            </span>
-                            Logout
-                          </button>
-                        </form>
-                      </div>
-                    )}
+                    <div className="flex  items-center p-2">
+                      <form onSubmit={handleFormSubmit}>
+                        <input type="hidden" name="logout" value="" />
+                        <button
+                          type="submit"
+                          className="text-text_color  hover:text-secondry gap-4 flex flex-row items-center justify-between focus:outline-none xl:text-base  text-base "
+                        >
+                          <span className="">
+                            <HiOutlineLogout className=" text-xl text-text_color focus:outline-none outline-none  hover:text-secondry " />
+                          </span>
+                          Logout
+                        </button>
+                      </form>
+                    </div>
                   </div>
                   {!userLoggedIn?.isLoggedIn && (
                     <div className="w-full pt-4">

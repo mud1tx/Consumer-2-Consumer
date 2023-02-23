@@ -3,8 +3,7 @@ import Cards from "../../layouts/Cards";
 import { useSelector } from "react-redux";
 import SkeletonComp from "../../components/SkeletonComp";
 import { BASE_URL } from "../../BASE_URL";
-import Shopsvg from "../../assets/Shopsvg";
-
+import EmptyShopSvg from "../../assets/EmptyShopSvg";
 const Shop = () => {
   const searchData = useSelector((state) => state.searchInputReducer);
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -56,7 +55,7 @@ const Shop = () => {
 
   return (
     <div className="   w-full h-full ">
-      <h1 className="  text-3xl font-bold text-primary  bg-backgound_white md:pl-10 text-center md:text-left">
+      <h1 className="  text-lg font-Poppins text-center bg-backgound_white text-primary  md:text-4xl font-semibold ">
         Feature Products SoFar:
       </h1>
       {marker && (
@@ -77,7 +76,16 @@ const Shop = () => {
           showDeleteBtn={false}
         />
       ) : (
-        [secMarker && <Shopsvg />]
+        [
+          secMarker && (
+            <div className="flex h-screen items-center justify-center flex-col ">
+              <div key="1"></div>
+              <div className="">
+                <EmptyShopSvg />
+              </div>
+            </div>
+          ),
+        ]
       )}
     </div>
   );

@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 const AddProductsPage = () => {
   return (
     <>
-      <Navbar/>
+      {/* <Navbar/> */}
       <AddProducts />
     </>
   );

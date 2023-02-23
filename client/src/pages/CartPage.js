@@ -5,7 +5,7 @@ import Cart from "../features/Cart/Cart";
 const CartPage = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Cart />
     </>
   );

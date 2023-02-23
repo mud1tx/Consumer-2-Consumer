@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
+import Footer from "../../components/Footer";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { BASE_URL } from "../../BASE_URL";
+import EmptyOrderSvvg from "../../assets/EmptyOrderSvvg";
 
 const Order = () => {
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -37,144 +39,164 @@ const Order = () => {
   return (
     <>
       {orderData?.length > 0 ? (
-        <div>
-          <div className="flex items-center justify-center py-8"></div>
-          <div
-            className="w-full h-full bg-opacity-90 top-0 overflow-y-auto overflow-x-hidden fixed sticky-0"
-            id="chec-div"
-          >
-            <div
-              className="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700"
-              id="checkout"
-            >
-              <div className="flex md:flex-row flex-col justify-end" id="cart">
+        <div className=" pl-2 pr-2 pb-2 pt-16">
+           <h1 className="md:text-4xl text-3xl font-bold  text-primary ml-2">Order</h1>
+          {orderData.map((order) => (
+            <div key={order._id}>
+              {order.products?.map((product) => (
                 <div
-                  className="lg:w-1/2 bg-backgound_white w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8  overflow-y-auto overflow-x-hidden h-screen"
-                  id="scroll"
+                  key={Math.random() * 10000000}
+                  className="md:flex items-center mt-18 py-8 border   border-t  border-gray-200 "
                 >
-                  <p className="text-5xl font-black leading-10  mb-10  text-primary pt-3">
-                    Your Orders
-                  </p>
-                  {orderData.map((order) => (
-                    <div key={order._id}>
-                      {order.products?.map((product) => (
-                        <div
-                          key={Math.random() * 10000000}
-                          className="md:flex items-center mt-18 py-8    border-t  border-backgound_white "
-                        >
-                          <div className=" h-auto  max-w-xs ">
-                            <Carousel
-                              infiniteLoop
-                              autoPlay
-                              showStatus={false}
-                              showArrows={false}
-                              showThumbs={false}
-                              showIndicators={false}
-                              stopOnHover={true}
-                              interval={2000}
-                            >
-                              {product.productId.image.map((img, index) => (
-                                <div key={index}>
-                                  <img
-                                    className="h-40 lg md:h-36 w-full object-cover object-center"
-                                    src={`data:image/jpeg;base64,${img.data}`}
-                                    alt={`${product.productId.category}`}
-                                  />
-                                </div>
-                              ))}
-                            </Carousel>
+                 
+                  <div className="flex flex-col lg:flex-row justify-between items-center gap-x-4 ">
+                    <div className=" lg:h-auto w-96   lg:max-w-xs ">
+                      <Carousel
+                        infiniteLoop
+                        autoPlay
+                        showStatus={false}
+                        showArrows={false}
+                        showThumbs={false}
+                        showIndicators={false}
+                        stopOnHover={true}
+                        interval={2000}
+                      >
+                        {product.productId.image.map((img, index) => (
+                          <div key={index}>
+                            <img
+                              className="lg:h-40 h-64   p-2  md:w-full object-cover object-center"
+                              src={`data:image/jpeg;base64,${img.data}`}
+                              alt={`${product.productId.category}`}
+                            />
                           </div>
-                          <div className="md:pl-3 md:w-3/4">
-                            <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">
-                              {product.productId._id}
-                            </p>
-                            <div className="flex items-center justify-between w-full pt-1">
-                              <p className="text-base font-black leading-none text-gray-800">
-                                This Is {product.productId.category}
-                              </p>
-                            </div>
-                            <p className="text-xs leading-3 text-text_color pt-2 py-4">
-                              Product Name: {product.productId.title}
-                            </p>
-                            <p className="w-96 text-xs leading-3 text-text_color">
-                              Product Details h: {product.productId.description}
-                            </p>
-                            <div className="flex items-center justify-between pt-5 pr-6">
-                              <p className="text-xl font-black leading-none text-gray-800">
-                                {product.productId.price} INR
-                              </p>
-                            </div>
-                            <div className="flex items-center justify-between pt-5 pr-6">
-                              <p className="text-xl font-black leading-none text-gray-800">
-                                {product.productId.userId.first_name +
-                                  " " +
-                                  product.productId.userId.first_name}
-                              </p>
-                            </div>
-                            <div className="flex items-center justify-between pt-5 pr-6">
-                              <p className="text-xl font-black leading-none text-gray-800">
-                                {product.productId.userId.email}
-                              </p>
-                            </div>
-                            {product.productId.userId.address && (
-                              <div className="flex items-center justify-between pt-5 pr-6">
-                                <p className="text-xl font-black leading-none text-gray-800">
-                                  {product.productId.userId.address}
-                                </p>
-                              </div>
-                            )}
-                            {product.productId.userId.pin_code && (
-                              <div className="flex items-center justify-between pt-5 pr-6">
-                                <p className="text-xl font-black leading-none text-gray-800">
-                                  {product.productId.userId.pin_code}
-                                </p>
-                              </div>
-                            )}
-                            {product.productId.userId.city && (
-                              <div className="flex items-center justify-between pt-5 pr-6">
-                                <p className="text-xl font-black leading-none text-gray-800">
-                                  {product.productId.userId.city}
-                                </p>
-                              </div>
-                            )}
-                            {product.productId.userId.country && (
-                              <div className="flex items-center justify-between pt-5 pr-6">
-                                <p className="text-xl font-black leading-none text-gray-800">
-                                  {product.productId.userId.country}
-                                </p>
-                              </div>
-                            )}
-                            <p>
-                              {product.expire > Date.now()
-                                ? `${Math.ceil(
-                                    (product.expire - Date.now()) / 86400000
-                                  )} day left to return the product`
-                                : `product returned ${Math.ceil(
-                                    (Date.now() - product.expire) / 86400000
-                                  )} days ago`}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
+                        ))}
+                      </Carousel>
                     </div>
-                  ))}
+
+                    <div className=" flex lg:flex-row flex-col   text-text_color font-Poppins">
+                      <div className="flex  gap-4 flex-col sm:flex-row ">
+                        <div className="basicDetails lg:border-b-0 border-b p-2 basis-2  flex-col  flex justify-between max-w-md">
+                          <p className="">
+                            <span className="font-medium  text-lg ">
+                              Product Id:{" "}
+                            </span>
+                            <span className="text-base">
+                              {" "}
+                              {product.productId._id}
+                            </span>
+                          </p>
+                          <p className="">
+                            <span className="text-lg  font-medium">
+                              Category:
+                            </span>
+                            <span className="text-base">
+                              {product.productId.category}
+                            </span>
+                          </p>
+                          <p className="">
+                            <span className="text-lg font-medium">Title: </span>{" "}
+                            <span className="text-base">
+                              {product.productId.title}{" "}
+                            </span>
+                          </p>
+                          <p className="">
+                            <span className="text-lg font-medium  ">
+                              Product Details:{" "}
+                            </span>
+                            {product.productId.description}
+                          </p>
+                        </div>
+
+                        <div className="font-Poppins basis-2 p-2 lg:border-b-0 border-b lg:border-l">
+                          <p className="">
+                            <span className="font-medium text-lg">Price:</span>
+                            <span className="text-base">
+                              {product.productId.price}
+                            </span>
+                            <span className="text-primary text-sm ml-1">
+                              {" "}
+                              INR/DAY
+                            </span>
+                          </p>
+                          <p className="">
+                            <span className="text-lg font-medium ">
+                              Owner Name:
+                            </span>
+                            <span className="text-base ">
+                              {product.productId.userId.first_name +
+                                " " +
+                                product.productId.userId.first_name}
+                            </span>
+                          </p>
+
+                          <p className="">
+                            <span className="text-lg font-medium ">
+                              Email:{" "}
+                            </span>
+                            <span>{product.productId.userId.email}</span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="basis lg:border-l p-2 ">
+                        <p>
+                          {product.expire > Date.now()
+                            ? `${Math.ceil(
+                                (product.expire - Date.now()) / 86400000
+                              )} day left to return the product`
+                            : `product returned ${Math.ceil(
+                                (Date.now() - product.expire) / 86400000
+                              )} days ago`}
+                        </p>
+
+                        <div className=" ">
+                          <span className="text-lg flex font-medium ">
+                            Address
+                            {product.productId.userId.address && (
+                              <p className=" text-base ml-1 font-normal">
+                                {product.productId.userId.address}
+                              </p>
+                            )}
+                          </span>
+
+                          <span className="text-lg flex font-medium ">
+                            Pincode:
+                            {product.productId.userId.pin_code && (
+                              <p className=" text-lg ml-1 font-medium">
+                                {product.productId.userId.pin_code}
+                              </p>
+                            )}
+                          </span>
+                          <span className="text-lg flex font-medium">
+                            City:
+                            {product.productId.userId.city && (
+                              <p className="text-base font-normal ml-1 ">
+                                {product.productId.userId.city}
+                              </p>
+                            )}
+                          </span>
+                          <span className="text-lg flex  font-medium">
+                            Country
+                            {product.productId.userId.country && (
+                              <p className="font-normal text-base ml-1">
+                                {product.productId.userId.country}
+                              </p>
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          </div>
+          ))}
         </div>
       ) : (
         <div>
-          <h1>
-            Order is
-            emptyefwj;ertfkwlrwerkjwelgkjeklrjwekrttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttr
-          </h1>
-          <h1>
-            Order is
-            emptyefwj;ertfkwlrwerkjwelgkjeklrjwekrttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttr
-          </h1>
+          <EmptyOrderSvvg />
         </div>
       )}
+      <Footer />
     </>
   );
 };

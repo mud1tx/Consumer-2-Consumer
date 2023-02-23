@@ -1,6 +1,6 @@
 <div align="center">
       <h1> <img src="https://github.com/mud1tx/Consumer/blob/master/client/src/assets/company-logo.png" width="80px"><br/>C2C</h1>
-     </div>
+</div>
 
 
 # Description

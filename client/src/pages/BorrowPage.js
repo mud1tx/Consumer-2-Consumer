@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 const BorrowPage = () => {
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       <BorrowDetail />
       <Footer/>
     </div>

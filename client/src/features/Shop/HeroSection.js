@@ -2,11 +2,13 @@ import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { Carousel } from "react-responsive-carousel";
 import "../../components/Custom.css";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const HeroSection = () => {
   return (
-    <div className="dark:bg-gray-900  h-full flex items-center  bg-backgound_white">
+    <>
+    <div className="dark:bg-gray-900  font-Poppins h-full flex items-center  bg-backgound_white">
       <div className="flex flex-col lg:flex-row  items-stretch justify-between lg:px-0 px-6 lg:py-20 py-8 2xl:mx-auto 2xl:container">
         <div className="z-30   relative lg:w-1/2">
           <div className="hidden dark:bg-gray-800  w-full lg:w-10/12 lg:h-full lg:flex justify-end items-center">
@@ -95,7 +97,7 @@ const HeroSection = () => {
             </Carousel>
           </div>
         </div>
-        <div className=" bg-gray-100 dark:bg-gray-800 lg:w-1/2 lg:ml-12 lg:p-14 p-8 flex items-center">
+        <div className=" bg-gray-100 dark:bg-gray-800 font-Poppins lg:w-1/2 lg:ml-12 lg:p-14 p-8 flex items-center">
           <div>
             <h1 className=" md:w-8/12 lg:w-10/12 xl:8/12 2xl:w-8/12 w-full xl:text-6xl sm:text-5xl text-4xl  font-semibold  text-text_color capitalize">
               {" "}
@@ -103,7 +105,7 @@ const HeroSection = () => {
               <span className="text-primary clip-path-polygon-[0_0,_100%_0,_100%_100%,_0_calc(100%_-_1rem)]">
                 sumer
               </span>
-              <span>To</span> Consum<span className="text-primary">er</span>
+              <span>{"  "}To</span> Consum<span className="text-primary">er</span>
             </h1>
             <p className="dark:text-gray-300 md:w-9/12 lg:w-11/12 xl:w-10/12 2xl:9/12 text-base leading-normal text-text_color mt-5">
               Get inspired by our curated selection of luxiwood interiors. We
@@ -119,9 +121,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      
     </div>
-    
+ 
+    </>
   );
 };
 

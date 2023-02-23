@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useSelector } from "react-redux";
+import { FaWhatsappSquare, FaWhatsapp } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import Cartsvg from "../../assets/Cartsvg";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../../BASE_URL";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
+import EmptyCartSvg from "../../assets/EmptyCartSvg";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -88,10 +91,10 @@ const Cart = () => {
                 id="cart"
               >
                 <div
-                  className="lg:w-1/2 bg-main_white w-full   p-10 md:pr-4 md:py-12  overflow-y-auto overflow-x-hidden "
+                  className="lg:w-1/2 font-Poppins bg-main_white w-full   p-10 md:pr-4 md:py-12  overflow-y-auto overflow-x-hidden "
                   id="scroll"
                 >
-                  <p className="text-3xl md:text-4xl font-bold mt-6 leading-10    text-primary pt-3">
+                  <p className="text-3xl md:text-4xl font-bold  mt-6 leading-10    text-primary pt-3">
                     Your Cart
                   </p>
                   {cartProducts.map((product) => (
@@ -113,7 +116,7 @@ const Cart = () => {
                           {product.productId.image.map((img, index) => (
                             <div key={index}>
                               <img
-                                className="h-40 lg md:h-36 w-full object-cover object-center"
+                                className="h-40 rounded-md lg md:h-36 w-full object-cover object-center"
                                 // src={`data:${product.productId.imageType[index]};base64,${img}`}
                                 src={`data:image/jpeg;base64,${img.data}`}
                                 alt={`${product.productId.category}`}
@@ -154,6 +157,7 @@ const Cart = () => {
                               onClick={() => {
                                 navigate(`/${product.productId._id}`);
                               }}
+                              className="hover:bg-primary font-Poppins  duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-1 py-1"
                             >
                               Details
                             </button>
@@ -164,11 +168,11 @@ const Cart = () => {
                                 navigate("/admin/chats");
                               }}
                             >
-                              chat
+                              <FaWhatsappSquare className="text-3xl text-primary" />
                             </button>
                           </div>
-                          <p className="text-xl font-black leading-none text-gray-800">
-                            {product.productId.price} INR
+                          <p className="text-lg font-black leading-none text-gray-800">
+                            {product.productId.price} INR/DAY
                           </p>
                         </div>
                       </div>
@@ -176,40 +180,40 @@ const Cart = () => {
                   ))}
                 </div>
 
-                <div className="xl:w-1/2 md:w-1/3 w-full bg-main_white h-full ">
-                  <div className="flex flex-col md:h-screen px-16 py-20 justify-between overflow-y-auto">
+                <div className="xl:w-1/2 md:w-1/3 w-full font-Poppins bg-main_white h-full ">
+                  <div className="flex flex-col md:h-screen px-16 py- md:py-20 justify-between overflow-y-auto">
                     <div>
-                      <p className="text-3xl md:text-4xl font-black leading-9 text-primary">
+                      <p className="text-2xl font-Poppins md:text-4xl font-black leading-9 text-primary">
                         Order Summary:
                       </p>
                       <div className="flex items-center justify-between pt-16">
-                        <p className="text-base leading-none text-text_color">
+                        <p className="md:text-base text-sm  leading-none text-text_color">
                           Subtotal
                         </p>
-                        <p className="text-base leading-none text-text_color">
-                          {price} INR
+                        <p className="md:text-base text-sm leading-none text-text_color">
+                          {price} INR/DAY
                         </p>
                       </div>
                       <div className="flex items-center justify-between pt-5">
-                        <p className="text-base leading-none text-text_color">
+                        <p className="md:text-base text-sm leading-none text-text_color">
                           Shipping
                         </p>
-                        <p className="text-base leading-none text-text_color">
-                          {cartProducts.length * 10} INR
+                        <p className="md:text-base text-sm leading-none text-text_color">
+                          {cartProducts.length * 10} INR/DAY
                         </p>
                       </div>
                     </div>
                     <div>
-                      <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
-                        <p className="text-2xl leading-normal  text-text_color">
+                      <div className="flex items-center md:pb-6 pb-4 justify-between lg:pt-5 pt-20">
+                        <p className="md:text-2xl text-sm leading-medium  text-text_color">
                           Total Amount
                         </p>
-                        <p className="text-2xl font-bold leading-normal text-right text-text_color">
-                          {price + cartProducts.length * 10} INR
+                        <p className="md:text-2xl text-base font-bold leading-normal text-right text-text_color">
+                          {price + cartProducts.length * 10} INR/DAY
                         </p>
                       </div>
-                      <button className="text-base leading-none w-full py-5 hover:bg-primary border border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-primary  hover:text-text_color duration-700 ">
-                        Checkout
+                      <button className="md:text-base text-sm capitalize leading-none w-full py-5 hover:bg-primary border border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-primary  hover:text-text_color duration-700 ">
+                        Click On Details to buy the item
                       </button>
                     </div>
                   </div>
@@ -219,8 +223,12 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <Cartsvg />
+        <div>
+          <EmptyCartSvg />
+        </div>
       )}
+      <Footer />
+      {/* <ToastContainer /> */}
     </>
   );
 };

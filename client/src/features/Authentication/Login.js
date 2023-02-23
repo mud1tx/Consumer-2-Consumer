@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { BASE_URL } from "../../BASE_URL";
 import "react-toastify/dist/ReactToastify.css";
+import LoginSvg from "../../assets/LoginSvg";
 import classes from "./Login.module.css";
 
 const Login = () => {
@@ -57,7 +58,7 @@ const Login = () => {
 
   return (
     <>
-      <div className=" bg-backgound_white  min-h-screen flex items-center justify-center ">
+      <div className=" bg-backgound_white font-Poppins sm:pt-20  min-h-screen flex items-center justify-center ">
         <div className="   flex bg-main_white rounded shadow-lg max-w-4xl px-2 py-4 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
             <div>
@@ -120,11 +121,7 @@ const Login = () => {
             </div>
           </div>
           <div className="md:block hidden w-1/2">
-            <img
-              className=" rounded "
-              alt="Logo"
-              src={require("../../assets/LoginBg.jpg")}
-            />
+           <LoginSvg/>
           </div>
         </div>
       </div>

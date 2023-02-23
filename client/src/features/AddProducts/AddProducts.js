@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { BASE_URL } from "../../BASE_URL";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "../../components/Footer";
 const AddProducts = () => {
   const navigate = useNavigate();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -130,8 +130,10 @@ const AddProducts = () => {
                 onChange={handleInputs}
               />
             </div>
+            {/* {classes.addProduct_form_submit_btn}  */}
             <button
-              className={classes.addProduct_form_submit_btn}
+              className="focus:outline-none  focus:ring-2 border bg-primary border-primary hover:bg-backgound_white  duration-700 focus:ring-offset-2 focus:ring-gray-800 font-medium text-base hover:text-primary leading-4  text-text_color w-full py-5 lg:mt-12 mt-6"
+              
               type="submit"
             >
               Add-Product
@@ -139,6 +141,7 @@ const AddProducts = () => {
           </form>
         </main>
       </div>
+      <Footer/>
     </>
   );
 };
