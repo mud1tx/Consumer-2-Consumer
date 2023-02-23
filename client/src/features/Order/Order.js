@@ -21,7 +21,6 @@ const Order = () => {
         },
       });
       const res = await orderApi.json();
-      console.log("order aaya hai", res);
       const { ok } = res;
       if (!ok) {
         setMessage(res.msg);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import Cards from "../../layouts/Cards";
 import { useSelector } from "react-redux";
 import SkeletonComp from "../../components/SkeletonComp";
@@ -8,7 +7,6 @@ import EmptyShopSvg from "../../assets/EmptyShopSvg";
 const Shop = () => {
   const searchData = useSelector((state) => state.searchInputReducer);
   const userLoggedIn = useSelector((state) => state.authenticateUser);
-  // console.log(searchData);
 
   const [allProductsData, setAllProductsData] = useState([]);
   const [searchProduct, setSearchProduct] = useState([]);
@@ -28,7 +26,6 @@ const Shop = () => {
           },
         });
         const res = await shopDataApi.json();
-        console.log("yahi change kiya hai", res);
         setAllProductsData(res.data);
         setMarker(false);
         setSecMarker(true);

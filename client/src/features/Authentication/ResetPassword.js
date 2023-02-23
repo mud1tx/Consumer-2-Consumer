@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
 import classes from "./Login.module.css";
@@ -84,7 +84,6 @@ const ResetPassword = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

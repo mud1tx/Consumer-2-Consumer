@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NewPasswordSvg from "../../assets/NewPasswordSvg";
 import { BASE_URL } from "../../BASE_URL";
@@ -114,7 +114,6 @@ const NewPassword = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

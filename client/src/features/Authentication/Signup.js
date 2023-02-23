@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../../BASE_URL";
 import SignUpsvg from "../../assets/SignUpSvg";
@@ -52,7 +52,6 @@ const SignUp = () => {
       });
 
       const formData = await loginApiResponse.json();
-      console.log("signupdata", formData);
       const { ok } = formData;
       const { message } = formData;
       if (!ok) {
@@ -249,7 +248,6 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };
