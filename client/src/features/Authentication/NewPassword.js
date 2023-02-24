@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NewPasswordSvg from "../../assets/NewPasswordSvg";
 import { BASE_URL } from "../../BASE_URL";
+import Loading from "../../components/Loading";
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -12,11 +13,11 @@ const NewPassword = () => {
   const [userLoginData, setUserLoginData] = useState("");
   const [userData, setUserData] = useState({ userId: "", passwordToken: "" });
   const [validate, setValidate] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleInputs = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log("dfdsf", name, value);
     setUserLoginData(value);
   };
 
@@ -42,6 +43,7 @@ const NewPassword = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const resetPasswordApiResponse = await fetch(`${BASE_URL}/new-password`, {
         method: "POST",
         body: JSON.stringify({
@@ -55,23 +57,28 @@ const NewPassword = () => {
       });
 
       const resetData = await resetPasswordApiResponse.json();
-      console.log("resetdata", resetData);
       const { ok } = resetData;
       const { message } = resetData;
       if (!ok) {
+        setLoading(false);
         toast.error(`${message}`);
         setValidate(resetData.validationErrors);
       } else {
+        setLoading(false);
         toast.success(`${message}`);
         navigate("/login");
       }
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
 
   return (
     <>
+    {loading ? (
+        <Loading />
+      ) : (
       <div className=" bg-backgound_white sm:pt-20 min-h-screen flex items-center justify-center">
         <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
@@ -114,6 +121,7 @@ const NewPassword = () => {
           </div>
         </div>
       </div>
+      )}
     </>
   );
 };

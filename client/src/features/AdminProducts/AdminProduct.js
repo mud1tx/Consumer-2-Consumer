@@ -42,7 +42,7 @@ const AdminProduct = () => {
         {marker && (
           <div className="flex flex-wrap bg-main_white p-4  justify-evenly items-center">
             {Array.from({ length: 8 }).map((_, index) => (
-              <SkeletonComp key={index} />
+              <SkeletonComp key={index * Math.random()} />
             ))}
           </div>
         )}
@@ -56,7 +56,10 @@ const AdminProduct = () => {
           //
           [
             secMarker && (
-              <div className="flex flex-col font-Poppins items-center justify-center h-screen">
+              <div
+                className="flex flex-col font-Poppins items-center justify-center h-screen"
+                key={Math.random() * 10000000}
+              >
                 <EmptyAdminSvg />
               </div>
             ),

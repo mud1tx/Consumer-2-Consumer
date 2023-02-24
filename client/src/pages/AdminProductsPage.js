@@ -1,15 +1,8 @@
-import React from 'react'
-import AdminProduct from '../features/AdminProducts/AdminProduct'
-import Navbar from "../components/Navbar"
+import React from "react";
+import AdminProduct from "../features/AdminProducts/AdminProduct";
 
 const AdminProductsPage = () => {
-  return (
-    <>
-     {/* <Navbar/> */}
-     <AdminProduct/>
-    </>
-   
-  )
-}
+  return <AdminProduct />;
+};
 
-export default AdminProductsPage
+export default AdminProductsPage;

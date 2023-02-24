@@ -78,7 +78,10 @@ const Shop = () => {
       ) : (
         [
           secMarker && (
-            <div className="flex h-screen items-center justify-center flex-col ">
+            <div
+              className="flex h-screen items-center justify-center flex-col "
+              key={Math.random() * 10000}
+            >
               <div key="1"></div>
               <div className="">
                 <EmptyShopSvg />

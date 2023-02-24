@@ -33,7 +33,6 @@ const BorrowDetail = () => {
       }
       setMarker(false);
       setSecMarker(true);
-      console.log("borrow", res);
     };
     borrowItemHandler();
   }, [userLoggedIn]);
@@ -57,7 +56,7 @@ const BorrowDetail = () => {
         [
           secMarker && (
             <div
-              key="1"
+              key={Math.random() * 10000}
               className="flex font-Poppins flex-col justify-center h-screen items-center"
             >
               <EmptyBorrowSvg />

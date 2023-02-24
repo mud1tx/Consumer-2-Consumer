@@ -39,7 +39,6 @@ const Lend = () => {
 
   return (
     <>
-      {/* <Navbar/> */}
       <div className=" pt-16 flex mb-4 gap-2  flex-wrap  items-center justify-center   h-full ">
         {marker && (
           <div className=" flex flex-wrap  p-4  justify-evenly items-center">
@@ -59,7 +58,7 @@ const Lend = () => {
             secMarker && (
               <div
                 className="md:text-4xl flex flex-col items-center justify-center h-screen text-lg sm:text-xl text-text_color font-semibold font-Poppins "
-                key="1"
+                key={Math.random() * 10000}
               >
                 <NoProductSvg />
               </div>
