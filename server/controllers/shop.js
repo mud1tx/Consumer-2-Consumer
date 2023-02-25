@@ -106,7 +106,25 @@ exports.getCartProducts = (req, res, next) => {
       user
         .populate("cart.items.productId")
         .then((user) => {
-          const products = user.cart.items;
+          let products = user.cart.items;
+          const cartProducts = [];
+          products = products.filter((prod) => {
+            if (prod.productId.borrowed === false) {
+              cartProducts.push({
+                productId: prod.productId._id,
+                _id: prod._id,
+              });
+              return prod;
+            }
+          });
+          User.findOne({ _id: userId })
+            .then((user) => {
+              user.cart.items = cartProducts;
+              return user.save();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           return res.json({
             ok: true,
             products: products,

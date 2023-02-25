@@ -109,65 +109,122 @@ const ProductDetail = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div>
+        <div className="h-screen text-text_color capitalize">
           <div>
             <div className="2xl:container 2xl:mx-auto h-screen bg-backgound_white lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
               <div className="flex justify-center items-center px-4 py-4 lg:flex-row flex-col-reverse gap-8">
                 <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
-                  <h2 className="font-semibold lg:text-4xl text-3xl lg:leading-9 leading-7 text-primary  mt-4">
-                    {prodDetail?.title}
+                  <h2 className="font-semibold capitalize lg:text-4xl text-3xl lg:leading-9 leading-7 text-primary  mt-4">
+                    <span className="capitalize ">{prodDetail?.title}</span>
                   </h2>
 
-                  <p className=" font-normal text-base leading-6 text-text_color mt-8">
-                    {prodDetail?.description}
+                  <p className=" font-medium text-base capitalize leading-6 text-text_color mt-4">
+                    Description:{" "}
+                    <span className="font-normal text-sm">
+                      {prodDetail?.description}
+                    </span>
                   </p>
-                  <h1 className=" font-normal  leading-6 text-text_color text-lg mt-8">
+                  <h1 className=" font-medium leading-6 text-text_color text-base mt-4">
                     Category:{" "}
-                    <span className="text-base">{prodDetail?.category}</span>
+                    <span className="text-sm font-normal">
+                      {prodDetail?.category}
+                    </span>
                   </h1>
-                  <p className=" font-normal text-base leading-6 text-text_color mt-8">
-                    {prodDetail?.userId.first_name +
-                      " " +
-                      prodDetail?.userId.last_name}
+                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                    UserName:{" "}
+                    <span className="font-normal text-sm">
+                      {prodDetail?.userId.first_name +
+                        " " +
+                        prodDetail?.userId.last_name}
+                    </span>
                   </p>
-                  <p className=" font-normal text-base leading-6 text-text_color mt-8">
-                    {prodDetail?.userId.email}
+                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                    Email:{" "}
+                    <span className="font-normal text-sm">
+                      {" "}
+                      {prodDetail?.userId.email}
+                    </span>
                   </p>
-                  {prodDetail?.userId.address && (
-                    <p className=" font-normal text-base leading-6 text-text_color mt-8">
+                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                    Address:{" "}
+                    <span className="font-normal text-sm">
                       {prodDetail?.userId.address}
-                    </p>
-                  )}
-                  {prodDetail?.userId.pin_code && (
-                    <p className=" font-normal text-base leading-6 text-text_color mt-8">
-                      {prodDetail?.userId.pin_code}
-                    </p>
-                  )}
-                  {prodDetail?.userId.city && (
-                    <p className=" font-normal text-base leading-6 text-text_color mt-8">
-                      {prodDetail?.userId.city}
-                    </p>
-                  )}
-                  {prodDetail?.userId.country && (
-                    <p className=" font-normal text-base leading-6 text-text_color mt-8">
-                      {prodDetail?.userId.country}
-                    </p>
-                  )}
-                  <p className=" font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 mt-6 ">
-                    {prodDetail?.price} INR
+                    </span>
                   </p>
-
-                  <button className="focus:outline-none  focus:ring-2 border bg-primary border-primary hover:bg-backgound_white  duration-700 focus:ring-offset-2 focus:ring-gray-800 font-medium text-base hover:text-primary leading-4  text-text_color w-full py-5 lg:mt-12 mt-6">
-                    Add to shopping bag
-                  </button>
+                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                    Pin:
+                    <span className="font-normal text-sm"></span>{" "}
+                    {prodDetail?.userId.pin_code}
+                  </p>
+                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                    City:
+                    <span className="font-normal text-sm"></span>{" "}
+                    {prodDetail?.userId.city}
+                  </p>
+                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                    country:{" "}
+                    <span className="text-sm font-normal">
+                      {" "}
+                      {prodDetail?.userId.country}
+                    </span>
+                  </p>
+                  <p className=" font-semibold lg:text-2xl flex items-center justify-items-center text-text_color text-xl lg:leading-6 leading-5 mt-4 ">
+                    Product Price:{" "}
+                    <span className="lg:text-xl ml-1">
+                      {" "}
+                      {prodDetail?.price} INR/DAY
+                    </span>
+                  </p>
+                  
+                  {showBorrowBtn && (
+                    <div className="flex border-2 pt-2 py-3 mt-4 border-primary  items-center justify-center">
+                      <p className=" duration-700 text-xs sm:text-lg ">
+                        Days Input From 1 to 30{" "}
+                      </p>
+                      <input
+                        className="ml-2 border border-primary focus:outline-none"
+                        type="number"
+                        min="1"
+                        max="30"
+                        name="days"
+                        value={days}
+                        onChange={(e) => {
+                          setDays(e.target.value);
+                        }}
+                      />
+                      {days && days <= 31 && (
+                        <StripeCheckout
+                          stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
+                          token={() => {
+                            makePayment(prodDetail);
+                          }}
+                          name="PAYMENT"
+                          image="https://picsum.photos/seed/picsum/200/300"
+                          currency="INR"
+                          amount={prodDetail.price * 100 * days}
+                        >
+                          <button
+                            className="hover:bg-primary  text-sm  shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-1 py-1"
+                            type="submit"
+                          >
+                            Borrow
+                          </button>
+                        </StripeCheckout>
+                      )}
+                    </div>
+                  )}
                 </div>
 
-                <div className=" w-full max-w-2xl  pt-16 sm:w-96 md:w-8/12  lg:w-6/12  lg:gap-8 sm:gap-6 gap-4">
+                <div className=" max-w-md">
                   <Carousel
                     showStatus={false}
                     showArrows={false}
                     showIndicators={false}
                     showThumbs={true}
+                    swipeScrollTolerance={20}
+                    centerMode={true}
+                    preventMovementUntilSwipeScrollTolerance={true}
+                    centerSlidePercentage={100}
                   >
                     {prodDetail?.image.map((img, index) => (
                       <div key={index}>
@@ -183,40 +240,6 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-          {showBorrowBtn && (
-            <div>
-              <label>Number of days you want to borrow(1 to 31)</label>
-              <input
-                type="number"
-                min="1"
-                max="30"
-                name="days"
-                value={days}
-                onChange={(e) => {
-                  setDays(e.target.value);
-                }}
-              />
-              {days && days <= 31 && (
-                <StripeCheckout
-                  stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
-                  token={() => {
-                    makePayment(prodDetail);
-                  }}
-                  name="PAYMENT"
-                  image="https://picsum.photos/seed/picsum/200/300"
-                  currency="INR"
-                  amount={prodDetail.price * 100 * days}
-                >
-                  <button
-                    className="hover:bg-primary shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-2 py-1"
-                    type="submit"
-                  >
-                    Borrow
-                  </button>
-                </StripeCheckout>
-              )}
-            </div>
-          )}
         </div>
       )}
     </>

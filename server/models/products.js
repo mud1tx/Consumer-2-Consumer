@@ -33,6 +33,10 @@ const productSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    borrowedUserId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );

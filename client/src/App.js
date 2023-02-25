@@ -13,14 +13,14 @@ import { User } from "./redux/action/authUser";
 import { useDispatch } from "react-redux";
 import ResetPassword from "./features/Authentication/ResetPassword";
 import NewPassword from "./features/Authentication/NewPassword";
-import ProductDetail from "./features/ProductDetail/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BorrowPage from "./pages/BorrowPage";
 import ChatPager from "./pages/ChatPager";
 import Navbar from "./components/Navbar";
-import Loading from "./components/Loading";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,11 +34,12 @@ const App = () => {
   return (
     <>
       <ToastContainer position="bottom-right" autoClose={3000} />
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<ShopPage />} />
         <Route element={<PrivateRoute />}>
-          <Route path="/:prodId" element={<ProductDetail />} />
+          <Route path="/:prodId" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/admin/add-product" element={<AddProductsPage />} />
@@ -48,7 +49,6 @@ const App = () => {
           <Route path="/admin/chats" element={<ChatPager />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/loading" element={<Loading />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/new-password/:token" element={<NewPassword />} />
         <Route path="/signup" element={<Signup />} />

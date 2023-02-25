@@ -1,13 +1,9 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const session = require("express-session");
 const cors = require("cors");
 const User = require("./models/user");
 const Product = require("./models/products");
 const connectDB = require("./config/connectDB");
-// const stripe = require("stripe")(process.env.STRIPE_KEY_SERVER);
 const PORT = process.env.PORT || 5000;
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
@@ -25,15 +21,6 @@ app.use(
   })
 );
 
-// app.use(
-//   express.json({
-//     limit: "5mb",
-//     verify: (req, res, buf) => {
-//       req.rawBody = buf.toString();
-//     },
-//   })
-// );
-
 User.find()
   .then((user) => {
     for (let i = 0; i < user.length; i++) {
@@ -45,6 +32,7 @@ User.find()
                 Product.findOne({ _id: us.lend[i].productId })
                   .then((prod) => {
                     prod.borrowed = false;
+                    prod.borrowedUserId = null;
                     prod.save();
                     return;
                   })
@@ -66,6 +54,7 @@ User.find()
                 Product.findOne({ _id: us.borrow[i].productId })
                   .then((prod) => {
                     prod.borrowed = false;
+                    prod.borrowedUserId = null;
                     prod.save();
                     return;
                   })
@@ -87,7 +76,6 @@ User.find()
 app.use("/admin", adminRoutes);
 app.use(authRoutes);
 app.use(shopRoutes);
-// app.use("/payment", stripe);
 
 const server = app.listen(
   PORT,

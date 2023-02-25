@@ -1,7 +1,6 @@
 .loading_body {
-  width: 99.5vw;
+  width: 99.4vw;
   height: 100vh;
-  background-color: #00000053;
 }
 .socket {
   display: flex;

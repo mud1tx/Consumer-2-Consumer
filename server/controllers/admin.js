@@ -94,6 +94,7 @@ exports.postOrderData = (req, res, next) => {
       Product.findOne({ _id: prodId })
         .then((prod) => {
           prod.borrowed = true;
+          prod.borrowedUserId = userId;
           return prod.save();
         })
         .catch((err) => {
@@ -136,6 +137,7 @@ exports.postOrderData = (req, res, next) => {
       Product.findOne({ _id: prodId })
         .then((prod) => {
           prod.borrowed = true;
+          prod.borrowedUserId = userId;
           return prod.save();
         })
         .catch((err) => {
@@ -180,7 +182,7 @@ exports.getCheckout = (req, res, next) => {
         {
           name: prodData.title,
           currency: "inr",
-          amount: prodData.price * days*100,
+          amount: prodData.price * days * 100,
           quantity: 1,
         },
       ],
@@ -214,20 +216,30 @@ exports.getOrderData = async (req, res, next) => {
   }
 };
 
-exports.postLendData = (req, res, next) => {
+exports.postLendData = async (req, res, next) => {
   const userId = req.body.userId;
   User.findOne({ _id: userId })
-    .then((user) => {
+    .then(async (user) => {
       if (user.lend.length === 0) {
         return res.json({ ok: false, msg: "No product is lended to anyone" });
       }
-      return Product.find({ userId: userId, borrowed: true })
-        .then((data) => {
-          return res.json({ ok: true, data: data });
+      try {
+        var islendProduct = await Product.find({
+          userId: userId,
+          borrowed: true,
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .populate({
+            path: "borrowedUserId",
+            model: "Product",
+            populate: { path: "borrowedUserId", model: "User" },
+          })
+          .populate("borrowedUserId");
+        if (islendProduct) {
+          res.json({ ok: true, data: islendProduct });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     })
     .catch((err) => {
       console.log(err);
