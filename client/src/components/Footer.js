@@ -4,7 +4,7 @@ import { BsFacebook ,BsInstagram ,BsGithub ,BsLinkedin} from "react-icons/bs";
 
 const Footer = () => {
     return (
-        <div className="mx-auto container xl:px-20 lg:px-12 sm:px-6  px-4 py-12">
+        <div className="mx-auto font-Poppins container xl:px-20 lg:px-12 sm:px-6  px-4 py-12">
             <div className="flex flex-col items-center justify-center">
             <div className="flex flex-row items-center ">
                   <img
@@ -27,7 +27,7 @@ const Footer = () => {
                     <BsFacebook className="text-xl   hover:shadow-sm"/>
                     </div>
                     <div className="cursor-pointer  rounded-full p-2 shadow- border-2 border-instagram hover:bg-instagram  text-instagram duration-500   hover:text-main_white">
-                       <BsInstagram className="text-xl shadow-2xl "/>
+                       <BsInstagram className="md:text-xl text-lg shadow-2xl "/>
                     </div>
                     <div className="cursor-pointer  rounded-full p-2 shadow-2xl  border-2 border-github hover:bg-github text-github duration-500   hover:text-main_white">
 
@@ -38,11 +38,11 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="flex items-center mt-6">
-                    <p className="text-base leading-4 text-text_color">
+                    <p className="md:text-base text-xs leading-4 text-text_color">
                         2021-22 <span className="font-semibold">Consumer to Consumer</span>
                     </p>
                     <div className="border-l border-gray-800 pl-2 ml-2">
-                        <p className="text-base leading-4 text-gray-800">Inc. All rigths reserved</p>
+                        <p className="md:text-base text-xs leading-4 text-gray-800">Inc. All rigths reserved</p>
                     </div>
                 </div>
             </div>

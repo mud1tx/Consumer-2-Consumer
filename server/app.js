@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://consumer-2-consumer.netlify.app",
+    origin: "https://consumer-2-consumer.netlify.app", 
     method: ["GET", "POST"],
     credentials: true,
   })

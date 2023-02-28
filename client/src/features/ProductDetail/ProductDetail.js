@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+// import Footer from "../../components/Footer";
 import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import StripeCheckout from "react-stripe-checkout";
@@ -109,80 +110,83 @@ const ProductDetail = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="h-screen text-text_color capitalize">
+        <div className=" text-text_color font-Poppins capitalize">
           <div>
-            <div className="2xl:container 2xl:mx-auto h-screen bg-backgound_white lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
+            <div className="2xl:container 2xl:mx-auto  bg-backgound_white lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
               <div className="flex justify-center items-center px-4 py-4 lg:flex-row flex-col-reverse gap-8">
                 <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
-                  <h2 className="font-semibold capitalize lg:text-4xl text-3xl lg:leading-9 leading-7 text-primary  mt-4">
+                  <h2 className="font-semibold capitalize lg:text-4xl md:text-3xl text-xl lg:leading-9 leading-7 text-primary  mt-4">
                     <span className="capitalize ">{prodDetail?.title}</span>
                   </h2>
 
-                  <p className=" font-medium text-base capitalize leading-6 text-text_color mt-4">
+                  <p className=" font-medium text-base md:text-lg capitalize leading-6 text-text_color mt-4">
                     Description:{" "}
-                    <span className="font-normal text-sm">
+                    <span className="font-normal ml-2 md:text-base text-xs">
                       {prodDetail?.description}
                     </span>
                   </p>
-                  <h1 className=" font-medium leading-6 text-text_color text-base mt-4">
+                  <h1 className=" font-medium text-base md:text-lg leading-6 text-text_color  mt-4">
                     Category:{" "}
-                    <span className="text-sm font-normal">
+                    <span className="text-xs  ml-2  md:text-base font-normal">
                       {prodDetail?.category}
                     </span>
                   </h1>
-                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                  <p className="  font-medium text-base md:text-lg leading-6 text-text_color mt-4">
                     UserName:{" "}
-                    <span className="font-normal text-sm">
+                    <span className="font-normal   ml-2  text-xs md:text-base">
                       {prodDetail?.userId.first_name +
                         " " +
                         prodDetail?.userId.last_name}
                     </span>
                   </p>
-                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                  <p className=" font-medium text-base md:text-lg leading-6 text-text_color mt-4">
                     Email:{" "}
-                    <span className="font-normal text-sm">
+                    <span className="font-normal  ml-2  text-xs md:text-base">
                       {" "}
                       {prodDetail?.userId.email}
                     </span>
                   </p>
-                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                  <p className=" font-medium text-base md:text-lg leading-6 text-text_color mt-4">
                     Address:{" "}
-                    <span className="font-normal text-sm">
+                    <span className="font-normal  ml-2  text-xs md:text-base">
                       {prodDetail?.userId.address}
                     </span>
                   </p>
-                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                  <p className=" font-medium text-base md:text-lg leading-6 text-text_color mt-4">
                     Pin:
-                    <span className="font-normal text-sm"></span>{" "}
-                    {prodDetail?.userId.pin_code}
+                    <span className="font-normal text-xs  ml-2  md:text-base">
+                      {prodDetail?.userId.pin_code}
+                    </span>
                   </p>
-                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                  <p className=" font-medium text-base md:text-lg leading-6 text-text_color mt-4">
                     City:
-                    <span className="font-normal text-sm"></span>{" "}
-                    {prodDetail?.userId.city}
+                    <span className="font-normal text-xs  ml-2  md:text-base">
+                      {" "}
+                      {prodDetail?.userId.city}
+                    </span>
                   </p>
-                  <p className=" font-medium text-base leading-6 text-text_color mt-4">
+                  <p className=" font-medium text-base md:text-lg leading-6 text-text_color mt-4">
                     country:{" "}
-                    <span className="text-sm font-normal">
+                    <span className="text-xs  ml-2  md:text-base font-normal">
                       {" "}
                       {prodDetail?.userId.country}
                     </span>
                   </p>
-                  <p className=" font-semibold lg:text-2xl flex items-center justify-items-center text-text_color text-xl lg:leading-6 leading-5 mt-4 ">
+                  <p className=" font-semibold lg:text-2xl flex items-center justify-items-center text-text_color text-lg lg:leading-6 leading-5 mt-4 ">
                     Product Price:{" "}
-                    <span className="lg:text-xl ml-1">
+                    <span className="md:text-lg   ml-2  text-lg text-primary ">
                       {" "}
                       {prodDetail?.price} INR/DAY
                     </span>
                   </p>
-                  
+
                   {showBorrowBtn && (
-                    <div className="flex border-2 pt-2 py-3 mt-4 border-primary  items-center justify-center">
+                    <div className="flex border-2 pt-2 py-3 mt-4 duration-700 border-primary  items-center justify-center">
                       <p className=" duration-700 text-xs sm:text-lg ">
                         Days Input From 1 to 30{" "}
                       </p>
                       <input
-                        className="ml-2 border border-primary focus:outline-none"
+                        className="ml-2 border duration-700 border-primary focus:outline-none"
                         type="number"
                         min="1"
                         max="30"
@@ -192,26 +196,26 @@ const ProductDetail = () => {
                           setDays(e.target.value);
                         }}
                       />
-                      {days && days <= 31 && (
-                        <StripeCheckout
-                          stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
-                          token={() => {
-                            makePayment(prodDetail);
-                          }}
-                          name="PAYMENT"
-                          image="https://picsum.photos/seed/picsum/200/300"
-                          currency="INR"
-                          amount={prodDetail.price * 100 * days}
-                        >
-                          <button
-                            className="hover:bg-primary  text-sm  shadow-lg duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-1 py-1"
-                            type="submit"
-                          >
-                            Borrow
-                          </button>
-                        </StripeCheckout>
-                      )}
                     </div>
+                  )}
+                  {days && days <= 31 && (
+                    <StripeCheckout
+                      stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
+                      token={() => {
+                        makePayment(prodDetail);
+                      }}
+                      name="PAYMENT"
+                      image="https://picsum.photos/seed/picsum/200/300"
+                      currency="INR"
+                      amount={prodDetail.price * 100 * days}
+                    >
+                      <button
+                        className="w-full text-xs sm:text-lg   duration-700 mt-2 border-2 border-primary pt-3 pb-3 bg-primary hover:bg-backgound_white "
+                        type="submit"
+                      >
+                        Borrow
+                      </button>
+                    </StripeCheckout>
                   )}
                 </div>
 
@@ -229,7 +233,7 @@ const ProductDetail = () => {
                     {prodDetail?.image.map((img, index) => (
                       <div key={index}>
                         <img
-                          className=""
+                          className="rounded-lg"
                           src={`data:image/jpeg;base64,${img.data}`}
                           alt={`${prodDetail?.category}`}
                         />
