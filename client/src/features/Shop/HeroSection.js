@@ -108,14 +108,13 @@ const HeroSection = () => {
               <span>{"  "}To</span> Consum<span className="text-primary">er</span>
             </h1>
             <p className="dark:text-gray-300 md:w-9/12 lg:w-11/12 xl:w-10/12 2xl:9/12 text-base leading-normal text-text_color mt-5">
-              Get inspired by our curated selection of luxiwood interiors. We
-              hope get inspired to have luxiwood interior yourself. You’ll find
-              tips here where you can buy a lot of cool furniture,decorations,
-              plants, etc.
+            C2C stands for “consumer to consumer” or “customer to customer”; it’s a business model that fosters commerce between private individuals, usually in an online environment.
+             C2C companies act as intermediaries to foster engagement and help 
+             consumers reach bigger audiences.
             </p>
             <div>
               <button className="dark:bg-white  gap-4 text-primary hover:text-text_color duration-700 rounded-sm dark:hover:bg-gray-400 dark:hover:text-gray-100 dark:text-gray-800 sm:w-auto w-full mt-8 text-base justify-between focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none hover:bg-primary font-medium leading-none  py-4 px-8 border border-primary flex items-center">
-                Swipe Down <AiOutlineArrowDown />
+              Swipe Down <AiOutlineArrowDown ></AiOutlineArrowDown>
               </button>
             </div>
           </div>

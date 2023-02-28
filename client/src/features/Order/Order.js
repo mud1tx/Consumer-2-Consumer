@@ -77,7 +77,7 @@ const Order = () => {
                             {product.productId.image.map((img, index) => (
                               <div key={index}>
                                 <img
-                                  className="lg:h-40 h-64   p-2  md:w-full object-cover object-center"
+                                  className="lg:h-40 h-64  rounded-lg p-2  md:w-full object-cover object-center"
                                   src={`data:image/jpeg;base64,${img.data}`}
                                   alt={`${product.productId.category}`}
                                 />
@@ -90,56 +90,57 @@ const Order = () => {
                           <div className="flex  gap-4 flex-col sm:flex-row ">
                             <div className="basicDetails lg:border-b-0 border-b p-2 basis-2  flex-col  flex justify-between max-w-md">
                               <p className="">
-                                <span className="font-medium  text-lg ">
+                                <span className="font-medium  text-base md:text-lg ">
                                   Product Id:{" "}
                                 </span>
-                                <span className="text-base">
+                                <span className="md:text-base text-xs">
                                   {" "}
                                   {product.productId._id}
                                 </span>
                               </p>
                               <p className="">
-                                <span className="text-lg  font-medium">
+                                <span className="md:text-lg text-base  font-medium">
                                   Category:
                                 </span>
-                                <span className="text-base">
+                                <span className=" text-xs ml-2 md:text-base">
                                   {product.productId.category}
                                 </span>
                               </p>
                               <p className="">
-                                <span className="text-lg font-medium">
+                                <span className="md:text-lg text-base font-medium">
                                   Title:{" "}
                                 </span>{" "}
-                                <span className="text-base">
+                                <span className="md:text-base text-xs">
                                   {product.productId.title}{" "}
                                 </span>
                               </p>
                               <p className="">
-                                <span className="text-lg font-medium  ">
+                                <span className="md:text-lg text-base font-medium  ">
                                   Product Details:{" "}
                                 </span>
-                                {product.productId.description}
+                                <span className="md:text-base text-xs">{product.productId.description}</span>
+                              
                               </p>
                             </div>
 
                             <div className="font-Poppins basis-2 p-2 lg:border-b-0 border-b lg:border-l">
                               <p className="">
-                                <span className="font-medium text-lg">
+                                <span className="font-medium md:text-lg text-base">
                                   Price:
                                 </span>
-                                <span className="text-base">
+                                <span className="md:text-base ml-2 font-medium text-xs">
                                   {product.productId.price}
                                 </span>
-                                <span className="text-primary text-sm ml-1">
+                                <span className="text-primary text-xs md:text-sm ml-1">
                                   {" "}
                                   INR/DAY
                                 </span>
                               </p>
                               <p className="">
-                                <span className="text-lg font-medium ">
+                                <span className="md:text-lg text-base font-medium ">
                                   Owner Name:
                                 </span>
-                                <span className="text-base ">
+                                <span className="md:text-base text-xs  ml-2">
                                   {product.productId.userId.first_name +
                                     " " +
                                     product.productId.userId.first_name}
@@ -147,15 +148,15 @@ const Order = () => {
                               </p>
 
                               <p className="">
-                                <span className="text-lg font-medium ">
+                                <span className="md:text-lg text-base font-medium ">
                                   Email:{" "}
                                 </span>
-                                <span>{product.productId.userId.email}</span>
+                                <span className="md:text-base ml-2 text-xs">{product.productId.userId.email}</span>
                               </p>
                             </div>
                           </div>
                           <div className="basis lg:border-l p-2 ">
-                            <p>
+                            <p className="text-xs capitalize text-primary">
                               {product.expire > Date.now()
                                 ? `${Math.ceil(
                                     (product.expire - Date.now()) / 86400000
@@ -166,35 +167,35 @@ const Order = () => {
                             </p>
 
                             <div className=" ">
-                              <span className="text-lg flex font-medium ">
+                              <span className="md:text-lg text-base flex items-center font-medium ">
                                 Address
                                 {product.productId.userId.address && (
-                                  <p className=" text-base ml-1 font-normal">
+                                  <p className=" md:text-base text-xs ml-2  font-normal">
                                     {product.productId.userId.address}
                                   </p>
                                 )}
                               </span>
 
-                              <span className="text-lg flex font-medium ">
+                              <span className="md:text-lg text-base flex items-center font-medium ">
                                 Pincode:
                                 {product.productId.userId.pin_code && (
-                                  <p className=" text-lg ml-1 font-medium">
+                                  <p className=" md:text-base text-xs ml-2 font-normal">
                                     {product.productId.userId.pin_code}
                                   </p>
                                 )}
                               </span>
-                              <span className="text-lg flex font-medium">
+                              <span className="md:text-lg text-base flex items-center font-medium">
                                 City:
                                 {product.productId.userId.city && (
-                                  <p className="text-base font-normal ml-1 ">
+                                  <p className="md:text-base text-xs font-normal ml-2 ">
                                     {product.productId.userId.city}
                                   </p>
                                 )}
                               </span>
-                              <span className="text-lg flex  font-medium">
-                                Country
+                              <span className="md:text-lg text-base flex  items-center font-medium">
+                                Country:
                                 {product.productId.userId.country && (
-                                  <p className="font-normal text-base ml-1">
+                                  <p className="font-normal text-xs md:text-base ml-2">
                                     {product.productId.userId.country}
                                   </p>
                                 )}
