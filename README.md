@@ -29,6 +29,10 @@ SENDGRID_KEY=###########SENDGRID KEY FOR SENDING MAILS
 NODE_ENV=production
 BASE_URL=http://localhost:5000
 CLIENT_URL=http://localhost:3000
+- Step 5: Now to run the server put the command "npm run server" in the terminal at the root directory
+- Step 6: To run the client go to client folder by typing "cd client" in the terminal
+- Step 7: Now put the command "npm start" to start the react
+- Step 8: Enjoy😃!!!
 
 [Links](https://consumer-2-consumer.netlify.app/)
 
