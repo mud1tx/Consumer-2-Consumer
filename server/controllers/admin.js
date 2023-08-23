@@ -275,114 +275,193 @@ exports.postBorrowData = async (req, res, next) => {
 
 /////////////////////////////////////////////////////////////////
 
-exports.accessChat = async (req, res, next) => {
-  const currentUserId = req.body.senderId;
-  const userId = req.body.receiverId;
-
-  if (!userId) {
-    console.log("UserId param not sent with request");
-    return res.sendStatus(400);
-  }
-
-  var isChat = await Chat.find({
-    isGroupChat: false,
-    $and: [
-      { users: { $elemMatch: { $eq: currentUserId } } },
-      { users: { $elemMatch: { $eq: userId } } },
+exports.createChat = async (req, res) => {
+  const chat = await Chat.find({
+    $or: [
+      { members: [req.body.senderId, req.body.receiverId] },
+      { members: [req.body.receiverId, req.body.senderId] },
     ],
-  })
-    .populate("users", "-password")
-    .populate("latestMessage");
-
-  isChat = await User.populate(isChat, {
-    path: "latestMessage.sender",
-    select: "first_name last_name email",
   });
-
-  if (isChat.length > 0) {
-    res.send(isChat[0]);
-  } else {
-    var chatData = {
-      chatName: "sender",
-      isGroupChat: false,
-      users: [currentUserId, userId],
-    };
-
-    try {
-      const createdChat = await Chat.create(chatData);
-      const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
-        "users",
-        "-password"
-      );
-      res.json({ ok: true, data: FullChat });
-    } catch (error) {
-      res.json({ ok: false, msg: "Conversation already created" });
-    }
+  console.log("bjbjhbhjbhbhbjbhjhbj", chat);
+  if (chat) {
+    return res.status(201).json("Already present in chatBox");
   }
-};
-
-exports.fetchChats = async (req, res, next) => {
-  const currentUserId = req.headers.currentuserid;
+  const newChat = new Chat({
+    members: [req.body.senderId, req.body.receiverId],
+  });
   try {
-    Chat.find({ users: { $elemMatch: { $eq: currentUserId } } })
-      .populate("users", "-password")
-      .populate("groupAdmin", "-password")
-      .populate("latestMessage")
-      .sort({ updatedAt: -1 })
-      .then(async (results) => {
-        results = await User.populate(results, {
-          path: "latestMessage.sender",
-          select: "first_name last_name email",
-        });
-        res.status(200).send(results);
-      });
+    const result = await newChat.save();
+    res.status(200).json(result);
   } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+    res.status(500).json(error);
   }
 };
 
-exports.allMessages = async (req, res) => {
+exports.userChats = async (req, res) => {
   try {
-    const messages = await Message.find({ chat: req.params.chatId })
-      .populate("sender", "first_name last_name email")
-      .populate("chat");
-    res.send(messages);
-  } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
-  }
-};
-
-exports.sendMessage = async (req, res) => {
-  const { currentUserId, content, chatId } = req.body;
-
-  if (!content || !chatId) {
-    console.log("Invalid data passed into request");
-    return res.sendStatus(400);
-  }
-
-  var newMessage = {
-    sender: currentUserId,
-    content: content,
-    chat: chatId,
-  };
-
-  try {
-    var message = await Message.create(newMessage);
-
-    message = await message.populate("sender", "name");
-    message = await message.populate("chat");
-    message = await User.populate(message, {
-      path: "chat.users",
-      select: "first_name last_name email",
+    const chat = await Chat.find({
+      members: { $in: [req.params.userId] },
     });
-
-    await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
-
-    res.json(message);
+    res.status(200).json(chat);
   } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+    res.status(500).json(error);
   }
 };
+
+exports.findChat = async (req, res) => {
+  try {
+    const chat = await Chat.findOne({
+      members: { $all: [req.params.firstId, req.params.secondId] },
+    });
+    res.status(200).json(chat);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.addMessage = async (req, res) => {
+  const { chatId, senderId, text } = req.body.message;
+  const message = new Message({
+    chatId,
+    senderId,
+    text,
+  });
+  try {
+    const result = await message.save();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.getMessages = async (req, res) => {
+  const { chatId } = req.params;
+  try {
+    const result = await Message.find({ chatId });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.getUser = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const result = await User.findOne({ _id: userId });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// exports.accessChat = async (req, res, next) => {
+//   const currentUserId = req.body.senderId;
+//   const userId = req.body.receiverId;
+
+//   if (!userId) {
+//     console.log("UserId param not sent with request");
+//     return res.sendStatus(400);
+//   }
+
+//   var isChat = await Chat.find({
+//     isGroupChat: false,
+//     $and: [
+//       { users: { $elemMatch: { $eq: currentUserId } } },
+//       { users: { $elemMatch: { $eq: userId } } },
+//     ],
+//   })
+//     .populate("users", "-password")
+//     .populate("latestMessage");
+
+//   isChat = await User.populate(isChat, {
+//     path: "latestMessage.sender",
+//     select: "first_name last_name email",
+//   });
+
+//   if (isChat.length > 0) {
+//     res.send(isChat[0]);
+//   } else {
+//     var chatData = {
+//       chatName: "sender",
+//       isGroupChat: false,
+//       users: [currentUserId, userId],
+//     };
+
+//     try {
+//       const createdChat = await Chat.create(chatData);
+//       const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
+//         "users",
+//         "-password"
+//       );
+//       res.json({ ok: true, data: FullChat });
+//     } catch (error) {
+//       res.json({ ok: false, msg: "Conversation already created" });
+//     }
+//   }
+// };
+
+// exports.fetchChats = async (req, res, next) => {
+//   const currentUserId = req.headers.currentuserid;
+//   try {
+//     Chat.find({ users: { $elemMatch: { $eq: currentUserId } } })
+//       .populate("users", "-password")
+//       .populate("groupAdmin", "-password")
+//       .populate("latestMessage")
+//       .sort({ updatedAt: -1 })
+//       .then(async (results) => {
+//         results = await User.populate(results, {
+//           path: "latestMessage.sender",
+//           select: "first_name last_name email",
+//         });
+//         res.status(200).send(results);
+//       });
+//   } catch (error) {
+//     res.status(400);
+//     throw new Error(error.message);
+//   }
+// };
+
+// exports.allMessages = async (req, res) => {
+//   try {
+//     const messages = await Message.find({ chat: req.params.chatId })
+//       .populate("sender", "first_name last_name email")
+//       .populate("chat");
+//     res.send(messages);
+//   } catch (error) {
+//     res.status(400);
+//     throw new Error(error.message);
+//   }
+// };
+
+// exports.sendMessage = async (req, res) => {
+//   const { currentUserId, content, chatId } = req.body;
+
+//   if (!content || !chatId) {
+//     console.log("Invalid data passed into request");
+//     return res.sendStatus(400);
+//   }
+
+//   var newMessage = {
+//     sender: currentUserId,
+//     content: content,
+//     chat: chatId,
+//   };
+
+//   try {
+//     var message = await Message.create(newMessage);
+
+//     message = await message.populate("sender", "name");
+//     message = await message.populate("chat");
+//     message = await User.populate(message, {
+//       path: "chat.users",
+//       select: "first_name last_name email",
+//     });
+
+//     await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
+
+//     res.json(message);
+//   } catch (error) {
+//     res.status(400);
+//     throw new Error(error.message);
+//   }
+// };

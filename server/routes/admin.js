@@ -8,6 +8,8 @@ const compress = require("../util/sharp");
 
 const router = express.Router();
 
+router.get(`/user/:userId`, adminController.getUser);
+
 router.post(
   "/add-product",
   // store.array("images", 12),
@@ -28,12 +30,15 @@ router.post("/borrow", adminController.postBorrowData);
 
 router.post("/checkout", adminController.getCheckout);
 
-router.post("/chats", adminController.accessChat);
+router.post("/chats", adminController.createChat);
 
-router.get("/chats", adminController.fetchChats);
+router.get("/chats/:userId", adminController.userChats);
 
-router.get("/message/:chatId", adminController.allMessages);
+router.get("/chats/find/:firstId/:secondId", adminController.findChat);
+// router.get("/chats", adminController.fetchChats);
 
-router.post("/message", adminController.sendMessage);
+router.get("/message/:chatId", adminController.getMessages);
+
+router.post("/message", adminController.addMessage);
 
 module.exports = router;

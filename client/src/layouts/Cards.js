@@ -1,10 +1,10 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { BsCartCheck ,BsFillCartCheckFill } from "react-icons/bs";
+import { BsCartCheck, BsFillCartCheckFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaWhatsappSquare,FaWhatsapp} from "react-icons/fa";
+import { FaWhatsappSquare, FaWhatsapp } from "react-icons/fa";
 import { AddToCart } from "../redux/action/addCart";
 import { toast } from "react-toastify";
 
@@ -59,14 +59,14 @@ const Cards = (props) => {
         },
       });
       const res = await newConvApi.json();
-      const { ok } = res;
-      if (!ok) {
+      console.log("res kya hai", res);
+      if (res.status === 200) {
         navigate("/admin/chats");
       } else {
         navigate("/admin/chats");
-        if (!chats.find((c) => c._id === res.data._id)) {
-          setChats([res, ...chats]);
-        }
+        // if (!chats.find((c) => c._id === res.data._id)) {
+        //   setChats([res, ...chats]);
+        // }
       }
     } catch (err) {
       console.log("error", err);
