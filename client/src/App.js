@@ -16,7 +16,7 @@ import NewPassword from "./features/Authentication/NewPassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BorrowPage from "./pages/BorrowPage";
-import ChatPager from "./pages/ChatPager";
+import ChatPage from "./pages/ChatPage";
 import Navbar from "./components/Navbar";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Footer from "./components/Footer";
@@ -46,14 +46,14 @@ const App = () => {
           <Route path="/admin/admin-products" element={<AdminProductsPage />} />
           <Route path="/admin/lend" element={<LendPage />} />
           <Route path="/admin/borrow" element={<BorrowPage />} />
-          <Route path="/admin/chats" element={<ChatPager />} />
+          <Route path="/admin/chats" element={<ChatPage />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/reset" element={<ResetPassword />} />
         <Route path="/new-password/:token" element={<NewPassword />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-      <Footer />
+      {window.location.pathname !== "/admin/chats" && <Footer />}
     </>
   );
 };

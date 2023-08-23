@@ -45,7 +45,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=" fixed font-Poppins mb-10 bg-main_white shadow-sm  w-full z-40  ">
+      <div className=" sticky top-0 font-Poppin bg-main_white shadow-sm  w-full z-40  ">
         {/* Code block starts */}
         <nav className="shadow    xl:block hidden  bg-main_white">
           <div className="mx-auto container px-6 py-2 xl:py-0">
@@ -57,6 +57,9 @@ const Navbar = () => {
                       className="rounded h-10 w-10 object-cover"
                       alt="Logo"
                       src={require("../assets/company-logo.png")}
+                      onClick={() => {
+                        navigate("/");
+                      }}
                     />
                   </div>
                 </NavLink>
@@ -124,6 +127,9 @@ const Navbar = () => {
                       className="  focus:shadow-xl drop-shadow-md  focus:outline-none rounded w-full bg-backgound_white text-sm text-text_color pl-8   py-2"
                       type="text"
                       placeholder="Search"
+                      onClick={() => {
+                        navigate("/");
+                      }}
                       onChange={(e) => {
                         const val = e.target.value;
                         dispatch(
@@ -190,12 +196,15 @@ const Navbar = () => {
         {/* For the mobile responsive nav bar started from here */}
 
         <nav>
-          <div className="py-2 px-6 w-full flex xl:hidden justify-between items-center bg-main_white fixed top-0 z-10">
+          <div className="py-2 px-6 w-full flex xl:hidden justify-between items-center bg-main_white sticky top-0 z-10">
             <div className="w-24">
               <img
                 className="rounded h-10 w-10 object-cover"
                 alt="Logo"
                 src={require("../assets/company-logo.png")}
+                onClick={() => {
+                  navigate("/");
+                }}
               />
             </div>
             <div className="flex items-center duration-700 ">
@@ -212,6 +221,9 @@ const Navbar = () => {
                         payload: val,
                       })
                     );
+                  }}
+                  onClick={() => {
+                    navigate("/");
                   }}
                 />
                 <CiSearch className="text-2xl text-text_color absolute pl-2  " />

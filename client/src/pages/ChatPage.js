@@ -1,8 +1,8 @@
 import React from "react";
 import Chat from "../features/Chat/Chat";
 
-const ChatPager = () => {
+const ChatPage = () => {
   return <Chat />;
 };
 
-export default ChatPager;
+export default ChatPage;
