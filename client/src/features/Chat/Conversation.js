@@ -11,7 +11,7 @@ const Conversation = ({ data, currentUser, online }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("sajna", currentUser);
+    // console.log("sajna", currentUser);
     const userId = data.members.find((id) => id !== currentUser);
 
     const getUserData = async () => {

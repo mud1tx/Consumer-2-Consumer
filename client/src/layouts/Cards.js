@@ -151,16 +151,16 @@ const Cards = (props) => {
                 </p>
 
                 <div className="flex items-center flex-row  justify-center gap-3">
-                  {userLoggedIn?.isLoggedIn && (
-                    <button
-                      className="hover:bg-primary font-Poppins  duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-1 py-1"
-                      onClick={() => {
-                        navigate(`/${product._id}`);
-                      }}
-                    >
-                      Details
-                    </button>
-                  )}
+                  {/* {userLoggedIn?.isLoggedIn && ( */}
+                  <button
+                    className="hover:bg-primary font-Poppins  duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-1 py-1"
+                    onClick={() => {
+                      navigate(`/${product._id}`);
+                    }}
+                  >
+                    Details
+                  </button>
+                  {/* )} */}
                   {showDeleteBtn && (
                     <button
                       className="hover:bg-primary  duration-700 border  px-1 py-1 border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  "

@@ -39,7 +39,7 @@ const Chat = () => {
   }, [userLoggedIn?.user?._id]);
 
   const handleInput = (e) => {
-    console.log("aaya kya", e);
+    // console.log("aaya kya", e);
     setsearchChatUser(e.target.value);
   };
 
@@ -49,7 +49,7 @@ const Chat = () => {
     socket.current.emit("new-user-add", userLoggedIn?.user?._id);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
-      console.log(onlineUsers);
+      // console.log(onlineUsers);
     });
   }, [userLoggedIn?.user?._id]);
 
@@ -63,7 +63,7 @@ const Chat = () => {
   // Get the message from socket server
   useEffect(() => {
     socket.current.on("recieve-message", (data) => {
-      console.log(data);
+      // console.log(data);
       setReceivedMessage(data);
     });
   }, []);
