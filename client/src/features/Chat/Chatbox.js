@@ -51,7 +51,7 @@ const Chatbox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
           }
         );
         const res = await fetchMessages.json();
-        console.log("mess", res);
+        // console.log("mess", res);
         setMessages(res);
       } catch (error) {
         console.log(error);
@@ -92,7 +92,7 @@ const Chatbox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
         },
       });
       const res = await SendMessageApi.json();
-      console.log("res", res);
+      // console.log("res", res);
       setMessages([...messages, res]);
       setNewMessage("");
     } catch {
@@ -102,7 +102,7 @@ const Chatbox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
 
   // Receive Message from parent component
   useEffect(() => {
-    console.log("Message Arrived: ", receivedMessage);
+    // console.log("Message Arrived: ", receivedMessage);
     if (receivedMessage !== null && receivedMessage?.chatId === chat?._id) {
       setMessages([...messages, receivedMessage]);
     }

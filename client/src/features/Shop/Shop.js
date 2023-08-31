@@ -54,7 +54,7 @@ const Shop = () => {
   }, [searchData, allProductsData]);
 
   return (
-    <div className="   w-full h-full ">
+    <div className="   w-full h-full " id="products">
       <h1 className="  text-lg font-Poppins text-center bg-backgound_white text-primary  md:text-4xl font-semibold ">
         Feature Products SoFar:
       </h1>

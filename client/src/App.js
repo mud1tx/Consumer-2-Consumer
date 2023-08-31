@@ -38,8 +38,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<ShopPage />} />
+        <Route path="/:prodId" element={<ProductDetailPage />} />
         <Route element={<PrivateRoute />}>
-          <Route path="/:prodId" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/admin/add-product" element={<AddProductsPage />} />

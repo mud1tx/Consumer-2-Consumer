@@ -32,9 +32,9 @@ const ProductDetail = () => {
     } else {
       setLoading(false);
       if (
-        productData.product.userId._id === userLoggedIn.user._id ||
-        (productData.product.borrowed === true &&
-          userLoggedIn.user._id !== productData.product.userId._id)
+        productData?.product?.userId?._id === userLoggedIn?.user?._id ||
+        (productData?.product?.borrowed === true &&
+          userLoggedIn?.user?._id !== productData?.product?.userId?._id)
       ) {
         setShowBorrowBtn(false);
       }
@@ -180,7 +180,7 @@ const ProductDetail = () => {
                     </span>
                   </p>
 
-                  {showBorrowBtn && (
+                  {userLoggedIn?.user?._id && showBorrowBtn && (
                     <div className="flex border-2 pt-2 py-3 mt-4 duration-700 border-primary  items-center justify-center">
                       <p className=" duration-700 text-xs sm:text-lg ">
                         Days Input From 1 to 30{" "}
@@ -198,7 +198,7 @@ const ProductDetail = () => {
                       />
                     </div>
                   )}
-                  {days && days <= 31 && (
+                  {userLoggedIn?.user?._id && days && days <= 31 && (
                     <StripeCheckout
                       stripeKey="pk_test_51LO0nNSBfCKAZDAkKq9TINx0QylNNPZB2VuFPQwLPnlRudxwz0x0PPTAl3I3SVjp6479PpXtgkTswBseoBwm8MWk002drvO5f4"
                       token={() => {
