@@ -283,7 +283,7 @@ exports.createChat = async (req, res) => {
     ],
   });
   console.log("bjbjhbhjbhbhbjbhjhbj", chat);
-  if (chat) {
+  if (chat.length) {
     return res.status(201).json("Already present in chatBox");
   }
   const newChat = new Chat({
