@@ -76,7 +76,7 @@ const AddProducts = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="pt-20">
+        <div className=" container pt-20">
           <main className={classes.addProduct_form}>
             <form className={classes.product_form} onSubmit={postAddProduct}>
               <div className={classes.form_control}>

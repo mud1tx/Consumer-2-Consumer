@@ -1,21 +1,23 @@
 import React, { useRef, useState, useEffect } from "react";
 import ChatBox from "./Chatbox";
 import Conversation from "./Conversation";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import "./Chat.css";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../BASE_URL";
 import { io } from "socket.io-client";
-
+import { GiHamburgerMenu } from "react-icons/gi";
 const Chat = () => {
   const socket = useRef();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
+  const [profile, setProfile] = useState(true);
   const [chats, setChats] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
   const [receivedMessage, setReceivedMessage] = useState(null);
   const [searchChatUser, setsearchChatUser] = useState();
-
+  // onClick={() => setProfile(!profile)}
   // // Get the chat in chat section
   useEffect(() => {
     const getChats = async () => {
@@ -77,42 +79,49 @@ const Chat = () => {
   };
 
   return (
-    <div className="Chat">
-      {/* Left Side */}
-      <div className="Left-side-chat">
-        <input type="search" value={searchChatUser} onChange={handleInput} />
-        <div className="Chat-container">
-          <h2>Chats</h2>
-          <div className="Chat-list">
-            {chats.map((chat) => (
-              <div
-                key={chat._id}
-                onClick={() => {
-                  setCurrentChat(chat);
-                }}
-              >
-                <Conversation
-                  data={chat}
-                  currentUser={userLoggedIn?.user?._id}
-                  online={checkOnlineStatus(chat)}
-                />
+    <>
+      <button
+        onClick={() => setProfile(!profile)}
+        className="border border-black/40 flex p-2 rounded-lg items-center justify-items-center"
+      >
+        Chats <AiOutlineArrowRight className="w-3 h-3 text-text_color" />
+      </button>
+
+      <div className="Chat_Mobile">
+        {/* Left Side */}
+        {profile && (
+          <div className="Left-side-chat">
+            <div className="Chat-container">
+              <div className="Chat-list">
+                {chats.map((chat) => (
+                  <div
+                    key={chat._id}
+                    onClick={() => {
+                      setCurrentChat(chat);
+                      setProfile((val) => !val);
+                    }}
+                  >
+                    <Conversation
+                      data={chat}
+                      currentUser={userLoggedIn?.user?._id}
+                      online={checkOnlineStatus(chat)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
+        )}
+        <div className="Right-side-chat">
+          <ChatBox
+            chat={currentChat}
+            currentUser={userLoggedIn?.user?._id}
+            setSendMessage={setSendMessage}
+            receivedMessage={receivedMessage}
+          />
         </div>
       </div>
-
-      {/* Right Side */}
-
-      <div className="Right-side-chat">
-        <ChatBox
-          chat={currentChat}
-          currentUser={userLoggedIn?.user?._id}
-          setSendMessage={setSendMessage}
-          receivedMessage={receivedMessage}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

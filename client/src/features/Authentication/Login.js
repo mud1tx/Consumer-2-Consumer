@@ -67,9 +67,9 @@ const Login = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className=" bg-backgound_white font-Poppins sm:pt-20  min-h-screen flex items-center justify-center ">
-          <div className="   flex bg-main_white rounded shadow-lg max-w-4xl px-2 py-4 items-center">
-            <div className="md:w-1/2  mr-3 ml-3 px-8 md:px-16">
+        <div className="  font-Poppins h-full  flex items-center justify-center ">
+          <div className=" flex  md:max-w-4xl w-full px-2 py-4 items-center">
+            <div className="md:w-1/2 w-full  mr-3 ml-3 px-4 ">
               <div>
                 <h2 className="font-bold text-4xl  px-8 text-primary text-shadow-lg ">
                   Log In

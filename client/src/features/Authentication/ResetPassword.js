@@ -47,9 +47,9 @@ const ResetPassword = () => {
 
   return (
     <>
-      <div className="bg-backgound_white font-Poppins font-Poppins sm:pt-5 min-h-screen flex items-center justify-center">
-        <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
-          <div className="md:w-1/2 px-8 md:px-16">
+      <div className=" font-Poppins  h-full flex items-center justify-center">
+        <div className=" flex  w-full md:max-w-4xl  items-center">
+          <div className="md:w-1/2 px-8 w-full">
             <h2 class="font-bold text-3xl text-primary mb-10">
               Reset Password
             </h2>
@@ -80,7 +80,7 @@ const ResetPassword = () => {
             </p>
           </div>
           <div class="md:block hidden w-1/2">
-          <ResetSvg/>
+            <ResetSvg />
           </div>
         </div>
       </div>

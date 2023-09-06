@@ -17,9 +17,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BorrowPage from "./pages/BorrowPage";
 import ChatPage from "./pages/ChatPage";
-import Navbar from "./components/Navbar";
+
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<ShopPage />} />
+
         <Route path="/:prodId" element={<ProductDetailPage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/cart" element={<CartPage />} />

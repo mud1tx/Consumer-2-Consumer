@@ -77,11 +77,11 @@ const SignUp = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="  font-Poppins  bg-backgound_white sm:pt-20  min-h-screen flex items-center justify-center">
-          <div className="  bg-main_white flex rounded shadow-lg max-w-4xl px-2 py-4 items-center">
-            <div className="md:w-11/12 px-4 md:px-16">
-              <h2 className="font-bold text-xl md:text-3xl px-8 text-primary">
-                Sign Up
+        <div className="  font-Poppins   sm:pt-8 h-full flex items-center justify-center">
+          <div className="   flex   md:max-w-4xl w-full px-2 py-4 items-center">
+            <div className="md:w-11/12 w-full px-4 md:px-16">
+              <h2 className="font-bold text-4xl  px-8 text-primary text-shadow-lg ">
+                Sign up
               </h2>
               <form
                 className="max-w-[400px]  w-full mx-auto bg-gary-900 p-8 px-8 rounded-lg"

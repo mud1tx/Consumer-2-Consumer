@@ -49,7 +49,7 @@ const Order = () => {
         [
           orderData?.length > 0 ? (
             <div
-              className=" pl-2 pr-2 pb-2 pt-16"
+              className=" container pl-2 pr-2 pb-2 pt-16"
               key={Math.random() * 1000000}
             >
               <h1 className="md:text-4xl text-3xl font-bold  text-primary ml-2">
@@ -118,8 +118,9 @@ const Order = () => {
                                 <span className="md:text-lg text-base font-medium  ">
                                   Product Details:{" "}
                                 </span>
-                                <span className="md:text-base text-xs">{product.productId.description}</span>
-                              
+                                <span className="md:text-base text-xs">
+                                  {product.productId.description}
+                                </span>
                               </p>
                             </div>
 
@@ -151,7 +152,9 @@ const Order = () => {
                                 <span className="md:text-lg text-base font-medium ">
                                   Email:{" "}
                                 </span>
-                                <span className="md:text-base ml-2 text-xs">{product.productId.userId.email}</span>
+                                <span className="md:text-base ml-2 text-xs">
+                                  {product.productId.userId.email}
+                                </span>
                               </p>
                             </div>
                           </div>

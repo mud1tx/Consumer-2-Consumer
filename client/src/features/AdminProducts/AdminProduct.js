@@ -38,7 +38,7 @@ const AdminProduct = () => {
 
   return (
     <>
-      <div className=" bg-main_white  h-screen pt-20  w-full  ">
+      <div className=" container bg-main_white  h-screen pt-20  w-full  ">
         {marker && (
           <div className="flex flex-wrap bg-main_white p-4  justify-evenly items-center">
             {Array.from({ length: 8 }).map((_, index) => (
