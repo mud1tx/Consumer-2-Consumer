@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaWhatsappSquare } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "react-toastify";
@@ -84,7 +86,7 @@ const Cart = () => {
       ) : (
         [
           cartProducts.length > 0 ? (
-            <div className="bg-main_white" key={Math.random() * 10000000}>
+            <div className="bg-main_white " key={Math.random() * 10000000}>
               <div
                 className="w-full h-screen  top-0 overflow-y-auto overflow-x-hidden flex items-center  fixed sticky-0"
                 id="chec-div"
@@ -101,6 +103,12 @@ const Cart = () => {
                       className="lg:w-1/2 font-Poppins bg-main_white w-full   p-10 md:pr-4 md:py-12  overflow-y-auto overflow-x-hidden "
                       id="scroll"
                     >
+                      <NavLink to="/">
+                        <button className="flex border border-black/40 hover:border-text_color px-3 py-2 rounded-lg items-start   ">
+                          <AiOutlineArrowLeft className="text-xl " />
+                          <span className="ml-2">Back</span>
+                        </button>
+                      </NavLink>
                       <p className="text-3xl md:text-4xl font-bold  mt-6 leading-10    text-primary pt-3">
                         Your Cart
                       </p>
@@ -149,8 +157,16 @@ const Cart = () => {
                             </p>
                             <div className="flex items-center justify-between pt-5 pr-6">
                               <div className="flex itemms-center">
-                                <p className="text-xs leading-3 flex flex-col-reverse gap-2 underline text-secondry pl-5 cursor-pointer">
+                                <p className="text-xs hidden md:flex leading-3  items-center justify-center flex-col-reverse gap-2 underline text-secondry pl-5 cursor-pointer">
                                   Remove:
+                                  <RiDeleteBin6Line
+                                    className="text-2xl"
+                                    onClick={() => {
+                                      removeCartProduct(product.productId._id);
+                                    }}
+                                  />
+                                </p>
+                                <p className="text-xs md:hidden flex leading-3  flex-col-reverse gap-2 underline text-secondry pl-5 cursor-pointer">
                                   <RiDeleteBin6Line
                                     className="text-2xl"
                                     onClick={() => {

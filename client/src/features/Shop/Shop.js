@@ -54,10 +54,10 @@ const Shop = () => {
   }, [searchData, allProductsData]);
 
   return (
-    <div className="   w-full h-full " id="products">
-      <h1 className="  text-lg font-Poppins text-center bg-backgound_white text-primary  md:text-4xl font-semibold ">
-        Feature Products SoFar:
-      </h1>
+    <div className=" mt-10  w-full h-full " id="products">
+      <div className="container text-center text-3xl mb-4 font-bold text-text_color ">
+        All Products
+      </div>
       {marker && (
         <div className="flex flex-wrap  p-4  justify-evenly items-center">
           {Array.from({ length: 8 }).map((_, index) => (

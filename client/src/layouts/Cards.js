@@ -100,13 +100,13 @@ const Cards = (props) => {
 
   return (
     <>
-      <div className="flex flex-wrap  p-4 bg-backgound_white justify-evenly items-center">
+      <div className="flex container flex-wrap   p-4 bg-backgound_white justify-evenly items-center">
         {allProductsData.map((product) => (
           <div
             key={product._id}
-            className="bg-main_white  border border-backgound_white  transform transition duration-700 delay-500  hover:scale-105 rounded-md 
+            className="bg-main_white  border border-black/40  transform transition duration-700 delay-500  hover:scale-105 rounded-md 
           shadow-xs hover:shadow-2xl
-          mb-6 p-4"
+          mb-6 p-3"
           >
             <div className=" h-auto  max-w-xs ">
               <Carousel

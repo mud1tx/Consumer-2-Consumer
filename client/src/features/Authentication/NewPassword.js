@@ -76,51 +76,51 @@ const NewPassword = () => {
 
   return (
     <>
-    {loading ? (
+      {loading ? (
         <Loading />
       ) : (
-      <div className=" bg-backgound_white sm:pt-20 min-h-screen flex items-center justify-center">
-        <div className="bg-main_white flex rounded shadow-lg max-w-4xl p-5 items-center">
-          <div className="md:w-1/2 px-8 md:px-16">
-            <h2 className="font-bold text-3xl text-primary mb-10">
-              New Password
-            </h2>
-            <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-              <div className="flex flex-col text-text_color">
-                <label>Password</label>
-                <input
-                  className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
-                  type="password"
-                  name="password"
-                  value={userLoginData}
-                  onChange={handleInputs}
-                />
-                <input
-                  className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                  type="hidden"
-                  name="userId"
-                  value={userData.userId}
-                />
-                <input
-                  className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                  type="hidden"
-                  name="passwordToken"
-                  value={userData.passwordToken}
-                />
-              </div>
-              <button
-                className="w-full my-5 bg-primary hover:shadow-xs focus:outline-none  duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
-                type="submit"
-              >
-                Update Password
-              </button>
-            </form>
-          </div>
-          <div class="md:block hidden w-1/2">
-            <NewPasswordSvg />
+        <div className="  sm:pt-20  flex items-center justify-center">
+          <div className=" flex w-full md:max-w-4xl p-5 items-center">
+            <div className="md:w-1/2 w-full px-8 md:px-16">
+              <h2 className="font-bold text-3xl text-primary mb-10">
+                New Password
+              </h2>
+              <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
+                <div className="flex flex-col text-text_color">
+                  <label>Password</label>
+                  <input
+                    className="rounded-sm bg-main_color-25 border focus:shadow-md text-sm p-2 focus:outline-none"
+                    type="password"
+                    name="password"
+                    value={userLoginData}
+                    onChange={handleInputs}
+                  />
+                  <input
+                    className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                    type="hidden"
+                    name="userId"
+                    value={userData.userId}
+                  />
+                  <input
+                    className="rounded bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
+                    type="hidden"
+                    name="passwordToken"
+                    value={userData.passwordToken}
+                  />
+                </div>
+                <button
+                  className="w-full my-5 bg-primary hover:shadow-xs focus:outline-none  duration-700 py-2 text-text_color shadow-lg  hover:shadow-green-500/20 font-semibold rounded-sm"
+                  type="submit"
+                >
+                  Update Password
+                </button>
+              </form>
+            </div>
+            <div class="md:block hidden w-1/2">
+              <NewPasswordSvg />
+            </div>
           </div>
         </div>
-      </div>
       )}
     </>
   );

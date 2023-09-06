@@ -38,7 +38,7 @@ const BorrowDetail = () => {
   }, [userLoggedIn]);
 
   return (
-    <div className=" pt-20  ">
+    <div className=" pt-20 container ">
       {marker && (
         <div className="flex flex-wrap  p-4  justify-evenly items-center">
           {Array.from({ length: 8 }).map((_, index) => (
