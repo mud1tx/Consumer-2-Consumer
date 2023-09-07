@@ -13,15 +13,6 @@ const Footer = () => {
             src={require("../assets/company-logo.png")}
           />
         </div>
-        {/* <div className="flex flex-wrap sm:gap-10 gap-8 items-center justify-center mt-8">
-                    <p className="hover:text-primary text-base cursor-pointer leading-4 text-text_color">Shop</p>
-                    <p className="hover:text-primary text-base cursor-pointer leading-4 text-text_color">Cart</p>
-                    <p className="hover:text-primary text-base cursor-pointer leading-4 text-text_color">Orders</p>
-                    <p className="hover:text-primary text-base cursor-pointer leading-4  text-text_color">Add Products</p>
-                    <p className="hover:text-primary text-base cursor-pointer leading-4  text-text_color">Admin Product</p>
-                    <p className="hover:text-primary text-base cursor-pointer leading-4  text-text_color">Lend</p>
-                    <p className="hover:text-primary text-base cursor-pointer leading-4  text-text_color">Borrowed</p>
-                </div> */}
         <div className="flex items-center gap-x-8 mt-6">
           <div className="cursor-pointer  rounded-full p-2 shadow-2xl   border-2 hover:bg-facebook border-facebook hover:text-main_white text-facebook duration-500   ">
             <BsFacebook className="text-xl   hover:shadow-sm" />

@@ -41,7 +41,6 @@ exports.getProduct = (req, res, next) => {
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.prodId;
   const userId = req.body.userId;
-  console.log(prodId);
   Product.deleteOne({
     _id: prodId,
     borrowed: false,

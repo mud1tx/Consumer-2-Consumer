@@ -23,27 +23,10 @@ exports.postAddProduct = async (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-  // convert images into base64 encoding
-  // let imgArray = images.map((file) => {
-  //   let img = fs.readFileSync(file.path);
-  //   return (en = img.toString("base64"));
-  // });
-  // const imageArray = [];
-  // const imageTypeArray = [];
-  // const imageNameArray = [];
-  // imgArray.map((src, index) => {
-  //   imageNameArray.push(images[index].originalname);
-  //   imageTypeArray.push(images[index].mimetype);
-  //   imageArray.push(src);
-  // });
   const imagess = req.body.images.map((image) => new Image(image));
-  // console.log("lksmdmkl", imagess);
-  console.log("imagesdhfjknbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", imagess);
   const product = new Product({
     title: title,
     category: category,
-    // imageName: imageNameArray,
-    // imageType: imageTypeArray,
     image: imagess,
     price: price,
     description: description,
@@ -53,8 +36,6 @@ exports.postAddProduct = async (req, res, next) => {
   product
     .save()
     .then((result) => {
-      console.log("Created Product");
-      console.log("imagesdhfjknbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", result);
       res.json({ ok: true, message: "Product Added Successfully🙂" });
     })
     .catch((err) => {
@@ -66,7 +47,6 @@ exports.postAddProduct = async (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   Product.find({ userId: req.body.userId })
     .then((products) => {
-      console.log("ksadjnfkjsfnnkjdf", products);
       return res.json({ ok: true, userProducts: products });
     })
     .catch((err) => console.log(err));
@@ -78,7 +58,6 @@ exports.postOrderData = (req, res, next) => {
   const days = Number(req.body.days);
   const currentTime = Date.now();
   const prodId = productData._id;
-  console.log(userId, productData.userId, days);
   Order.findOne({ userId: userId }).then((user) => {
     if (!user) {
       const prodArray = [];
@@ -174,7 +153,6 @@ exports.postOrderData = (req, res, next) => {
 
 exports.getCheckout = (req, res, next) => {
   const { token, prodData, days } = req.body;
-  console.log("df;l,g,kl;dmglkdsm", prodData);
   stripe.checkout.sessions
     .create({
       payment_method_types: ["card"],
@@ -282,7 +260,6 @@ exports.createChat = async (req, res) => {
       { members: [req.body.receiverId, req.body.senderId] },
     ],
   });
-  console.log("bjbjhbhjbhbhbjbhjhbj", chat);
   if (chat.length) {
     return res.status(201).json("Already present in chatBox");
   }
@@ -353,115 +330,3 @@ exports.getUser = async (req, res) => {
     res.status(500).json(error);
   }
 };
-
-// exports.accessChat = async (req, res, next) => {
-//   const currentUserId = req.body.senderId;
-//   const userId = req.body.receiverId;
-
-//   if (!userId) {
-//     console.log("UserId param not sent with request");
-//     return res.sendStatus(400);
-//   }
-
-//   var isChat = await Chat.find({
-//     isGroupChat: false,
-//     $and: [
-//       { users: { $elemMatch: { $eq: currentUserId } } },
-//       { users: { $elemMatch: { $eq: userId } } },
-//     ],
-//   })
-//     .populate("users", "-password")
-//     .populate("latestMessage");
-
-//   isChat = await User.populate(isChat, {
-//     path: "latestMessage.sender",
-//     select: "first_name last_name email",
-//   });
-
-//   if (isChat.length > 0) {
-//     res.send(isChat[0]);
-//   } else {
-//     var chatData = {
-//       chatName: "sender",
-//       isGroupChat: false,
-//       users: [currentUserId, userId],
-//     };
-
-//     try {
-//       const createdChat = await Chat.create(chatData);
-//       const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
-//         "users",
-//         "-password"
-//       );
-//       res.json({ ok: true, data: FullChat });
-//     } catch (error) {
-//       res.json({ ok: false, msg: "Conversation already created" });
-//     }
-//   }
-// };
-
-// exports.fetchChats = async (req, res, next) => {
-//   const currentUserId = req.headers.currentuserid;
-//   try {
-//     Chat.find({ users: { $elemMatch: { $eq: currentUserId } } })
-//       .populate("users", "-password")
-//       .populate("groupAdmin", "-password")
-//       .populate("latestMessage")
-//       .sort({ updatedAt: -1 })
-//       .then(async (results) => {
-//         results = await User.populate(results, {
-//           path: "latestMessage.sender",
-//           select: "first_name last_name email",
-//         });
-//         res.status(200).send(results);
-//       });
-//   } catch (error) {
-//     res.status(400);
-//     throw new Error(error.message);
-//   }
-// };
-
-// exports.allMessages = async (req, res) => {
-//   try {
-//     const messages = await Message.find({ chat: req.params.chatId })
-//       .populate("sender", "first_name last_name email")
-//       .populate("chat");
-//     res.send(messages);
-//   } catch (error) {
-//     res.status(400);
-//     throw new Error(error.message);
-//   }
-// };
-
-// exports.sendMessage = async (req, res) => {
-//   const { currentUserId, content, chatId } = req.body;
-
-//   if (!content || !chatId) {
-//     console.log("Invalid data passed into request");
-//     return res.sendStatus(400);
-//   }
-
-//   var newMessage = {
-//     sender: currentUserId,
-//     content: content,
-//     chat: chatId,
-//   };
-
-//   try {
-//     var message = await Message.create(newMessage);
-
-//     message = await message.populate("sender", "name");
-//     message = await message.populate("chat");
-//     message = await User.populate(message, {
-//       path: "chat.users",
-//       select: "first_name last_name email",
-//     });
-
-//     await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
-
-//     res.json(message);
-//   } catch (error) {
-//     res.status(400);
-//     throw new Error(error.message);
-//   }
-// };

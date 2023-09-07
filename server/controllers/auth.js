@@ -68,16 +68,6 @@ exports.postSignup = (req, res, next) => {
   const city = req.body.city;
   const pin_code = req.body.pin_code;
   const country = req.body.country;
-  console.log(
-    firstname,
-    lastname,
-    email,
-    password,
-    address,
-    pin_code,
-    city,
-    country
-  );
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.json({
