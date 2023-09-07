@@ -1,11 +1,8 @@
 .buttonn {
-  /* position: relative; */
-  /* display: inline-block; */
   text-decoration: none;
   text-transform: uppercase;
   color: #5ec576;
   outline: 2px solid #5ec576;
-  /* padding: 30px 60px; */
   overflow: hidden;
   transition: color 1s;
 }

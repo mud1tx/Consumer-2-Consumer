@@ -112,7 +112,7 @@ const ProductDetail = () => {
       ) : (
         <div className=" text-text_color  font-Poppins capitalize">
           <div>
-            <div className="2xl:container 2xl:mx-auto sm:h-screen h-full   lg:py-4 lg:px-20 md:py-8 md:px-6 py-2 px-4  ">
+            <div className="2xl:container 2xl:mx-auto h-full   lg:py-4 lg:px-20 md:py-8 md:px-6 py-2 px-4  ">
               <div className="flex justify-center items-center px-4 py-4 lg:flex-row flex-col-reverse gap-8">
                 <div className="  w-full sm:w-96 md:w-8/12 lg:w-6/12 items-center">
                   <h2 className="font-semibold capitalize lg:text-4xl md:text-3xl text-xl lg:leading-9 leading-7 text-primary  mt-4">

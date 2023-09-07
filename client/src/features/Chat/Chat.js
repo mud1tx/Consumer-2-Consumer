@@ -6,7 +6,7 @@ import "./Chat.css";
 import { useSelector } from "react-redux";
 import { BASE_URL } from "../../BASE_URL";
 import { io } from "socket.io-client";
-import { GiHamburgerMenu } from "react-icons/gi";
+
 const Chat = () => {
   const socket = useRef();
   const userLoggedIn = useSelector((state) => state.authenticateUser);
@@ -17,7 +17,6 @@ const Chat = () => {
   const [sendMessage, setSendMessage] = useState(null);
   const [receivedMessage, setReceivedMessage] = useState(null);
   const [searchChatUser, setsearchChatUser] = useState();
-  // onClick={() => setProfile(!profile)}
   // // Get the chat in chat section
   useEffect(() => {
     const getChats = async () => {
@@ -41,7 +40,6 @@ const Chat = () => {
   }, [userLoggedIn?.user?._id]);
 
   const handleInput = (e) => {
-    // console.log("aaya kya", e);
     setsearchChatUser(e.target.value);
   };
 

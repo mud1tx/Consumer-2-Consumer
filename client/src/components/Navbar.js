@@ -36,9 +36,7 @@ const Navbar = () => {
 
   return (
     <header className="w-full  text-gray-100 body-font mb-4 ">
-      {/* :DESKTOP MENU */}
       <div className="container mx-auto flex justify-between items-center py-7 px-5">
-        {/* ::Navbar */}
 
         <NavLink to="/">
           <div className="flex flex-row items-center ">
@@ -156,7 +154,6 @@ const Navbar = () => {
                     </NavLink>
                   </ul>
                 )}
-                {/* <div className="cursor-pointer  text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out"></div> */}
                 {!userLoggedIn?.isLoggedIn && (
                   <div className="ml-2 text-main_color-200 flex items-center">
                     <FaUserCircle className="text-3xl cursor-pointer text-text_color" />
@@ -172,7 +169,6 @@ const Navbar = () => {
                       className="text-sm flex bg-primary px-4 py-3 rounded-lg items-center justify-center"
                     >
                       Logout
-                      {/* <HiOutlineLogout className="text-xl text-text_color focus:outline-none outline-none  " /> */}
                     </button>
                   </form>
                 </div>

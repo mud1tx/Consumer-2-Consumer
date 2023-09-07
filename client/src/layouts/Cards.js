@@ -1,15 +1,15 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { BsCartCheck, BsFillCartCheckFill } from "react-icons/bs";
+import { BsFillCartCheckFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaWhatsappSquare, FaWhatsapp } from "react-icons/fa";
+import { FaWhatsappSquare } from "react-icons/fa";
 import { AddToCart } from "../redux/action/addCart";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { ChatState } from "../context/ChatProvider";
+// import { ChatState } from "../context/ChatProvider";
 import { BASE_URL } from "../BASE_URL";
 
 const Cards = (props) => {
@@ -19,7 +19,7 @@ const Cards = (props) => {
   const allProductsData = props.allProductsData;
   const showChatsCartBtn = props.showChatsCartBtn;
   const showDeleteBtn = props.showDeleteBtn;
-  const { chats, setChats } = ChatState();
+  // const { chats, setChats } = ChatState();
 
   const getProductToCartHandler = async (productId) => {
     const res = await fetch(`${BASE_URL}/cart`, {
