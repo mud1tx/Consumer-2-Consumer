@@ -39,7 +39,7 @@ const Order = () => {
 
   useEffect(() => {
     fetchOrderHandler();
-  }, []);
+  }, [userLoggedIn?.user]);
 
   return (
     <>
