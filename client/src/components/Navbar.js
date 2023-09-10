@@ -4,6 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { HiOutlineLogout } from "react-icons/hi";
 import { AiOutlineLogin, AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../redux/action/authUser";
@@ -37,7 +38,6 @@ const Navbar = () => {
   return (
     <header className="w-full  text-gray-100 body-font mb-4 ">
       <div className="container mx-auto flex justify-between items-center py-7 px-5">
-
         <NavLink to="/">
           <div className="flex flex-row items-center ">
             <img
@@ -177,7 +177,7 @@ const Navbar = () => {
           </div>
         </nav>
         {/* ::Avatar */}
-        <div className="hidden sm:inline-flex ml-auto md:ml-0 mr-4 md:mr-0 cursor-pointer"></div>
+        <div className="hidden  cursor-pointer"></div>
         {/* ::Burger icon standard */}
         <GiHamburgerMenu
           onClick={() => setIsOpen(!isOpen)}
@@ -187,11 +187,30 @@ const Navbar = () => {
 
       {/* :MOBILE MENU */}
       {isOpen && (
-        <div className="w-full h-full  ease-in-out duration-300 transition-all overflow-y-hidden top-10    sm:h-auto  bg-white flex flex-col py-4 px-4 xl:hidden  text-base uppercase text-center font-semibold">
-          <nav className=" md:mr-auto md:ml-4 md:pl-4  md:flex flex-wrap items-center justify-between text-base tracking-wide">
-            <div className=" text-sm xl:flex md:mr-6 xl:mr-16">
+        <div className="min-h-screen  fixed top-0 z-40 w-screen ease-in-out duration-300 transition-all  top-10    sm:h-auto  bg-white flex flex-col py-4 px-4 xl:hidden  text-base uppercase text-center font-semibold">
+          <div className="flex flex-row  justify-between">
+            <div className="">
+              <img
+                className="rounded h-10 w-10 object-cover"
+                alt="Logo"
+                src={require("../assets/company-logo.png")}
+                onClick={() => {
+                  navigate("/");
+                }}
+              />
+            </div>
+            <div>
+              <AiOutlineCloseCircle
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-2xl xl:hidden cursor-pointer text-text_color absolute mt-2 mr-4 right-0  rounded-md active:outline-none focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500 "
+              />
+            </div>
+          </div>
+
+          <nav className=" md:mr-auto pt-10 md:ml-4 md:pl-4  md:flex  items-center justify-between text-base tracking-wide">
+            <div className=" text-sm xl:flex md:mr-6 xl:mr-6">
               <NavLink to="/">
-                <div className=" flex px-4 items-center transform  border-b overflow-x-hidden overflow-y-hidden  focus:bg-primary text-sm  py-2  leading-5 text-text_color    focus:outline-none transition duration-500 ease-in-out">
+                <div className=" flex px-4 items-center transform  border-b overflow-x-hidden overflow-y-hidden  focus:bg-primary text-sm  py-2  leading-5 text-text_color    focus:outline-none ">
                   Shop
                 </div>
               </NavLink>

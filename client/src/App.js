@@ -39,7 +39,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<ShopPage />} />
-
+    
         <Route path="/:prodId" element={<ProductDetailPage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/cart" element={<CartPage />} />
