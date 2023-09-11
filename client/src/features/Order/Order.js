@@ -49,21 +49,18 @@ const Order = () => {
         [
           orderData?.length > 0 ? (
             <div
-              className=" container pl-2 pr-2 pb-2 pt-16"
+              className="pl-2 pr-2 pb-2  container"
               key={Math.random() * 1000000}
             >
-              <h1 className="md:text-4xl text-3xl font-bold  text-primary ml-2">
-                Order
+              <h1 className=" text-primary font-medium  md:text-3xl text-xl sm:text-2xl ">
+                Orders
               </h1>
               {orderData.map((order) => (
                 <div key={order._id}>
                   {order.products?.map((product) => (
-                    <div
-                      key={Math.random() * 10000000}
-                      className="md:flex items-center mt-18 py-8 border   border-t  border-gray-200 "
-                    >
-                      <div className="flex flex-col lg:flex-row justify-between items-center gap-x-4 ">
-                        <div className=" lg:h-auto w-96   lg:max-w-xs ">
+                    <div key={Math.random() * 10000000} className=" ">
+                      <div className=" border-b mt-4 border-black/40 flex flex-col items-start ">
+                        <div className=" w-20 h-20 ">
                           <Carousel
                             infiniteLoop
                             autoPlay
@@ -77,7 +74,7 @@ const Order = () => {
                             {product.productId.image.map((img, index) => (
                               <div key={index}>
                                 <img
-                                  className="lg:h-40 h-64  rounded-lg p-2  md:w-full object-cover object-center"
+                                  className=" rounded-full"
                                   src={`data:image/jpeg;base64,${img.data}`}
                                   alt={`${product.productId.category}`}
                                 />
@@ -85,124 +82,103 @@ const Order = () => {
                             ))}
                           </Carousel>
                         </div>
-
-                        <div className=" flex lg:flex-row flex-col   text-text_color font-Poppins">
-                          <div className="flex  gap-4 flex-col sm:flex-row ">
-                            <div className="basicDetails lg:border-b-0 border-b p-2 basis-2  flex-col  flex justify-between max-w-md">
-                              <p className="">
-                                <span className="font-medium  text-base md:text-lg ">
-                                  Product Id:{" "}
-                                </span>
-                                <span className="md:text-base text-xs">
-                                  {" "}
+                        <p className=" capitalize text-xs text-primary">
+                          {product.expire > Date.now()
+                            ? `${Math.ceil(
+                                (product.expire - Date.now()) / 86400000
+                              )} day left to return the product`
+                            : `product returned ${Math.ceil(
+                                (Date.now() - product.expire) / 86400000
+                              )} days ago`}
+                        </p>
+                        <div className=" flex flex-col items-start justify-start mb-6 ">
+                          <div className=" ">
+                            <div className=" flex items-start flex-col ">
+                              <p className=" font-semibold flex  sm:text-xl text-lg">
+                                Product Id:
+                                <span className="font-normal ">
                                   {product.productId._id}
                                 </span>
                               </p>
-                              <p className="">
-                                <span className="md:text-lg text-base  font-medium">
-                                  Category:
-                                </span>
-                                <span className=" text-xs ml-2 md:text-base">
+                              <p className="font-semibold  sm:text-xl text-lg">
+                                Category:
+                                <span className=" font-normal max-w-xs truncate ml-2">
                                   {product.productId.category}
                                 </span>
                               </p>
-                              <p className="">
-                                <span className="md:text-lg text-base font-medium">
-                                  Title:{" "}
-                                </span>{" "}
-                                <span className="md:text-base text-xs">
+                              <p className="font-semibold  sm:text-xl text-lg">
+                                Title:
+                                <span className="font-normal max-w-xs truncate ml-2">
                                   {product.productId.title}{" "}
                                 </span>
                               </p>
-                              <p className="">
-                                <span className="md:text-lg text-base font-medium  ">
-                                  Product Details:{" "}
-                                </span>
-                                <span className="md:text-base text-xs">
+                              <p className="font-semibold flex items-start sm:text-xl text-lg">
+                                Details:
+                                <p className="font-normal w-64 truncate ml-2">
                                   {product.productId.description}
-                                </span>
+                                </p>
                               </p>
                             </div>
 
-                            <div className="font-Poppins basis-2 p-2 lg:border-b-0 border-b lg:border-l">
-                              <p className="">
-                                <span className="font-medium md:text-lg text-base">
-                                  Price:
-                                </span>
-                                <span className="md:text-base ml-2 font-medium text-xs">
-                                  {product.productId.price}
-                                </span>
-                                <span className="text-primary text-xs md:text-sm ml-1">
-                                  {" "}
-                                  INR/DAY
+                            <div className=" flex flex-col gap-x-2">
+                              <p className="font-semibold  sm:text-xl text-lg">
+                                Price:
+                                <span className="font-normal max-w-xs truncate ml-2">
+                                  {product.productId.price}INR/DAY
                                 </span>
                               </p>
-                              <p className="">
-                                <span className="md:text-lg text-base font-medium ">
-                                  Owner Name:
-                                </span>
-                                <span className="md:text-base text-xs  ml-2">
+                              <p className="font-semibold  sm:text-xl text-lg">
+                                Owner Name:
+                                <span className="font-normal max-w-xs truncate ml-2">
                                   {product.productId.userId.first_name +
                                     " " +
                                     product.productId.userId.first_name}
                                 </span>
                               </p>
 
-                              <p className="">
-                                <span className="md:text-lg text-base font-medium ">
-                                  Email:{" "}
-                                </span>
-                                <span className="md:text-base ml-2 text-xs">
+                              <p className="font-semibold  sm:text-xl text-lg">
+                                Email:
+                                <span className="font-normal max-w-xs truncate ml-2">
                                   {product.productId.userId.email}
                                 </span>
                               </p>
                             </div>
                           </div>
-                          <div className="basis lg:border-l p-2 ">
-                            <p className="text-xs capitalize text-primary">
-                              {product.expire > Date.now()
-                                ? `${Math.ceil(
-                                    (product.expire - Date.now()) / 86400000
-                                  )} day left to return the product`
-                                : `product returned ${Math.ceil(
-                                    (Date.now() - product.expire) / 86400000
-                                  )} days ago`}
-                            </p>
-
-                            <div className=" ">
-                              <span className="md:text-lg text-base flex items-center font-medium ">
+                          <div className=" ">
+                            <div className="flex items-start flex-col ">
+                              <p className="font-semibold   sm:text-xl text-lg ">
                                 Address
                                 {product.productId.userId.address && (
-                                  <p className=" md:text-base text-xs ml-2  font-normal">
+                                  <span className="font-normal max-w-xs w-64  truncate ml-2 ">
                                     {product.productId.userId.address}
-                                  </p>
+                                  </span>
                                 )}
-                              </span>
+                              </p>
 
-                              <span className="md:text-lg text-base flex items-center font-medium ">
+                              <p className="font-semibold  flex  items-start sm:text-xl text-lg">
                                 Pincode:
                                 {product.productId.userId.pin_code && (
-                                  <p className=" md:text-base text-xs ml-2 font-normal">
+                                  <p className="font-normal max-w-xs w-64  truncate ml-2 ">
                                     {product.productId.userId.pin_code}
                                   </p>
                                 )}
-                              </span>
-                              <span className="md:text-lg text-base flex items-center font-medium">
+                              </p>
+                              <p className="font-semibold  flex  items-start sm:text-xl text-lg">
                                 City:
                                 {product.productId.userId.city && (
-                                  <p className="md:text-base text-xs font-normal ml-2 ">
+                                  <p className=" font-normal max-w-xs w-64  truncate ml-2">
                                     {product.productId.userId.city}
                                   </p>
                                 )}
-                              </span>
-                              <span className="md:text-lg text-base flex  items-center font-medium">
+                              </p>
+                              <p className="font-semibold  flex  items-start sm:text-xl text-lg">
                                 Country:
                                 {product.productId.userId.country && (
-                                  <p className="font-normal text-xs md:text-base ml-2">
+                                  <span className="font-normal max-w-xs w-64  truncate ml-2">
                                     {product.productId.userId.country}
-                                  </p>
+                                  </span>
                                 )}
-                              </span>
+                              </p>
                             </div>
                           </div>
                         </div>

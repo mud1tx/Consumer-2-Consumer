@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { BsFillChatDotsFill } from "react-icons/bs";
 import { FaWhatsappSquare } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "react-toastify";
@@ -32,6 +33,7 @@ const Cart = () => {
       },
     });
     const cartData = await cartApiResponse.json();
+    console.log(cartData);
     const { ok } = cartData;
     let totalPrice = 0;
     for (let i = 0; i < cartData?.products?.length; i++) {
@@ -86,38 +88,26 @@ const Cart = () => {
       ) : (
         [
           cartProducts.length > 0 ? (
-            <div className="bg-main_white " key={Math.random() * 10000000}>
-              <div
-                className="w-full h-screen  top-0 overflow-y-auto overflow-x-hidden flex items-center  fixed sticky-0"
-                id="chec-div"
-              >
-                <div
-                  className="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700"
-                  id="checkout"
-                >
+            <div className="" key={Math.random() * 10000000}>
+              <div className="" id="chec-div">
+                <div className="container" id="checkout">
                   <div
-                    className="flex md:flex-row flex-col justify-center bg-main_white"
+                    className="  flex md:flex-row  flex-col items-start   justify-between"
                     id="cart"
                   >
                     <div
-                      className="lg:w-1/2 font-Poppins bg-main_white w-full   p-10 md:pr-4 md:py-12  overflow-y-auto overflow-x-hidden "
+                      className=" flex flex-col ml-8 md:ml-0 items-start justify-start "
                       id="scroll"
                     >
-                      <NavLink to="/">
-                        <button className="flex border border-black/40 hover:border-text_color px-3 py-2 rounded-lg items-start   ">
-                          <AiOutlineArrowLeft className="text-xl " />
-                          <span className="ml-2">Back</span>
-                        </button>
-                      </NavLink>
-                      <p className="text-3xl md:text-4xl font-bold  mt-6 leading-10    text-primary pt-3">
+                      <p className="text-3xl text-primary font-semibold">
                         Your Cart
                       </p>
                       {cartProducts.map((product) => (
                         <div
                           key={product.productId._id}
-                          className="md:flex items-center mt-18 py-10    "
+                          className=" flex flex-col items-start justify-start pb-10  "
                         >
-                          <div className=" h-auto  max-w-xs ">
+                          <div className="w-16 h-16  mb-4">
                             <Carousel
                               infiniteLoop
                               autoPlay
@@ -129,10 +119,9 @@ const Cart = () => {
                               interval={2000}
                             >
                               {product.productId.image.map((img, index) => (
-                                <div key={index}>
+                                <div key={index} className="">
                                   <img
-                                    className="h-40 rounded-md lg md:h-36 w-full object-cover object-center"
-                                    // src={`data:${product.productId.imageType[index]};base64,${img}`}
+                                    className="rounded-full"
                                     src={`data:image/jpeg;base64,${img.data}`}
                                     alt={`${product.productId.category}`}
                                   />
@@ -140,73 +129,74 @@ const Cart = () => {
                               ))}
                             </Carousel>
                           </div>
-                          <div className="md:pl-3 md:w-3/4">
-                            <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">
+                          <div className="flex text-text_color flex-col items-start ">
+                            <p className="text-xs text-primary">
                               {product.productId._id}
                             </p>
-                            <div className="flex items-center justify-between w-full pt-1">
-                              <p className="text-base font-black leading-none text-gray-800">
-                                This Is {product.productId.category}
+                            <div className="">
+                              <p className=" text-text_color md:text-lg flex gap-x-2 font-semibold  text-base mr-2">
+                                Category:
+                                <span className="font-normal text-text_color  w-40 truncate">
+                                  {product.productId.category}
+                                </span>
                               </p>
                             </div>
-                            <p className="text-xs leading-3 text-text_color pt-2 py-4">
-                              Product Name: {product.productId.title}
+                            <p className=" md:text-lg flex gap-x-2 font-semibold  text-base mr-2">
+                              Product Name:{" "}
+                              <span className="font-normal w-40 truncate">
+                                {product.productId.title}
+                              </span>
                             </p>
-                            <p className="w-96 text-xs leading-3 text-text_color">
-                              Product Details h: {product.productId.description}
+                            <p className="md:text-lg flex gap-x-2 font-semibold  text-base mr-2">
+                              Product Details:{" "}
+                              <span className="font-normal w-40 truncate">
+                                {product.productId.description}
+                              </span>
                             </p>
-                            <div className="flex items-center justify-between pt-5 pr-6">
-                              <div className="flex itemms-center">
-                                <p className="text-xs hidden md:flex leading-3  items-center justify-center flex-col-reverse gap-2 underline text-secondry pl-5 cursor-pointer">
-                                  Remove:
+                            <p className="md:text-lg flex gap-x-2 text-primary font-semibold  text-base mr-2">
+                              {product.productId.price} INR/DAY
+                            </p>
+                            <div>
+                              <div className=" flex mt-4  items-center justify-center gap-20">
+                                <div className=" cursor-pointer text-red-500">
                                   <RiDeleteBin6Line
                                     className="text-2xl"
                                     onClick={() => {
                                       removeCartProduct(product.productId._id);
                                     }}
                                   />
-                                </p>
-                                <p className="text-xs md:hidden flex leading-3  flex-col-reverse gap-2 underline text-secondry pl-5 cursor-pointer">
-                                  <RiDeleteBin6Line
-                                    className="text-2xl"
+                                </div>
+
+                                <div>
+                                  <button
                                     onClick={() => {
-                                      removeCartProduct(product.productId._id);
+                                      navigate("/admin/chats");
                                     }}
-                                  />
-                                </p>
+                                  >
+                                    <BsFillChatDotsFill className="text-xl text-primary" />
+                                  </button>
+                                </div>
                               </div>
-                              <div>
+                              <div className="mt-2">
                                 <button
                                   onClick={() => {
                                     navigate(`/${product.productId._id}`);
                                   }}
-                                  className="hover:bg-primary font-Poppins  duration-700 border border-primary text-primary hover:text-text_color focus:outline-none rounded-sm  px-1 py-1"
+                                  className="md:text-base text-sm capitalize leading-none w-full py-2 hover:bg-primary  border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-primary  hover:text-text_color duration-700 border"
                                 >
                                   Details
                                 </button>
                               </div>
-                              <div>
-                                <button
-                                  onClick={() => {
-                                    navigate("/admin/chats");
-                                  }}
-                                >
-                                  <FaWhatsappSquare className="text-3xl text-primary" />
-                                </button>
-                              </div>
-                              <p className="text-lg font-black leading-none text-gray-800">
-                                {product.productId.price} INR/DAY
-                              </p>
                             </div>
                           </div>
                         </div>
                       ))}
                     </div>
 
-                    <div className="xl:w-1/2 md:w-1/3 w-full font-Poppins bg-main_white h-full ">
-                      <div className="flex flex-col md:h-screen px-16 py- md:py-20 justify-between overflow-y-auto">
+                    <div className="  xl:w-1/3 md:w-1/2 w-full   md:border md:border-black/40 font-Poppins bg-main_white h-full ">
+                      <div className="flex flex-col  px-8  md:py-8 justify-between overflow-y-auto">
                         <div>
-                          <p className="text-2xl font-Poppins md:text-4xl font-black leading-9 text-primary">
+                          <p className="text-xl font-Poppins md:text-2xl font-black leading-9 text-primary">
                             Order Summary:
                           </p>
                           <div className="flex items-center justify-between pt-16">
@@ -228,10 +218,10 @@ const Cart = () => {
                         </div>
                         <div>
                           <div className="flex items-center md:pb-6 pb-4 justify-between lg:pt-5 pt-20">
-                            <p className="md:text-2xl text-sm leading-medium  text-text_color">
+                            <p className="md:text-xl text-sm leading-medium  text-text_color">
                               Total Amount
                             </p>
-                            <p className="md:text-2xl text-base font-bold leading-normal text-right text-text_color">
+                            <p className="md:text-xl text-base font-bold leading-normal text-right text-text_color">
                               {price + cartProducts.length * 10} INR/DAY
                             </p>
                           </div>
