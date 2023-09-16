@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://consumer-2-consumer.netlify.app",
     method: ["GET", "POST"],
     credentials: true,
   })
@@ -85,7 +85,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://consumer-2-consumer.netlify.app",
   },
 });
 
