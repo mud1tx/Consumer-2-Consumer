@@ -45,7 +45,7 @@ const Chat = () => {
 
   // // Connect to Socket.io
   useEffect(() => {
-    socket.current = io("https://consumer-2-consumer.onrender.com");
+    socket.current = io("https://consumer-2-consumer.adaptable.app");
     socket.current.emit("new-user-add", userLoggedIn?.user?._id);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
